@@ -1,12 +1,43 @@
-# React + Vite
+# 롤링페이퍼 애플리케이션
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 소개
 
-Currently, two official plugins are available:
+이 프로젝트는 React와 Vite를 사용하여 만든 롤링페이퍼 애플리케이션입니다. 친구, 동료, 또는 사랑하는 사람들에게 따뜻한 메시지를 남겨보세요.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 기술 스택
 
-## Expanding the ESLint configuration
+- **프론트엔드**: React, Vite
+- **CSS**: styled-components
+- **배포**: Vercel
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 기능
+
+- 롤링페이퍼 생성 및 공유
+- 메시지 카드 작성 및 삭제
+- 다양한 디자인 테마 제공
+- 반응형 디자인으로 다양한 기기 지원
+
+## 설치 및 실행
+
+1.  **저장소 클론:**
+
+    ```bash
+    git clone [저장소 URL]
+    cd [프로젝트 디렉토리]
+    ```
+
+2.  **의존성 설치:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **개발 서버 실행:**
+
+    ```bash
+    npm run dev
+    ```
+
+4.  **브라우저에서 애플리케이션 접속:**
+
+    `http://localhost:5173`
