@@ -12,10 +12,30 @@ const StyledBadge = styled.div`
   text-align: center;
 `;
 
-function Badge({ children, fontColor, bgColor }) {
+const relationshipColors = {
+  지인: {
+    bgColor: '#FFF0D6',
+    fontColor: '#FF8832',
+  },
+  동료: {
+    bgColor: '#F8F0FF',
+    fontColor: '#9935FF',
+  },
+  가족: {
+    bgColor: '#E4FBDC',
+    fontColor: '#2BA600',
+  },
+  친구: {
+    bgColor: '#E2F5FF',
+    fontColor: '#00A2FE',
+  },
+};
+
+function Badge({ relationship }) {
+  const { fontColor, bgColor } = relationshipColors[relationship];
   return (
     <StyledBadge fontColor={fontColor} bgColor={bgColor}>
-      {children}
+      {relationship}
     </StyledBadge>
   );
 }
