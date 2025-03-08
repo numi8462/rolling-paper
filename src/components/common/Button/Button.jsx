@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import styled, { css } from "styled-components";
 import { theme } from "../../../styles/theme";
@@ -128,3 +129,9 @@ const StyledButtonHeight = {
   `,
 } 
 
+=======
+import { colors } from "../../../styles/theme";
+
+
+
+>>>>>>> 062a97dd4f3da7c3cae358dafc960da82c56dca9

@@ -227,7 +227,6 @@ export const media = {
   `,
 };
 
-
 export const Contaner = styled.div`   
   background-color: white;
   max-width: 1248px;
