@@ -6,8 +6,6 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  width: ${({ width }) => width || "100%"};
-  max-width: ${({ maxWidth }) => maxWidth || "300px"};
 `;
 
 //인풋의 스타일 컴포넌트구요.
@@ -19,6 +17,8 @@ const StyledInput = styled.input`
   padding: 8px;
   font-size: ${({ size }) => size || "20px"};
   transition: border 0.2s ease-in-out;
+  width: ${({ width }) => width || "100%"};
+  max-width: ${({ maxWidth }) => maxWidth || "300px"};
 
     &:focus {
     border: 2px solid "#555555"
@@ -55,7 +55,7 @@ const Input = ({ placeholder, size, width, maxWidth }) => {
   };
 
   return (
-    <InputContainer width={width} maxWidth={maxWidth}>
+    <InputContainer>
       <StyledInput
         type="text"
         placeholder={placeholder}
@@ -64,6 +64,8 @@ const Input = ({ placeholder, size, width, maxWidth }) => {
         onBlur={handleBlur}
         error={error}
         size={size}
+        width={width}
+        maxWidth={maxWidth}
       />
       <ErrorMessage show={error}>값을 입력해 주세요.</ErrorMessage>
     </InputContainer>
