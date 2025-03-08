@@ -1,9 +1,9 @@
 import React from "react";
-import Icon from "../../assets/Icons/Icons";
+import Input from "../../components/common/Input/Input";
 const HomePage = () => {
   return (
     <div>
-      <Icon name="rightArrow" alt="삭제 아이콘" />
+      <Input />
       Homepage
     </div>
   );
