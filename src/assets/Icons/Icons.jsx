@@ -6,6 +6,7 @@ import otherOption from "./otherOption.svg";
 import plusEmoji20px from "./plusEmoji20px.svg";
 import plusEmoji24px from "./plusEmoji24px.svg";
 import plusIcon from "./plusIcon.svg";
+import leftArrow from "./leftArrow.svg";
 import rightArrow from "./rightArrow.svg";
 import shareIcon20px from "./shareIcon20px.svg";
 import shareIcon24px from "./shareIcon24px.svg";
@@ -19,6 +20,7 @@ const icons = {
   checkIcon,
   deleteIcon,
   downArrow,
+  leftArrow,
   nomalprofile,
   otherOption,
   plusEmoji20px,

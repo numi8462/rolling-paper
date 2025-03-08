@@ -214,13 +214,13 @@ export const Font = {  //  font 설정
 
 export const media = {
   // tablet
-  t: (styles) => css` 
+  tablet: (styles) => css` 
     @media (max-width: ${theme.breakpoints.t}) {
       ${styles}
     }
   `,
   // Mobile
-  m: (styles) => css` 
+  mobile: (styles) => css` 
     @media (max-width: ${theme.breakpoints.m}) {
       ${styles}
     }
@@ -232,10 +232,10 @@ export const Contaner = styled.div`
   max-width: 1248px;
   margin: 0 auto;
  
-  ${media.t`
+  ${media.tablet`
     margin: 0 24px;
   `}
-  ${media.m`
+  ${media.mobile`
     margin: 0 20px;
   `}
 `;
