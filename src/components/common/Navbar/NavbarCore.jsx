@@ -1,6 +1,27 @@
 import Logo from '../../../assets/icons/🎨 Icon Color.svg';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Button } from '../Button/Button';
+
+const BREAK_POINT = {
+    mobile: 768,
+    tablet: 1248,
+};
+
+const NavbarWrapper = styled.header`
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 0px;
+
+    border-bottom: 1px solid #EDEDED;
+
+    @media (max-width: ${BREAK_POINT.tablet}px){
+        padding: 11px 24px;
+    }
+
+`;
 
 const RollingLogo = styled.div`
     box-sizing: border-box;
@@ -31,7 +52,10 @@ const RollingHeader = () => {
 
     return (
         <RollingLogo onClick={handleLogoClick}>
-            <img src={Logo} alt='Logo' style={{ width: '27.82px', height: '27.66px' }} /> 
+            <img 
+                src={Logo} alt='Logo' 
+                style={{ width: '27.82px', height: '27.66px' }} 
+            /> 
             <LogoText>Rolling</LogoText>
         </RollingLogo>
     );
@@ -40,28 +64,34 @@ const RollingHeader = () => {
 const MakingRollingPaper = () => {
     // 다른 페이지에서는 안 보이게 만들기
     const navigate = useNavigate();
-    const handleMakingClick = () => navigate('list');
-    
+    const handleMakingClick = () => navigate('post');
+    const ButtonContainer = styled.div`
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        @media (max-width: ${BREAK_POINT.tablet}px) {
+            gap: 12px;
+        }
+
+        @media (max-width: ${BREAK_POINT.mobile}px) {
+            gap: 8px;
+        }
+
+    `;
     return (
-        <div onClick={handleMakingClick}>
-            {/* <Button type='outlined' w='122' h='40'>롤링 페이퍼 만들기</Button>  */}
-            <button>롤링페이퍼 만들기</button>
-        </div>
+        <ButtonContainer onClick={handleMakingClick}>
+            <Button type='outlined' w='157' h='40'>롤링 페이퍼 만들기</Button> 
+        </ButtonContainer>
     )
 }
 
 export default function Navbar() {
-    const Navbar = styled.div`
-        border-bottom: 1px #EDEDED;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 11px;
-    `;
+
     return (
-        <Navbar>
+        <NavbarWrapper>
             <RollingHeader />
             <MakingRollingPaper />
-        </Navbar>
+        </NavbarWrapper>
     )
 }
