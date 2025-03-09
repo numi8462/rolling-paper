@@ -2,6 +2,7 @@ import Logo from '../../../assets/icons/🎨 Icon Color.svg';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
+import { useEffect, useState } from 'react';
 
 const BREAK_POINT = {
     mobile: 768,
@@ -62,9 +63,13 @@ const RollingHeader = () => {
 };
 
 const MakingRollingPaper = () => {
-    // 다른 페이지에서는 안 보이게 만들기
     const navigate = useNavigate();
     const handleMakingClick = () => navigate('post');
+
+    if (!['/','/list'].includes(location.pathname)) {
+        return null;
+    }
+    
     const ButtonContainer = styled.div`
         display: flex;
         align-items: center;
