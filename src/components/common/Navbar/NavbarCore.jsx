@@ -2,7 +2,7 @@ import Logo from '../../../assets/icons/🎨 Icon Color.svg';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
-import { useEffect, useState } from 'react';
+
 
 const BREAK_POINT = {
     mobile: 768,
@@ -69,7 +69,7 @@ const MakingRollingPaper = () => {
     if (!['/','/list'].includes(location.pathname)) {
         return null;
     }
-    
+
     const ButtonContainer = styled.div`
         display: flex;
         align-items: center;
