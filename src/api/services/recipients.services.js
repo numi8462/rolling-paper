@@ -7,17 +7,15 @@ class RecipientService {
   }
   // rolling paper 만들기
   createRecipient(body) {
-    return requestor.post(`/recipients/`, {
-      data: body,
-    });
+    return requestor.post(`/recipients/`, body);
   }
   // rolling paper 불러오기
   getRecipient(id) {
-    return requestor.get(`/recipients/${id}`);
+    return requestor.get(`/recipients/${id}/`);
   }
   // rolling paper 삭제
   deleteRecipient(id) {
-    return requestor.delete(`/recipients/${id}`);
+    return requestor.delete(`/recipients/${id}/`);
   }
   // rolling paper의 모든 메세지 불러오기
   getMessages(id, limit = 0, offset = 0) {
@@ -27,19 +25,15 @@ class RecipientService {
   }
   // rolling paper 만들기
   createMessage(id, body) {
-    return requestor.post(`/recipients/${id}/messages`, {
-      data: body,
-    });
+    return requestor.post(`/recipients/${id}/messages/`, body);
   }
   // rolling paper의 모든 반응 불러오기
   getReactions(id) {
-    return requestor.get(`/recipients/${id}/reactions`);
+    return requestor.get(`/recipients/${id}/reactions/`);
   }
   // rolling paper 반응 만들기
   createReaction(id, body) {
-    return requestor.post(`/recipients/${id}/reactions`, {
-      data: body,
-    });
+    return requestor.post(`/recipients/${id}/reactions/`, body);
   }
 }
 
