@@ -7,9 +7,7 @@ class RecipientService {
   }
   // rolling paper 만들기
   createRecipient(body) {
-    return requestor.post(`/recipients/`, {
-      data: body,
-    });
+    return requestor.post(`/recipients/`, body);
   }
   // rolling paper 불러오기
   getRecipient(id) {
@@ -27,9 +25,7 @@ class RecipientService {
   }
   // rolling paper 만들기
   createMessage(id, body) {
-    return requestor.post(`/recipients/${id}/messages`, {
-      data: body,
-    });
+    return requestor.post(`/recipients/${id}/messages`, body);
   }
   // rolling paper의 모든 반응 불러오기
   getReactions(id) {
@@ -37,9 +33,7 @@ class RecipientService {
   }
   // rolling paper 반응 만들기
   createReaction(id, body) {
-    return requestor.post(`/recipients/${id}/reactions`, {
-      data: body,
-    });
+    return requestor.post(`/recipients/${id}/reactions`, body);
   }
 }
 
