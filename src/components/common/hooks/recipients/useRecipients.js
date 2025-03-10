@@ -1,18 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
-import recipientService from '../../../api/services/recipients.services';
+import recipientService from '../../../../api/services/recipients.services';
 
-function useRecipient(id) {
-  const [rollingPaper, setRollingPaper] = useState([]);
+function useRecipients() {
+  const [rollingPapers, setRollingPapers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleLoad = async () => {
     setLoading(true);
     try {
-      const res = await recipientService.getRecipient(id);
-      console.log('res', res);
-      const data = res.data;
-      setRollingPaper(data);
+      const res = await recipientService.getRecipients();
+      const { results } = res.data;
+      setRollingPapers(results);
     } catch (error) {
       console.error('Error fetching recipients:', error);
       setError(error);
@@ -29,7 +28,7 @@ function useRecipient(id) {
     handleLoad();
   }, []);
 
-  return { rollingPaper, loading, error, refetch };
+  return { rollingPapers, loading, error, refetch };
 }
 
-export default useRecipient;
+export default useRecipients;
