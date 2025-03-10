@@ -24,7 +24,7 @@ function RollingPaperList() {
   };
 
   const handleDelete = async () => {
-    await deleteRecipient(10466);
+    await deleteRecipient(10469);
   };
 
   return (
@@ -43,7 +43,10 @@ function RollingPaperList() {
             );
           })}
       </ul>
-      <div>롤링페이퍼{rollingPaper.id}</div>
+      <div>
+        롤링페이퍼{rollingPaper.id}
+        {rollingPaper.name}
+      </div>
     </div>
   );
 }
