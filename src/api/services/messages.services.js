@@ -14,7 +14,7 @@ class MessageService {
     return requestor.patch(`/messages/${id}/`, body);
   }
   // 메세지 삭제
-  deleteMessages(id) {
+  deleteMessage(id) {
     return requestor.delete(`/messages/${id}/`);
   }
 }

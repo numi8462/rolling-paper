@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import recipientService from '../../../api/services/recipients.services';
+import recipientService from '../../../../api/services/recipients.services';
 
 function useCreateRecipient(refetch) {
   const [data, setData] = useState();
