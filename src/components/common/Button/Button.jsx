@@ -42,7 +42,7 @@ const buttonDefault = css`
     color: ${theme.colors.basic.white};
     img {
       width: 20px;
-    )
+    }
   }
 `;
 // button color type
