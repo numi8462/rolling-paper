@@ -1,6 +1,8 @@
 import checkIcon from "./checkIcon.svg";
 import deleteIcon from "./deleteIcon.svg";
 import downArrow from "./downArrow.svg";
+import rightArrow from "./rightArrow.svg";
+import leftArrow from "./leftArrow.svg";
 import nomalprofile from "./nomalprofile.svg";
 import otherOption from "./otherOption.svg";
 import plusEmoji20px from "./plusEmoji20px.svg";
@@ -20,13 +22,13 @@ const icons = {
   checkIcon,
   deleteIcon,
   downArrow,
+  rightArrow,
   leftArrow,
   nomalprofile,
   otherOption,
   plusEmoji20px,
   plusEmoji24px,
   plusIcon,
-  rightArrow,
   shareIcon20px,
   shareIcon24px,
   toastcloseIcon,
