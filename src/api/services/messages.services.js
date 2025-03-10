@@ -1,22 +1,25 @@
 import requestor from '../client/requestor';
 
 class MessageService {
-  getRecipients(limit = 0, offset = 0) {
-    return requestor.get(`/recipients/?limit=${limit}&offset=${offset}`);
+  // 메세지 불러오기
+  getMessage(id) {
+    return requestor.get(`/messages/${id}`);
   }
-
-  createRecipient(body) {
-    return requestor.post(`/recipients/`, {
+  // 메세지의 전체 내용을 body의 내용으로 업데이트
+  putMessages(id, body) {
+    return requestor.put(`/messages/${id}`, {
       data: body,
     });
   }
-
-  getRecipient(id) {
-    return requestor.get(`/recipients/${id}`);
+  // 메세지의 일부 정보 업데이트
+  patchMessages(id, body) {
+    return requestor.patch(`/messages/${id}`, {
+      data: body,
+    });
   }
-
-  deleteRecipient(id) {
-    return requestor.delete(`/recipients/${id}`);
+  // 메세지 삭제
+  deleteMessages(id) {
+    return requestor.delete(`/messages/${id}`);
   }
 }
 
