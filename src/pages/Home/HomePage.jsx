@@ -1,7 +1,10 @@
-import React from "react";
-import Input from "../../components/common/Input/Input";
+import React from 'react';
+
 const HomePage = () => {
-  return <div>Homepage</div>;
+  return (
+    <div></div>
+  );
 };
 
 export default HomePage;
+
