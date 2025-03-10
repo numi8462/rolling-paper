@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import recipientService from '../../../api/services/recipients.services';
 
-function useCreateRecipient() {
+function useCreateRecipient(refetch) {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,6 +12,9 @@ function useCreateRecipient() {
       const res = await recipientService.createRecipient(body);
       setData(res.data);
       console.log('res', res);
+      if (refetch) {
+        refetch();
+      }
     } catch (error) {
       console.log(error);
       setError(error);
