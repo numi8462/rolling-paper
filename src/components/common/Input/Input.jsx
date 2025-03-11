@@ -14,8 +14,8 @@ const InputContainer = styled.div`
 //size 프롭을 전달하면 크기를 지정할수있습니다. 기본값은 20px로 지정해놨습니다
 const StyledInput = styled.input`
   border-radius: 4px;
-  border: 1px solid ${({ error }) =>
-    error ? theme.colors.basic[error] : theme.colors.gray[300]};
+  border: 1px solid ${({ $error }) =>
+    $error ? theme.colors.basic.Error : theme.colors.gray[300]};
   padding: 8px;
   font-size: ${({ size }) => size || theme.fs.xl};
   transition: border 0.2s ease-in-out;
@@ -43,9 +43,9 @@ const StyledInput = styled.input`
 `;
 
 const ErrorMessage = styled.span`
-  color: ${theme.colors.basic[error]}
+  color: #dc3a3a
   font-size: 14px;
-  visibility: ${({ show }) => (show ? "visible" : "hidden")};
+  visibility: ${({ $show }) => ($show ? "visible" : "hidden")};
 `;
 
 const Input = ({ placeholder, size, width, maxWidth }) => {
@@ -64,12 +64,12 @@ const Input = ({ placeholder, size, width, maxWidth }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onBlur={handleBlur}
-        error={error}
+        $error={error}
         size={size}
         width={width}
         maxWidth={maxWidth}
       />
-      <ErrorMessage show={error}>값을 입력해 주세요.</ErrorMessage>
+      <ErrorMessage $show={error}>값을 입력해 주세요.</ErrorMessage>
     </InputContainer>
   );
 };
