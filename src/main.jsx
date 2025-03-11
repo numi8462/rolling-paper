@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home/HomePage.jsx";
 import RollingPaperList from "./pages/RollingPaperList/RollingPaperList.page.jsx";
 import RollingPaper from "./pages/RollingPaper/RollingPaper.page.jsx";
-import RollingPaperMaking from "./pages/RollingpaperMaking.jsx";
+import RollingPaperMaking from "./pages/CreateRollingPaper/CreateRollingPaper.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
