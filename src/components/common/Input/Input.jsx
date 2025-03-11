@@ -43,7 +43,7 @@ const StyledInput = styled.input`
 `;
 
 const ErrorMessage = styled.span`
-  color: #dc3a3a
+  color: ${theme.colors.basic.Error};
   font-size: 14px;
   visibility: ${({ $show }) => ($show ? "visible" : "hidden")};
 `;
