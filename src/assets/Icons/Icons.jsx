@@ -1,21 +1,19 @@
-import checkIcon from "./checkIcon.svg";
-import deleteIcon from "./deleteIcon.svg";
-import downArrow from "./downArrow.svg";
-import rightArrow from "./rightArrow.svg";
-import leftArrow from "./leftArrow.svg";
-import nomalprofile from "./nomalprofile.svg";
-import otherOption from "./otherOption.svg";
-import plusEmoji20px from "./plusEmoji20px.svg";
-import plusEmoji24px from "./plusEmoji24px.svg";
-import plusIcon from "./plusIcon.svg";
-import leftArrow from "./leftArrow.svg";
-import rightArrow from "./rightArrow.svg";
-import shareIcon20px from "./shareIcon20px.svg";
-import shareIcon24px from "./shareIcon24px.svg";
-import toastcloseIcon from "./toastcloseIcon.svg";
-import toastcompleted from "./toastcompleted.svg";
-import logoIcon from "./logoIcon.svg";
-import styled from "styled-components";
+import checkIcon from './checkIcon.svg';
+import deleteIcon from './deleteIcon.svg';
+import downArrow from './downArrow.svg';
+import rightArrow from './rightArrow.svg';
+import leftArrow from './leftArrow.svg';
+import nomalprofile from './nomalprofile.svg';
+import otherOption from './otherOption.svg';
+import plusEmoji20px from './plusEmoji20px.svg';
+import plusEmoji24px from './plusEmoji24px.svg';
+import plusIcon from './plusIcon.svg';
+import shareIcon20px from './shareIcon20px.svg';
+import shareIcon24px from './shareIcon24px.svg';
+import toastcloseIcon from './toastcloseIcon.svg';
+import toastcompleted from './toastcompleted.svg';
+import logoIcon from './logoIcon.svg';
+import styled from 'styled-components';
 
 // 아이콘 객체 (이미지 경로는 .src로 접근)
 const icons = {
@@ -37,11 +35,11 @@ const icons = {
 };
 
 const StyledIcon = styled.img`
-  width: ${(props) => props.size || "24px"};
-  height: ${(props) => props.size || "24px"};
+  width: ${(props) => props.size || '24px'};
+  height: ${(props) => props.size || '24px'};
 `;
 
-const Icon = ({ name, alt = "", size = "24px" }) => {
+const Icon = ({ name, alt = '', size = '24px' }) => {
   const iconSrc = icons[name];
 
   if (!iconSrc) {

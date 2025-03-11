@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { theme } from '../../../styles/theme';
 
 const StyledBadge = styled.div`
-  width: 40px;
+  width: 42px;
   height: 20px;
-  padding: 0 8px;
-  font-size: 14px;
+  ${theme.p[0][8]};
+  ${theme.fs.xs};
+  font-weight: 400;
+  line-height: 20px;
   color: ${(props) => props.fontColor};
   background-color: ${(props) => props.bgColor};
   border-radius: 4px;
@@ -14,20 +17,20 @@ const StyledBadge = styled.div`
 
 const relationshipColors = {
   지인: {
-    bgColor: '#FFF0D6',
-    fontColor: '#FF8832',
+    bgColor: `${theme.colors.beige[100]}`,
+    fontColor: `${theme.colors.beige[500]}`,
   },
   동료: {
-    bgColor: '#F8F0FF',
-    fontColor: '#9935FF',
+    bgColor: `${theme.colors.purple[100]}`,
+    fontColor: `${theme.colors.purple[500]}`,
   },
   가족: {
-    bgColor: '#E4FBDC',
-    fontColor: '#2BA600',
+    bgColor: `${theme.colors.green[100]}`,
+    fontColor: `${theme.colors.green[500]}`,
   },
   친구: {
-    bgColor: '#E2F5FF',
-    fontColor: '#00A2FE',
+    bgColor: `${theme.colors.blue[100]}`,
+    fontColor: `${theme.colors.blue[500]}`,
   },
 };
 
