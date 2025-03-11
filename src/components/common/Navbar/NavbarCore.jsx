@@ -14,6 +14,7 @@ const NavbarWrapper = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
     padding: 11px 0px;
 
     border-bottom: 1px solid #EDEDED;
