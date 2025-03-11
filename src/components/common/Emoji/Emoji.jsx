@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { theme } from '../../../styles/theme';
 
 const StyledEmoji = styled.div`
-  box-sizing: border-box;
   width: 66px;
   height: 36px;
-  padding: 8px 12px;
+  ${theme.p[8][12]};
+  line-height: 20px;
   background-color: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
+  color: ${theme.colors.basic.white};
   border-radius: 32px;
   text-align: center;
 `;

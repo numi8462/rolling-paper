@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { RiCheckboxCircleFill } from 'react-icons/ri';
-import { IoMdClose } from 'react-icons/io';
+import { theme } from '../../../styles/theme';
+import Icon from '../../../assets/Icons/Icons';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -15,36 +15,36 @@ const fadeOut = keyframes`
 
 const ToastContainer = styled.div`
   width: 524px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   position: fixed;
   bottom: 20px;
   background-color: #000000cc;
-  color: white;
-  padding: 20px 30px;
+  color: ${theme.colors.basic.white};
+  ${theme.p[20][30]};
   border-radius: 8px;
   z-index: 9999;
-  display: flex;
-  align-items: center;
   animation: ${fadeIn} 0.3s ease-out, ${fadeOut} 0.3s ease-in 2.7s forwards;
 `;
 
-const CheckIcon = styled(RiCheckboxCircleFill)`
-  font-size: 24px;
-  margin-right: 10px;
-  color: #4caf50;
+const Message = styled.div`
+  width: 100%;
 `;
 
-const CloseIcon = styled(IoMdClose)`
-  font-size: 20px;
-  margin-left: auto;
+const Close = styled.div`
   cursor: pointer;
 `;
 
 function Toast({ message, onClose }) {
   return (
     <ToastContainer>
-      <CheckIcon />
-      <span>{message}</span>
-      <CloseIcon onClick={onClose} />
+      <Icon name="toastcompleted" alt="toast complete" />
+      <Message>{message}</Message>
+      <Close onClick={onClose}>
+        <Icon name="toastcloseIcon" alt="close" />
+      </Close>
     </ToastContainer>
   );
 }
