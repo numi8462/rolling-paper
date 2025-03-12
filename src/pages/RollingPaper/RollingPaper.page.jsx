@@ -1,17 +1,42 @@
 import React from 'react';
 import InformationBar from '../../components/domain/rollingpaper/InformationBar/InformationBar';
-import useMessages from '../../components/common/hooks/messages/useMessages';
 import { useParams } from 'react-router-dom';
+import MessageCardList from '../../components/domain/rollingpaper/MessageCardList/MessageCardList';
+import styled from 'styled-components';
+import useRecipient from '../../components/common/hooks/recipients/useRecipeint';
+import { theme } from '../../styles/theme';
+
+const StyledRollingPaper = styled.div`
+  height: calc(100vh - 65px);
+  background-color: ${(props) => theme.colors[props.$bgColor]?.[200]};
+  background-image: url(${(props) => props.$bgUrl});
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-y: auto;
+  /* &::-webkit-scrollbar {
+    display: none;
+  } */
+`;
 
 function RollingPaper() {
   const { id } = useParams();
-  const { messages, loading, error, refetch } = useMessages(id);
+  const { rollingPaper, loading, error, refetch } = useRecipient(id);
+  const {
+    name,
+    backgroundColor,
+    backgroundImageURL,
+    createdAt,
+    messageCount,
+    recentMessages,
+  } = rollingPaper;
+
+  console.log(backgroundImageURL);
 
   return (
-    <div>
+    <StyledRollingPaper $bgColor={backgroundColor} $bgUrl={backgroundImageURL}>
       <InformationBar />
-      RollingPaper page, Post id: {id}
-    </div>
+      <MessageCardList postId={id} />
+    </StyledRollingPaper>
   );
 }
 

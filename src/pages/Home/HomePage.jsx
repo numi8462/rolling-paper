@@ -23,7 +23,7 @@ const S = {
     margin-top: 30px;
     padding: 60px 0;
 
-    @media (max-width: ${theme.breakpoints.m}) {
+    @media (max-width: ${theme.breakpoints.t}) {
       flex-direction: column;
       padding: 40px 0;
       ${(props) =>
@@ -33,7 +33,7 @@ const S = {
         `}
     }
 
-    @media (max-width: ${theme.breakpoints.min}) {
+    @media (max-width: ${theme.breakpoints.m}) {
       flex-direction: column;
       padding: 24px 0;
       ${(props) =>
@@ -56,13 +56,13 @@ const S = {
         padding-right: 60px;
       `}
 
-    @media (max-width: ${theme.breakpoints.m}) {
+    @media (max-width: ${theme.breakpoints.t}) {
       width: 100%;
       padding: 0 40px;
       margin-bottom: 36px;
     }
 
-    @media (max-width: ${theme.breakpoints.min}) {
+    @media (max-width: ${theme.breakpoints.m}) {
       padding: 0 24px;
       margin-bottom: 50px;
     }
@@ -88,7 +88,7 @@ const S = {
   `,
 
   Break: styled.br`
-    @media (max-width: ${theme.breakpoints.m}) {
+    @media (max-width: ${theme.breakpoints.t}) {
       display: none;
     }
   `,
