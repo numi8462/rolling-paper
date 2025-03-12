@@ -80,7 +80,7 @@ const CreateRollingPaper = () => {
         onChange={(index) => setActiveTab(index)}
       />
 
-      {activeTab === "컬러" ? (
+      {activeTab === 0 ? (
         <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
           {colorOptions.map((color) => (
             <ColorOption
