@@ -19,8 +19,8 @@ const StyledInput = styled.input`
   padding: 8px;
   font-size: ${({ size }) => size || theme.fs.xl};
   transition: border 0.2s ease-in-out;
-  width: ${({ width }) => width || "100%"};
-  max-width: ${({ maxWidth }) => maxWidth || "300px"};
+  width: ${({ $width }) => $width || "100%"};
+  max-width: ${({ $maxWidth }) => $maxWidth || "300px"};
 
     &:focus {
     border: 2px solid ${theme.colors.gray[500]}
@@ -66,8 +66,8 @@ const Input = ({ placeholder, size, width, maxWidth }) => {
         onBlur={handleBlur}
         $error={error}
         size={size}
-        width={width}
-        maxWidth={maxWidth}
+        $width={width}
+        $maxWidth={maxWidth}
       />
       <ErrorMessage $show={error}>값을 입력해 주세요.</ErrorMessage>
     </InputContainer>
