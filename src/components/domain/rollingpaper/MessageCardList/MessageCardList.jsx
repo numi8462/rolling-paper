@@ -5,6 +5,8 @@ import useMessages from '../../../common/hooks/messages/useMessages';
 import Card from '../../../../pages/RollingPaper/components/Card';
 import Icon from '../../../../assets/Icons/Icons';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Modal from '../Modal/Modal';
 const S = {
   ListContainer: styled.div`
     display: grid;
@@ -35,6 +37,13 @@ const S = {
 
 function MessageCardList({ postId }) {
   const { messages, loading, error, refetch } = useMessages(postId);
+  const [message, setMessage] = useState();
+
+  const handleClick = (message) => {
+    console.log('clicked', message.id);
+    setMessage(message);
+  };
+
   return (
     <Container style={{ backgroundColor: 'transparent' }}>
       <S.ListContainer>
@@ -47,9 +56,14 @@ function MessageCardList({ postId }) {
         </Link>
 
         {messages?.map((message) => (
-          <MessageCard key={message.id} message={message} />
+          <MessageCard
+            key={message.id}
+            message={message}
+            onClick={() => handleClick(message)}
+          />
         ))}
       </S.ListContainer>
+      {message && <Modal message={message} />}
     </Container>
   );
 }

@@ -30,8 +30,6 @@ function RollingPaper() {
     recentMessages,
   } = rollingPaper;
 
-  console.log(backgroundImageURL);
-
   return (
     <StyledRollingPaper $bgColor={backgroundColor} $bgUrl={backgroundImageURL}>
       <InformationBar />

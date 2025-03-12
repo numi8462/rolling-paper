@@ -4,7 +4,7 @@ import Card from '../../../../pages/RollingPaper/components/Card';
 import Badge from '../../../common/Badge/Badge';
 import { formatDate } from '../../../../utils/date';
 
-function MessageCard({ message }) {
+function MessageCard({ message, onClick }) {
   const {
     id,
     recipientId,
@@ -19,7 +19,7 @@ function MessageCard({ message }) {
   const date = formatDate(createdAt);
 
   return (
-    <Card.Container>
+    <Card.Container onClick={onClick}>
       <Card.InfoBox>
         <Card.ProfileImg src={profileImageURL} alt="profile" />
         <Card.SenderInfoBox>
