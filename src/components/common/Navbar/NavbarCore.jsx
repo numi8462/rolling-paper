@@ -37,23 +37,37 @@ const NavbarWrapper = styled.header`
 `;
 
 const RollingLogo = styled.div`
-  box-sizing: border-box;
-  width: 106px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+    box-sizing: border-box;
+    width: 106px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 `;
 
 const LogoText = styled.span`
-  font-family: Poppins, sans-serif;
-  font-size: 19.97px;
-  font-weight: 700;
-  line-height: 29.96px;
-  text-align: center;
-  margin-left: 8px;
-  color: #4a494f;
+    font-family: Poppins, sans-serif;
+    font-size: 19.97px;
+    font-weight: 700;
+    line-height: 29.96px;
+    text-align: center;
+    margin-left: 8px;
+    color: #4a494f;
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    @media (max-width: ${BREAK_POINT.tablet}px) {
+        gap: 12px;
+    }
+
+    @media (max-width: ${BREAK_POINT.mobile}px) {
+        gap: 8px;
+    }
 `;
 
 const RollingHeader = () => {
@@ -82,19 +96,6 @@ const MakingRollingPaper = () => {
     return null;
   }
 
-  const ButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-    @media (max-width: ${BREAK_POINT.tablet}px) {
-      gap: 12px;
-    }
-
-    @media (max-width: ${BREAK_POINT.mobile}px) {
-      gap: 8px;
-    }
-  `;
   return (
     <ButtonContainer onClick={handleMakingClick}>
       <Button type="outlined" w="157" h="40">
