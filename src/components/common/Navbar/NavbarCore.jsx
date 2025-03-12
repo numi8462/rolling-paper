@@ -2,12 +2,22 @@ import Logo from '../../../assets/icons/🎨 Icon Color.svg';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
-
-
+import  { Container } from '../../../styles/theme';
+ 
 const BREAK_POINT = {
     mobile: 768,
     tablet: 1248,
 };
+const NavbarOuter = styled.div`
+    width: 100%;
+    border-bottom: 1px solid #EDEDED;
+    position: sticky;
+    top: 0;
+    /* 필요하다면 배경 색상과 z-index를 지정해서 
+        스크롤 시 위에 고정할 수도 있음 */
+    background-color: white;
+    z-index: 999;
+`;
 
 const NavbarWrapper = styled.header`
     box-sizing: border-box;
@@ -16,11 +26,12 @@ const NavbarWrapper = styled.header`
     align-items: center;
     position: sticky;
     padding: 11px 0px;
-
-    border-bottom: 1px solid #EDEDED;
+    max-width: 1207;
+    /* border-bottom: 1px solid #EDEDED; */
 
     @media (max-width: ${BREAK_POINT.tablet}px){
-        padding: 11px 24px;
+        padding: 11px 0;
+        margin: 0;
     }
 
 `;
@@ -94,10 +105,21 @@ const MakingRollingPaper = () => {
 
 export default function Navbar() {
 
+    if (
+        window.innerWidth <= BREAK_POINT.mobile &&
+        !['/','/list'].includes(location.pathname)
+    ){
+        return null;
+    }
+
     return (
-        <NavbarWrapper>
-            <RollingHeader />
-            <MakingRollingPaper />
-        </NavbarWrapper>
+        <NavbarOuter>
+            <Container>
+                <NavbarWrapper>
+                        <RollingHeader />
+                        <MakingRollingPaper />
+                </NavbarWrapper>
+            </Container>
+        </NavbarOuter>
     )
 }
