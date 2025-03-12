@@ -21,22 +21,22 @@ const StyledInput = styled.input`
   max-width: ${({ maxWidth }) => maxWidth || "300px"};
 
     &:focus {
-    border: 2px solid "#555555"
-    outline: none;
+      border: 2px solid #555555;
+      outline: none;
     }
 
     &:active {
-    border: 2px solid "#3a3a3a"
+      border: 2px solid #3a3a3a;
     }
     &:hover {
-    border: 1px solid #555555
+      border: 1px solid #555555;
     }
 
     &:disabled {
-        color: #f6f6f6; 
-        background-color: #eeeeee; 
-        border: 1px solid #cccccc;
-        cursor: not-allowed; 
+      color: #f6f6f6; 
+      background-color: #eeeeee; 
+      border: 1px solid #cccccc;
+      cursor: not-allowed; 
     }
 `;
 
