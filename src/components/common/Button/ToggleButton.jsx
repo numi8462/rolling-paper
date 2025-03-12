@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Font, theme } from "../../../styles/theme";
 import { useState } from "react";
 
-export function ToggleButton({ tabs, activeTab, ...rest }) {
+export function ToggleButton({ tabs, activeTab, onChange, ...rest }) {
   const tabLength = tabs.length;
   const tabWidth = 122;
   const buttonWidth = tabLength * tabWidth;
@@ -14,7 +14,9 @@ export function ToggleButton({ tabs, activeTab, ...rest }) {
   const handleActiveTab = (index) => {
     setToggleTab(index);
     setActivePosition(index * tabWidth);
-    onChange?.(index);
+    if (onChange) {
+      onChange(index);
+    }
   };
 
   return (
