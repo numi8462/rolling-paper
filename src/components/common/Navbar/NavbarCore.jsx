@@ -10,18 +10,23 @@ const BREAK_POINT = {
 };
 
 const NavbarWrapper = styled.header`
-  box-sizing: border-box;
-  justify-content: space-between;
-  align-items: center;
-  padding: 11px 0px;
-
-  div {
-    display: flex;
+    box-sizing: border-box;
     justify-content: space-between;
-  }
+    align-items: center;
+    padding: 11px 0px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    div {
+        display: flex;
+        justify-content: space-between;
+    }
     align-items: center;
     padding: 11px 0px;
 
+    background-color: white;
     border-bottom: 1px solid #EDEDED;
 
     @media (max-width: ${BREAK_POINT.tablet}px){
