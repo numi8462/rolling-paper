@@ -18,10 +18,9 @@ const NavbarWrapper = styled.header`
   div {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 11px 0px;
+  }
 
-    border-bottom: 1px solid #EDEDED;
+  border-bottom: 1px solid #ededed;
 
   @media (max-width: ${BREAK_POINT.tablet}px) {
     padding: 11px 24px;
@@ -39,13 +38,23 @@ const RollingLogo = styled.div`
 `;
 
 const LogoText = styled.span`
-    font-family: Poppins, sans-serif;
+<<<<<<< HEAD
+    font-family: 'Poppins', sans-serif;
     font-size: 19.97px;
     font-weight: 700;
     line-height: 29.96px;
     text-align: center;
     margin-left: 8px;
     color: #4A494F;
+=======
+  font-family: Poppins, sans-serif;
+  font-size: 19.97px;
+  font-weight: 700;
+  line-height: 29.96px;
+  text-align: center;
+  margin-left: 8px;
+  color: #4a494f;
+>>>>>>> bd4ccea13354f06c01557498f7a9e5a698491515
 `;
 
 const RollingHeader = () => {
