@@ -3,11 +3,9 @@ import { media, theme } from "../../../styles/theme";
 import Emoji from "./Emoji";
 
 
-const StyledEmojiList = styled.div`
+const StyledEmojiList = styled.ul`
   display:flex;
   gap: 8px;
-  ${media.tablet`
-  `}
   ${media.mobile`
     gap: 4px;
   `}
