@@ -11,6 +11,7 @@ const StyledRollingPaper = styled.div`
   background-color: ${(props) => theme.colors[props.$bgColor]?.[200]};
   background-image: url(${(props) => props.$bgUrl});
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   overflow-y: auto;
   &::-webkit-scrollbar {
