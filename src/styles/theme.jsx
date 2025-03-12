@@ -64,17 +64,17 @@ export const theme = {
     30: { 24: 'padding: 30px 24px' },
     28: { 24: 'padding: 28px 24px' },
     24: { 24: 'padding: 24px 24px'},
-    19: { 30: 'padding: 19x 30px'},
-    16: { 16: 'padding: 16x 16px'},
-    14: { 60: 'padding: 14x 60px', 24: 'padding: 14x 24px', 16: 'padding: 14x 16px'},
-    12: { 16: 'padding: 12x 16px', 12: 'padding: 12x 12px'},
-    10: { 0: 'padding: 10x 0px'},
-    8: { 16: 'padding: 8x 16px', 12: 'padding: 8x 12px'},
-    7: { 16: 'padding: 7x 16px', 15: 'padding: 7x 15px'},
-    6: { 16: 'padding: 6x 16px', 8: 'padding: 6x 8px', 6: 'padding: 6x 6px'},
-    4: { 8: 'padding: 4x 8px'},
-    2: { 16: 'padding: 2x 16px'},
-    0: { 24: 'padding: 0x 24px', 20: 'padding: 0x 20px', 8: 'padding: 0x 8px' },
+    19: { 30: 'padding: 19px 30px'},
+    16: { 16: 'padding: 16px 16px'},
+    14: { 60: 'padding: 14px 60px', 24: 'padding: 14px 24px', 16: 'padding: 14px 16px'},
+    12: { 16: 'padding: 12px 16px', 12: 'padding: 12px 12px'},
+    10: { 0: 'padding: 10px 0px'},
+    8: { 16: 'padding: 8px 16px', 12: 'padding: 8px 12px'},
+    7: { 16: 'padding: 7px 16px', 15: 'padding: 7px 15px'},
+    6: { 16: 'padding: 6px 16px', 8: 'padding: 6px 8px', 6: 'padding: 6px 6px'},
+    4: { 8: 'padding: 4px 8px'},
+    2: { 16: 'padding: 2px 16px'},
+    0: { 24: 'padding: 0px 24px', 20: 'padding: 0px 20px', 8: 'padding: 0px 8px' },
   },
   fs : { // font-size
     xxxl: 'font-size: 28px',
@@ -176,7 +176,7 @@ export const Font = {  //  font 설정
   `,
   f20:css`
     display: inline-block;
-    line-height : 30x;
+    line-height : 30px;
     ${theme.fs.xl};
     font-weight : ${({ $bold }) => $bold ? `700` : `400`};
   `,
@@ -227,7 +227,7 @@ export const media = {
   `,
 };
 
-export const Contaner = styled.div`   
+export const Container = styled.div`   
   background-color: white;
   max-width: 1248px;
   margin: 0 auto;

@@ -15,6 +15,7 @@ const NavbarWrapper = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 11px 0px;
+    
 
     border-bottom: 1px solid #EDEDED;
 
@@ -35,7 +36,7 @@ const RollingLogo = styled.div`
 `;
 
 const LogoText = styled.span`
-    font-family: Poppins, sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 19.97px;
     font-weight: 700;
     line-height: 29.96px;
