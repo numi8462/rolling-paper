@@ -8,16 +8,6 @@ const BREAK_POINT = {
   mobile: 768,
   tablet: 1248,
 };
-// const NavbarOuter = styled.div`
-//     width: 100%;
-//     border-bottom: 1px solid #EDEDED;
-//     position: sticky;
-//     top: 0;
-//     /* 필요하다면 배경 색상과 z-index를 지정해서 
-//         스크롤 시 위에 고정할 수도 있음 */
-//     background-color: white;
-//     z-index: 999;
-// `;
 
 const NavbarWrapper = styled.header`
   box-sizing: border-box;
