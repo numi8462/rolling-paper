@@ -13,9 +13,9 @@ const StyledRollingPaper = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   overflow-y: auto;
-  /* &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
-  } */
+  }
 `;
 
 function RollingPaper() {
