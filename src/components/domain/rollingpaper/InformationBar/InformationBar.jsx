@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Emoji from '../../../common/Emoji/Emoji';
 import useToast from '../../../common/Toast/useToast';
 import Toast from '../../../common/Toast/Toast';
+import { theme } from '../../../../styles/theme';
+import Badge from '../../../common/Badge/Badge';
 
 const StyledInformationBar = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${theme.center}
   height: 68px;
 `;
 
@@ -38,6 +38,7 @@ function InformationBar({ name, messageCount, emojis }) {
       <Emoji emoji={'\u{1F600}'} count={2} />
       <button onClick={handleClick}>URL복사</button>
       {toast && <Toast message={toast.message} onClose={closeToast} />}
+      <Badge relationship="가족" />
     </StyledInformationBar>
   );
 }
