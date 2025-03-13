@@ -4,6 +4,7 @@ import Input from "../../components/common/Input/Input";
 import { theme } from "../../styles/theme";
 import { ToggleButton } from "../../components/common/Button/ToggleButton";
 import { FilledButton } from "../../components/common/Button/FilledButton";
+import Icon from "../../assets/Icons/Icons";
 
 const Wrapper = styled.div`
   display: flex;
@@ -48,6 +49,24 @@ const OptionsContainer = styled.div`
   margin-top: 10px;
 `;
 
+const CheckIcon = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+`;
+
 const ColorOption = styled.div`
   width: 168px;
   height: 168px;
@@ -58,9 +77,15 @@ const ColorOption = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+
   &:hover,
   &.selected {
     border: 2px solid black;
+  }
+
+  &.selected ${CheckIcon} {
+    visibility: visible;
   }
 `;
 
@@ -70,9 +95,15 @@ const ImageOption = styled.img`
   border-radius: 8px;
   cursor: pointer;
   object-fit: cover;
+  position: relative;
+
   &:hover,
   &.selected {
     border: 2px solid black;
+  }
+
+  &.selected + ${CheckIcon} {
+    visibility: visible;
   }
 `;
 
@@ -115,7 +146,11 @@ const CreateRollingPaper = () => {
                   setBgColor(color);
                   setBgImage(null);
                 }}
-              />
+              >
+                <CheckIcon>
+                  <Icon name="checkIcon" />
+                </CheckIcon>
+              </ColorOption>
             ))}
           </OptionsContainer>
         ) : (
