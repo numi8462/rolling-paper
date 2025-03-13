@@ -1,8 +1,10 @@
 import Input from "../../components/common/Input/Input";
 import { theme, Font, Container, media } from "../../styles/theme";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { FilledButton } from "../../components/common/Button/FilledButton";
 import { Link } from "react-router-dom";
+import Dropdown from "../../components/common/Dropdown/Dropdown";
+import { useState } from "react";
 
 const S = {
     CreateMessageCard: styled.div`
@@ -42,13 +44,23 @@ const S = {
 };
 
 export default function CreateMessageCard() {
+    const [selectItem, setSelectItem] = useState('');
+
+    const realations = [
+        {value: '지인', label: '지인'},
+        {value: '동료', label: '동료'},
+        {value: '가족', label: '가족'},
+        {value: '친구', label: '친구'},
+    ];
+
+    const handleSelectChange = (value) => setSelectItem(value);
+
     return (
         <Container>
             <S.CreateMessageCard>
                 <S.MessageContainer>
                     <S.ContentWrapper>
                         <S.Label $bold>From.</S.Label>
-                        {/* input media 설정 해야함 */}
                         <Input
                             placeholder='이름을 입력해 주세요.'
                             width={720}
@@ -60,6 +72,13 @@ export default function CreateMessageCard() {
                     </S.ContentWrapper>
                     <S.ContentWrapper>
                         <S.Label $bold>상대와의 관계</S.Label>
+                        <Dropdown 
+                            placeholder="지인"
+                            options={realations}
+                            disabled={false}
+                            onChange={handleSelectChange}
+                            errorMessage="하나를 선택해주세요."
+                        />
                     </S.ContentWrapper>
                     <S.ContentWrapper>
                         <S.Label $bold>내용을 입력해주세요</S.Label>
