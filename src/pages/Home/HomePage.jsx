@@ -80,10 +80,8 @@ const S = {
   `,
 
   Title: styled.h2`
-    ${theme.fs.xxl};
+    ${Font.f24};
     font-weight: 700;
-    line-height: 36px;
-    letter-spacing: -1%;
     color: ${theme.colors.gray[900]};
   `,
 
@@ -94,7 +92,6 @@ const S = {
   `,
 
   Description: styled.p`
-    font-weight: 400;
     ${Font.f18};
     color: ${theme.colors.gray[500]};
   `,
@@ -138,7 +135,7 @@ function Homepage() {
           </S.ImageContainer>
           <S.InfoBox $right={true}>
             <S.Point>Point. 02</S.Point>
-            <S.Title>
+            <S.Title $bold>
               서로에게 이모지로 감정을 <S.Break /> 표현해보세요
             </S.Title>
             <S.Description>

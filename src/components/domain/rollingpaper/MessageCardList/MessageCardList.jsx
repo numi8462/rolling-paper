@@ -40,8 +40,12 @@ function MessageCardList({ postId }) {
   const [message, setMessage] = useState();
 
   const handleClick = (message) => {
-    console.log('clicked', message.id);
+    // console.log('clicked', message.id);
     setMessage(message);
+  };
+
+  const handleConfirm = () => {
+    setMessage(null);
   };
 
   return (
@@ -63,7 +67,7 @@ function MessageCardList({ postId }) {
           />
         ))}
       </S.ListContainer>
-      {message && <Modal message={message} />}
+      {message && <Modal message={message} onClick={() => handleConfirm()} />}
     </Container>
   );
 }
