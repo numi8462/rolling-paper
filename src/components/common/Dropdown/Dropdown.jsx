@@ -47,6 +47,17 @@ const DropdownButton = styled.button`
     color: ${({ $hasValue }) => ($hasValue ? gray_900 : gray_500)};
     background-color: ${theme.colors.basic.white};
     cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+    /* ▼ isOpen 상태 / disabled 상태에 따라 다른 배경이미지 */
+    background: url(${({ disabled, $isOpen }) => (disabled ? disabledArrow : $isOpen ? topArrow : downArrow)}) 
+        no-repeat center center;
+
+    background-size: 16px;
+    
+    &:disabled {
+        cursor: not-allowed;
+        /* 필요하면 배경이미지 말고 다른 스타일도 변경 가능 */
+    }  
+   ;
 
     appearance: none;
     -webkit-appearance: none;
@@ -71,17 +82,6 @@ const DropdownButton = styled.button`
     }
 `;
 
-const DropdownIcon = styled.img`
-    /* ▼ 기본 화살표 (열려있으면 topArrow, 아니면 downArrow) */
-    background: (${({ isOpen }) =>(isOpen ? topArrow : downArrow)})
-    no-repeat 95% 50%;
-    background-size: 16px;
-
-    &:disabled {
-        /* disabled arrow */
-        background: disabledArrow no-repeat 95% 50%;
-    }
-`;
 
 /** ▼ 옵션 리스트 ( ul ) */
 const OptionsList = styled.ul`
@@ -183,11 +183,10 @@ function Dropdown({
         onBlur={handleBlur}
         $error={showError}
         disabled={disabled}
-        isOpen={isopen}
+        $isOpen={isopen}
         $hasValue={!!value}
       >
         {buttonText}
-        <DropdownIcon />
       </DropdownButton>
 
       {/* ▼ 드롭다운 옵션 목록 */}

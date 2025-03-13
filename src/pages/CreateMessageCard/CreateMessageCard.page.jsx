@@ -11,7 +11,7 @@ const S = {
         /* width: 100%; */
         ${theme.center}
         flex-direction: column;
-        margin-top: 50px;
+        margin: 50px 0 ;
     `,
 
     MessageContainer: styled.form`
@@ -53,6 +53,13 @@ export default function CreateMessageCard() {
         {value: '친구', label: '친구'},
     ];
 
+    const Fonts = [
+        {value: 'Noto Sans', label: 'Noto Sans'},
+        {value: 'Pretendard', label: 'Pretendard'},
+        {value: '나눔 명조', label: '나눔 명조'},
+        {value: '나눔 손글씨 손편지체', label: '나눔 손글씨 손편지체'},
+    ];
+
     const handleSelectChange = (value) => setSelectItem(value);
 
     return (
@@ -77,7 +84,7 @@ export default function CreateMessageCard() {
                             options={realations}
                             disabled={false}
                             onChange={handleSelectChange}
-                            errorMessage="하나를 선택해주세요."
+                            errorMessage="관계를 선택해주세요."
                         />
                     </S.ContentWrapper>
                     <S.ContentWrapper>
@@ -85,7 +92,13 @@ export default function CreateMessageCard() {
                     </S.ContentWrapper>
                     <S.ContentWrapper>
                         <S.Label $bold>폰트 선택</S.Label>
-                
+                        <Dropdown 
+                            placeholder={Fonts[0].label}
+                            options={Fonts}
+                            disabled={false}
+                            onChange={handleSelectChange}
+                            errorMessage="폰트를 선택해 주세요."
+                        />
                     </S.ContentWrapper>
                 </S.MessageContainer>
                 <S.ButtonContainer>
