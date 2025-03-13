@@ -1,119 +1,33 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import Input from "../../components/common/Input/Input";
 import { theme } from "../../styles/theme";
 import { ToggleButton } from "../../components/common/Button/ToggleButton";
 import { FilledButton } from "../../components/common/Button/FilledButton";
 import Icon from "../../assets/Icons/Icons";
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center; /* 전체 페이지 기준 중앙 정렬 */
-  width: 100%;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* 왼쪽 정렬 */
-  gap: 16px;
-  padding: 20px;
-  width: 60%;
-  max-width: 800px; /* 최대 너비 제한 */
-`;
-
-const Label = styled.label`
-  font-size: ${theme.fs.l};
-  margin-bottom: 8px;
-`;
-
-const BackgroundContainer = styled.div`
-  width: 100%;
-  height: 300px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${(props) =>
-    props.bgImage ? `url(${props.bgImage})` : props.bgColor};
-  background-size: cover;
-  background-position: center;
-`;
-const OptionsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 10px;
-`;
-
-const CheckIcon = styled.div`
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 24px;
-  height: 24px;
-  background-color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: black;
-  visibility: hidden;
-  transition: all 0.3s ease-in-out;
-`;
-
-const ColorOption = styled.div`
-  width: 168px;
-  height: 168px;
-  border-radius: 8px;
-  cursor: pointer;
-  background: ${(props) => props.color};
-  border: 2px solid transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-
-  &:hover,
-  &.selected {
-    border: 2px solid black;
-  }
-
-  &.selected ${CheckIcon} {
-    visibility: visible;
-  }
-`;
-
-const ImageOption = styled.img`
-  width: 168px;
-  height: 168px;
-  border-radius: 8px;
-  cursor: pointer;
-  object-fit: cover;
-  position: relative;
-
-  &:hover,
-  &.selected {
-    border: 2px solid black;
-  }
-
-  &.selected + ${CheckIcon} {
-    visibility: visible;
-  }
-`;
-
+import {
+  Wrapper,
+  IconWrapper,
+  ToInputContainer,
+  Container,
+  Toh1,
+  CustomP,
+  OptionsContainer,
+  ColorOption,
+  ImageOption,
+  ImageOptionContainer,
+} from "./components/CreateRollingPageStyleComponents";
 const CreateRollingPaper = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [bgColor, setBgColor] = useState("#FFD700"); // 기본 색상
+  const [bgColor, setBgColor] = useState(theme.colors.beige[200]); // 기본 색상
   const [bgImage, setBgImage] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
 
-  const colorOptions = ["#FFD700", "#FF4500", "#1E90FF", "#32CD32"]; // 임의의 색상들
+  const colorOptions = [
+    theme.colors.beige[200],
+    theme.colors.purple[200],
+    theme.colors.blue[200],
+    theme.colors.green[200],
+  ]; // 임의의 색상들
 
   useEffect(() => {
     fetch("https://rolling-api.vercel.app/background-images/")
@@ -125,10 +39,12 @@ const CreateRollingPaper = () => {
   return (
     <Wrapper>
       <Container>
-        <Label>To.</Label>
-        <Input width="720px" maxWidth="1000px" />
+        <ToInputContainer>
+          <Toh1>To.</Toh1>
+          <Input width="720px" maxWidth="1000px" />
+        </ToInputContainer>
         <h2>배경화면을 선택해 주세요.</h2>
-        <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
+        <CustomP>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</CustomP>
         <ToggleButton
           tabs={["컬러", "이미지"]}
           activeTab={activeTab}
@@ -147,24 +63,32 @@ const CreateRollingPaper = () => {
                   setBgImage(null);
                 }}
               >
-                <CheckIcon>
-                  <Icon name="checkIcon" />
-                </CheckIcon>
+                {bgColor === color && (
+                  <IconWrapper>
+                    <Icon name="checkIcon" size="44px" />
+                  </IconWrapper>
+                )}
               </ColorOption>
             ))}
           </OptionsContainer>
         ) : (
           <OptionsContainer>
-            {imageUrls.slice(0, 4).map((url) => (
-              <ImageOption
-                key={url}
-                src={url}
-                className={bgImage === url ? "selected" : ""}
-                onClick={() => {
-                  setBgImage(url);
-                  setBgColor(null);
-                }}
-              />
+            {imageUrls.map((url) => (
+              <ImageOptionContainer key={url}>
+                <ImageOption
+                  src={url}
+                  className={bgImage === url ? "selected" : ""}
+                  onClick={() => {
+                    setBgImage(url);
+                    setBgColor(null);
+                  }}
+                />
+                {bgImage === url && (
+                  <IconWrapper>
+                    <Icon name="checkIcon" size="44px" />
+                  </IconWrapper>
+                )}
+              </ImageOptionContainer>
             ))}
           </OptionsContainer>
         )}
