@@ -1,5 +1,5 @@
 import Input from "../../components/common/Input/Input";
-import { theme, Font, Container } from "../../styles/theme";
+import { theme, Font, Container, media } from "../../styles/theme";
 import styled, { css } from 'styled-components';
 import { FilledButton } from "../../components/common/Button/FilledButton";
 import { Link } from "react-router-dom";
@@ -9,13 +9,19 @@ const S = {
         /* width: 100%; */
         ${theme.center}
         flex-direction: column;
+        margin-top: 50px;
     `,
 
     MessageContainer: styled.form`
         display: flex;
         flex-direction: column;
         justify-content: left;
+        width: 720px;
         gap: 50px;
+
+        ${media.mobile`
+            width: 100%;
+        `}
     `,
 
     ContentWrapper: styled.div`
