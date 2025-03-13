@@ -7,7 +7,7 @@ function useToast() {
     setToast({ message, id: Date.now() });
     setTimeout(() => {
       setToast(null);
-    }, 3000);
+    }, 5000);
   }, []);
 
   const closeToast = useCallback(() => {

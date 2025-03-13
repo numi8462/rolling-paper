@@ -31,7 +31,7 @@ function MessageCard({ message, onClick }) {
         </Card.SenderInfoBox>
       </Card.InfoBox>
       <Card.MessageBox>
-        <Card.Message>{content}</Card.Message>
+        <Card.Message $limit>{content}</Card.Message>
       </Card.MessageBox>
       <Card.Date>{date}</Card.Date>
     </Card.Container>

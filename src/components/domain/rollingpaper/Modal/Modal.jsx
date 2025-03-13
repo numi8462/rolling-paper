@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import Card from '../../../../pages/RollingPaper/components/Card';
 import { theme } from '../../../../styles/theme';
+import { formatDate } from '../../../../utils/date';
+import Badge from '../../../common/Badge/Badge';
+import { Button } from '../../../common/Button/Button';
 
 const S = {
-  ModalBox: styled.div`
+  ModalContainer: styled.div`
     position: absolute;
     inset: 0;
     display: flex;
@@ -14,18 +17,28 @@ const S = {
   `,
 
   Modal: styled.div`
-    position: absolute;
     width: 600px;
-    height: 476px;
+    height: 65vh;
     border-radius: 16px;
     padding: 40px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     background-color: ${theme.colors.basic.white};
+
+    @media (max-width: ${theme.breakpoints.t}) {
+      margin: 0 84px;
+    }
+
+    @media (max-width: ${theme.breakpoints.m}) {
+      margin: 0 24px;
+    }
   `,
+
+  ConfirmButton: styled(Button)``,
 };
 
-function Modal({ message }) {
+function Modal({ message, onClick }) {
   const {
     id,
     recipientId,
@@ -37,10 +50,30 @@ function Modal({ message }) {
     createdAt,
   } = message;
 
+  const date = formatDate(createdAt);
+
   return (
-    <S.ModalBox>
-      <S.Modal>box</S.Modal>
-    </S.ModalBox>
+    <S.ModalContainer>
+      <S.Modal>
+        <Card.InfoBox>
+          <Card.ProfileImg src={profileImageURL} alt="profile" />
+          <Card.SenderInfoBox>
+            <Card.Sender>
+              From.
+              <Card.Name $bold>{sender}</Card.Name>
+            </Card.Sender>
+            <Badge relationship={relationship} />
+          </Card.SenderInfoBox>
+          <Card.Date>{date}</Card.Date>
+        </Card.InfoBox>
+        <Card.MessageBox $modal>
+          <Card.Message>{content}</Card.Message>
+        </Card.MessageBox>
+        <Button w="120" h="40" onClick={onClick}>
+          확인
+        </Button>
+      </S.Modal>
+    </S.ModalContainer>
   );
 }
 
