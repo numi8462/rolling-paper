@@ -7,8 +7,12 @@ import { theme } from '../../../../styles/theme';
 import Badge from '../../../common/Badge/Badge';
 
 const StyledInformationBar = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 99;
   ${theme.center}
   height: 68px;
+  background-color: ${theme.colors.basic.white};
 `;
 
 const StyledName = styled.div`
