@@ -16,7 +16,7 @@ const StyledInput = styled.input`
   border-radius: 4px;
   border: 1px solid ${({ $error }) =>
     $error ? theme.colors.basic.Error : theme.colors.gray[300]};
-  padding: 8px;
+  padding: 12px 16px;
   font-size: ${({ size }) => size || theme.fs.xl};
   transition: border 0.2s ease-in-out;
   width: ${({ $width }) => $width || "100%"};
