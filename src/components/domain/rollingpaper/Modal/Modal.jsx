@@ -40,6 +40,7 @@ const S = {
 
   ConfirmButton: styled(Button)`
     min-height: 40px;
+    ${theme.fonts.pd};
   `,
 };
 
