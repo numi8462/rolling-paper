@@ -15,10 +15,6 @@ export const IconWrapper = styled.div`
   z-index: 10;
 `;
 
-export const ToInputContainer = styled.div`
-  margin: 57px 0px 50px;
-`;
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,18 +55,18 @@ export const BackgroundContainer = styled.div`
 `;
 export const OptionsContainer = styled.div`
   display: flex;
-  flex-direction: row;
   gap: 16px;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
-  margin-top: 10px;
+  margin: 45px 0px;
 `;
 
 export const ColorOption = styled.div`
   width: 168px;
   height: 168px;
-  border-radius: 8px;
+  border-radius: 16px;
+  border: 1px solid #00000014
   cursor: pointer;
   background: ${(props) => props.color};
   border: 2px solid transparent;
@@ -78,16 +74,18 @@ export const ColorOption = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  &:hover,
-  &.selected {
+  &:hover {
     border: 2px solid black;
+  }
+  &.selected {
+    border: none;
   }
 `;
 
 export const ImageOption = styled.img`
   width: 168px;
   height: 168px;
-  border-radius: 8px;
+  border-radius: 16px;
   cursor: pointer;
   object-fit: cover;
   position: relative;
@@ -99,6 +97,7 @@ export const ImageOption = styled.img`
   }
 
   &.selected {
+    border: none;
     filter: brightness(0.5);
     opacity: 0.6;
   }
@@ -107,4 +106,17 @@ export const ImageOption = styled.img`
 export const ImageOptionContainer = styled.div`
   position: relative;
   display: inline-block;
+`;
+
+export const SelectContainer = styled.div`
+  margin: 0px;
+  margin-bottom: 24px;
+`;
+
+export const ToInputContainer = styled.div`
+  margin-top: 57px;
+`;
+
+export const ButtonContainer = styled.div`
+  margin: 24px;
 `;
