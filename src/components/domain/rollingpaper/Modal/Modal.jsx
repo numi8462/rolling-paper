@@ -39,18 +39,28 @@ const S = {
 };
 
 function Modal({ message, onClick }) {
-  const {
-    id,
-    recipientId,
-    sender,
-    profileImageURL,
-    relationship,
-    content,
-    font,
-    createdAt,
-  } = message;
+  const { sender, profileImageURL, relationship, content, font, createdAt } =
+    message;
 
   const date = formatDate(createdAt);
+
+  let newFont;
+  switch (font) {
+    case 'Noto Sans':
+      newFont = 'ns';
+      break;
+    case 'Nanum Myeongjo':
+      newFont = 'nm';
+      break;
+    case 'Nanum Pen':
+      newFont = 'np';
+      break;
+    case 'Pretendard':
+      newFont = 'pd';
+      break;
+    default:
+      newFont = 'pd';
+  }
 
   return (
     <S.ModalContainer>
@@ -66,7 +76,7 @@ function Modal({ message, onClick }) {
           </Card.SenderInfoBox>
           <Card.Date>{date}</Card.Date>
         </Card.InfoBox>
-        <Card.MessageBox $modal>
+        <Card.MessageBox $modal $font={newFont}>
           <Card.Message>{content}</Card.Message>
         </Card.MessageBox>
         <Button w="120" h="40" onClick={onClick}>

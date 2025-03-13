@@ -56,9 +56,11 @@ const Card = {
   MessageBox: styled.div`
     width: 100%;
     height: ${(props) => (props.$modal ? '256px' : '110px')};
+    flex: 1 1 auto;
     margin: 16px 0;
     ${Font.f18};
     color: ${theme.colors.gray[600]};
+    ${(props) => theme.fonts[props.$font]};
 
     @media (max-width: ${theme.breakpoints.m}) {
       height: 56px;
