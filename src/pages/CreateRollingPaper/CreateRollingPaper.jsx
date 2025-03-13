@@ -4,6 +4,8 @@ import { theme } from "../../styles/theme";
 import { ToggleButton } from "../../components/common/Button/ToggleButton";
 import { FilledButton } from "../../components/common/Button/FilledButton";
 import Icon from "../../assets/Icons/Icons";
+import { Link } from "react-router-dom";
+import useCreateRecipient from "../../components/common/hooks/recipients/useCreateRecipient";
 import {
   Wrapper,
   IconWrapper,
@@ -23,13 +25,16 @@ const colorOptions = [
   theme.colors.purple[200],
   theme.colors.blue[200],
   theme.colors.green[200],
-]; // 임의의 색상들
+];
 
 const CreateRollingPaper = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [bgColor, setBgColor] = useState(colorOptions[0]); // 기본 색상
+  const [bgColor, setBgColor] = useState(colorOptions[0]);
   const [bgImage, setBgImage] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
+  const [toValue, setToValue] = useState("");
+  const { data, createRecipient } = useCreateRecipient();
+
   useEffect(() => {
     fetch("https://rolling-api.vercel.app/background-images/")
       .then((res) => res.json())
@@ -37,25 +42,44 @@ const CreateRollingPaper = () => {
         setImageUrls(data.imageUrls);
       })
       .catch((err) => console.error("이미지 불러오기 실패:", err));
-  }, []); // ✅ 한 번만 실행
+  }, []);
 
   useEffect(() => {
     if (activeTab === 0) {
-      setBgColor(colorOptions[0]); // 컬러 탭일 때 첫 번째 색상 선택
-      setBgImage(null); // 이미지 해제
+      setBgColor(colorOptions[0]);
+      setBgImage(null);
     } else if (activeTab === 1 && imageUrls.length > 0) {
-      setBgImage(imageUrls[0]); // 이미지 탭일 때 첫 번째 이미지 선택
-      setBgColor(null); // 컬러 해제
+      setBgImage(imageUrls[0]);
+      setBgColor(null);
     }
-  }, [activeTab, imageUrls]); // ✅ activeTab이 변경될 때 실행
+  }, [activeTab, imageUrls]);
+
+  const handleCreate = async () => {
+    if (!toValue.trim()) return;
+
+    const body = {
+      recipient: toValue,
+      backgroundColor: bgColor,
+      backgroundImage: bgImage,
+    };
+
+    await createRecipient(body);
+  };
 
   return (
     <Wrapper>
       <Container>
         <ToInputContainer>
           <Toh1>To.</Toh1>
-          <Input width="720px" maxWidth="1000px" />
+          <Input
+            width="720px"
+            maxWidth="1000px"
+            placeholder="받는 사람 이름을 입력해 주세요"
+            value={toValue}
+            onChange={(e) => setToValue(e.target.value)}
+          />
         </ToInputContainer>
+
         <SelectContainer>
           <h2>배경화면을 선택해 주세요.</h2>
           <CustomP>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</CustomP>
@@ -109,7 +133,19 @@ const CreateRollingPaper = () => {
           </OptionsContainer>
         )}
 
-        <FilledButton w="720">생성하기</FilledButton>
+        {data?.id ? (
+          <Link to={`/post/${data.id}`}>
+            <FilledButton w="720">생성하기</FilledButton>
+          </Link>
+        ) : (
+          <FilledButton
+            w="720"
+            onClick={handleCreate}
+            disabled={!toValue.trim()}
+          >
+            생성하기
+          </FilledButton>
+        )}
       </Container>
     </Wrapper>
   );

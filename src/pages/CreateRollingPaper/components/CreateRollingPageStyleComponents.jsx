@@ -55,11 +55,11 @@ export const BackgroundContainer = styled.div`
 `;
 export const OptionsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  margin: 45px 0px;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
 `;
 
 export const ColorOption = styled.div`
@@ -69,10 +69,7 @@ export const ColorOption = styled.div`
   border: 1px solid #00000014
   cursor: pointer;
   background: ${(props) => props.color};
-  border: 2px solid transparent;
   display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   &:hover {
     border: 2px solid black;
@@ -83,12 +80,11 @@ export const ColorOption = styled.div`
 `;
 
 export const ImageOption = styled.img`
-  width: 168px;
+  width: 168px; /* ✅ 컬러와 동일한 크기 */
   height: 168px;
-  border-radius: 16px;
+  border-radius: 8px;
   cursor: pointer;
   object-fit: cover;
-  position: relative;
   transition: all 0.3s ease-in-out;
 
   &:hover,
@@ -97,7 +93,6 @@ export const ImageOption = styled.img`
   }
 
   &.selected {
-    border: none;
     filter: brightness(0.5);
     opacity: 0.6;
   }
