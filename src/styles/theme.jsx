@@ -81,6 +81,7 @@ export const theme = {
     7: { 16: 'padding: 7px 16px', 15: 'padding: 7px 15px' },
     6: {
       16: 'padding: 6px 16px',
+      12: 'padding: 6px 12px',
       8: 'padding: 6px 8px',
       6: 'padding: 6px 6px',
     },
@@ -254,7 +255,7 @@ export const media = {
 
 export const Container = styled.div`
   background-color: white;
-  max-width: 1248px;
+  max-width: 1200px;
   margin: 0 auto;
 
   ${media.tablet`

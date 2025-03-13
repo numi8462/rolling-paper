@@ -13,6 +13,7 @@ import shareIcon24px from './shareIcon24px.svg';
 import toastcloseIcon from './toastcloseIcon.svg';
 import toastcompleted from './toastcompleted.svg';
 import logoIcon from './logoIcon.svg';
+import addIcon from './addIcon.svg';
 import styled from 'styled-components';
 
 // 아이콘 객체 (이미지 경로는 .src로 접근)
@@ -32,6 +33,7 @@ const icons = {
   toastcloseIcon,
   toastcompleted,
   logoIcon,
+  addIcon,
 };
 
 const StyledIcon = styled.img`

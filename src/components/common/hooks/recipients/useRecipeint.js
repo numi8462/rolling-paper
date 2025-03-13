@@ -10,7 +10,7 @@ function useRecipient(id) {
     setLoading(true);
     try {
       const res = await recipientService.getRecipient(id);
-      console.log('res', res);
+      // console.log('res', res);
       const data = res.data;
       setRollingPaper(data);
     } catch (error) {

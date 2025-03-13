@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     min-width: ${theme.breakpoints.min};
-    ${theme.fonts.ns};
+    ${theme.fonts.pd};
     font-size: 16px;
     line-height: 1.5;
     color: ${theme.colors.gray[900]};

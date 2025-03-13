@@ -14,9 +14,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
           <Route path="list" element={<RollingPaperList />} />
-          <Route path="post" element={<RollingPaperMaking />}>
-            <Route path=":id" element={<RollingPaper />} />
-          </Route>
+          <Route path="post" element={<RollingPaperMaking />} />
+          <Route path="post/:id" element={<RollingPaper />} />
         </Route>
       </Routes>
     </BrowserRouter>
