@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Font } from "../../../styles/theme";
 
 //에러메시지를 인풋의 바로 아래에 표시하기 위해서 만든 인풋컨테이너입니다.
 const InputContainer = styled.div`
@@ -14,8 +15,11 @@ const InputContainer = styled.div`
 const StyledInput = styled.input`
   border-radius: 4px;
   border: 1px solid ${({ error }) => (error ? "#dc3a3a" : "#cccccc")};
-  padding: 8px;
-  font-size: ${({ size }) => size || "20px"};
+  padding: 12px 16px;
+  /* font-size: ${({ size }) => size || "20px"}; */
+  /* 임시로 다시 작성했습니다. 수정하셔도 됩니다. */
+  font-size: ${Font.f16};
+
   transition: border 0.2s ease-in-out;
   width: ${({ width }) => width || "100%"};
   max-width: ${({ maxWidth }) => maxWidth || "300px"};
