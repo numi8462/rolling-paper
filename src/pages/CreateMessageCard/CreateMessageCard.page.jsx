@@ -5,6 +5,7 @@ import { FilledButton } from "../../components/common/Button/FilledButton";
 import { Link } from "react-router-dom";
 import Dropdown from "../../components/common/Dropdown/Dropdown";
 import { useState } from "react";
+import Profile from "../../components/common/Profile/Profile";
 
 const S = {
     CreateMessageCard: styled.div`
@@ -43,6 +44,7 @@ const S = {
     `,
 };
 
+
 export default function CreateMessageCard() {
     const [selectItem, setSelectItem] = useState('');
 
@@ -76,11 +78,12 @@ export default function CreateMessageCard() {
                     </S.ContentWrapper>
                     <S.ContentWrapper>
                         <S.Label $bold>프로필 이미지</S.Label>
+                        <Profile />
                     </S.ContentWrapper>
                     <S.ContentWrapper>
                         <S.Label $bold>상대와의 관계</S.Label>
                         <Dropdown 
-                            placeholder="지인"
+                            placeholder={realations[0].label}
                             options={realations}
                             disabled={false}
                             onChange={handleSelectChange}
