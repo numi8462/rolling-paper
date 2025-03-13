@@ -7,6 +7,7 @@ import { Button } from '../../../common/Button/Button';
 
 const S = {
   ModalContainer: styled.div`
+    min-width: 360px;
     position: absolute;
     inset: 0;
     display: flex;
@@ -14,11 +15,13 @@ const S = {
     justify-content: center;
     background-color: #00000099;
     z-index: 999;
+    overflow: auto;
   `,
 
   Modal: styled.div`
     width: 600px;
     height: 65vh;
+    min-height: 320px;
     border-radius: 16px;
     padding: 40px;
     display: flex;
@@ -31,11 +34,13 @@ const S = {
     }
 
     @media (max-width: ${theme.breakpoints.m}) {
-      margin: 0 24px;
+      margin: 0;
     }
   `,
 
-  ConfirmButton: styled(Button)``,
+  ConfirmButton: styled(Button)`
+    min-height: 40px;
+  `,
 };
 
 function Modal({ message, onClick }) {
@@ -79,9 +84,9 @@ function Modal({ message, onClick }) {
         <Card.MessageBox $modal $font={newFont}>
           <Card.Message>{content}</Card.Message>
         </Card.MessageBox>
-        <Button w="120" h="40" onClick={onClick}>
+        <S.ConfirmButton w="120" h="40" onClick={onClick}>
           확인
-        </Button>
+        </S.ConfirmButton>
       </S.Modal>
     </S.ModalContainer>
   );

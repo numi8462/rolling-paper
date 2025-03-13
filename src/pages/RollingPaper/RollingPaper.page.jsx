@@ -7,7 +7,7 @@ import useRecipient from '../../components/common/hooks/recipients/useRecipeint'
 import { theme } from '../../styles/theme';
 
 const StyledRollingPaper = styled.div`
-  height: calc(100vh - 65px);
+  height: calc(100dvh - 65px);
   background-color: ${(props) => theme.colors[props.$bgColor]?.[200]};
   background-image: url(${(props) => props.$bgUrl});
   background-size: cover;
@@ -16,6 +16,10 @@ const StyledRollingPaper = styled.div`
   overflow-y: auto;
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (max-width: ${theme.breakpoints.t}) {
+    height: 100dvh;
   }
 `;
 
