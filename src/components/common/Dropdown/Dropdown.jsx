@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { DropdownContainer, ErrorMessage, DropdownButton, OptionsList, OptionItem } from '../Dropdown/Dropdown.core';
 
 function Dropdown({
   placeholder = 'PlaceHolder', // 기본 플레이스홀더
