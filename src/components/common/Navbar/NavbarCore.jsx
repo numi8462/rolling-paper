@@ -113,6 +113,7 @@ export default function Navbar() {
   ) {
     return null;
   }
+
   return (
     <NavbarWrapper>
       <Container>
