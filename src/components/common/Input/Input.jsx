@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { theme } from "../../../styles/theme";
+import { media, theme } from "../../../styles/theme";
 
 //에러메시지를 인풋의 바로 아래에 표시하기 위해서 만든 인풋컨테이너입니다.
 const InputContainer = styled.div`
@@ -20,7 +20,7 @@ const StyledInput = styled.input`
   font-size: ${({ size }) => size || theme.fs.xl};
   transition: border 0.2s ease-in-out;
   width: ${({ $width }) => $width || "100%"};
-  max-width: ${({ $maxWidth }) => $maxWidth || "300px"};
+  max-width: ${({ $maxWidth }) => $maxWidth || "100%"};
 
     &:focus {
     border: 2px solid ${theme.colors.gray[500]}
@@ -40,6 +40,14 @@ const StyledInput = styled.input`
         border: 1px solid ${theme.colors.gray[300]} 
         cursor: not-allowed; 
     }
+      ${media.tablet`
+      width: 720px;
+      height: 50px
+      `}
+    ${media.mobile`
+      width: 320px;
+      height: 50px
+      `}
 `;
 
 const ErrorMessage = styled.span`
