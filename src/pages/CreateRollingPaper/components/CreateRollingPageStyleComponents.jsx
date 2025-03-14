@@ -80,16 +80,19 @@ export const ColorOption = styled.div`
 `;
 
 export const ImageOption = styled.img`
-  width: 168px; /* ✅ 컬러와 동일한 크기 */
+  width: 168px;
   height: 168px;
   border-radius: 8px;
   cursor: pointer;
   object-fit: cover;
   transition: all 0.3s ease-in-out;
 
-  &:hover,
-  &.selected {
+  &:hover {
     border: 2px solid black;
+  }
+
+  &.selected {
+    border: none;
   }
 
   &.selected {

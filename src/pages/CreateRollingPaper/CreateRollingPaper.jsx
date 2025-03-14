@@ -6,6 +6,7 @@ import { FilledButton } from "../../components/common/Button/FilledButton";
 import Icon from "../../assets/Icons/Icons";
 import { Link } from "react-router-dom";
 import useCreateRecipient from "../../components/common/hooks/recipients/useCreateRecipient";
+import useBackgroundImages from "../../components/common/hooks/images/useBackgroundImages";
 import {
   Wrapper,
   IconWrapper,
@@ -31,18 +32,9 @@ const CreateRollingPaper = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [bgColor, setBgColor] = useState(colorOptions[0]);
   const [bgImage, setBgImage] = useState(null);
-  const [imageUrls, setImageUrls] = useState([]);
   const [toValue, setToValue] = useState("");
   const { data, createRecipient } = useCreateRecipient();
-
-  useEffect(() => {
-    fetch("https://rolling-api.vercel.app/background-images/")
-      .then((res) => res.json())
-      .then((data) => {
-        setImageUrls(data.imageUrls);
-      })
-      .catch((err) => console.error("이미지 불러오기 실패:", err));
-  }, []);
+  const { imgUrls: imageUrls, loading, error } = useBackgroundImages();
 
   useEffect(() => {
     if (activeTab === 0) {
@@ -113,23 +105,29 @@ const CreateRollingPaper = () => {
           </OptionsContainer>
         ) : (
           <OptionsContainer>
-            {imageUrls.map((url) => (
-              <ImageOptionContainer key={url}>
-                <ImageOption
-                  src={url}
-                  className={bgImage === url ? "selected" : ""}
-                  onClick={() => {
-                    setBgImage(url);
-                    setBgColor(null);
-                  }}
-                />
-                {bgImage === url && (
-                  <IconWrapper>
-                    <Icon name="checkIcon" size="44px" />
-                  </IconWrapper>
-                )}
-              </ImageOptionContainer>
-            ))}
+            {loading ? (
+              <p>이미지를 불러오는 중...</p>
+            ) : error ? (
+              <p>이미지를 불러오는 데 실패했습니다.</p>
+            ) : (
+              imageUrls.map((url) => (
+                <ImageOptionContainer key={url}>
+                  <ImageOption
+                    src={url}
+                    className={bgImage === url ? "selected" : ""}
+                    onClick={() => {
+                      setBgImage(url);
+                      setBgColor(null);
+                    }}
+                  />
+                  {bgImage === url && (
+                    <IconWrapper>
+                      <Icon name="checkIcon" size="44px" />
+                    </IconWrapper>
+                  )}
+                </ImageOptionContainer>
+              ))
+            )}
           </OptionsContainer>
         )}
 
