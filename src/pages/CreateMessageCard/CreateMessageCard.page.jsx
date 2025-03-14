@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Dropdown from "../../components/common/Dropdown/Dropdown";
 import { useState } from "react";
 import Profile from "../../components/common/Profile/Profile";
+import TextEditor from "../../components/common/TextEditor/TextEditor";
 
 const S = {
     CreateMessageCard: styled.div`
@@ -94,6 +95,7 @@ export default function CreateMessageCard() {
                     </S.ContentWrapper>
                     <S.ContentWrapper>
                         <S.Label $bold>내용을 입력해주세요</S.Label>
+                        <TextEditor />
                     </S.ContentWrapper>
                     <S.ContentWrapper>
                         <S.Label $bold>폰트 선택</S.Label>
