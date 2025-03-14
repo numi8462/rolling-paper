@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Font, theme } from '../../../styles/theme';
 
 const Card = {
@@ -41,6 +41,7 @@ const Card = {
     height: 56px;
     min-width: 110px;
     display: flex;
+    flex: 1 1 auto;
     align-items: start;
     flex-direction: column;
     gap: 6px;
@@ -54,24 +55,38 @@ const Card = {
   `,
   MessageBox: styled.div`
     width: 100%;
-    height: 110px;
+    height: ${(props) => (props.$modal ? '256px' : '110px')};
+    flex: 1 1 auto;
     margin: 16px 0;
     ${Font.f18};
     color: ${theme.colors.gray[600]};
+    ${(props) => theme.fonts[props.$font]};
 
     @media (max-width: ${theme.breakpoints.m}) {
       height: 56px;
     }
+
+    ${(props) =>
+      props.$modal &&
+      css`
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: ${theme.colors.gray[200]} #fff;
+      `}
   `,
   Message: styled.p`
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    ${(props) =>
+      props.$limit &&
+      css`
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
 
-    @media (max-width: ${theme.breakpoints.m}) {
-      -webkit-line-clamp: 2;
-    }
+        @media (max-width: ${theme.breakpoints.m}) {
+          -webkit-line-clamp: 2;
+        }
+      `}
   `,
   Date: styled.span`
     ${Font.f12};
