@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme } from "../../../styles/theme";
+import { media, theme } from "../../../styles/theme";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -23,6 +23,13 @@ export const Container = styled.div`
   width: 60%;
   max-width: 800px;
   ${theme.fonts.pd}
+
+  ${media.tablet`
+    width: 90%;
+    `}
+  ${media.mobile`
+    width: 90%;
+    `}
 `;
 
 export const Toh1 = styled.h1`
@@ -60,6 +67,9 @@ export const OptionsContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 250px;
+  ${media.mobile`
+    gap: 12px; 
+  `}
 `;
 
 export const ColorOption = styled.div`
@@ -77,6 +87,11 @@ export const ColorOption = styled.div`
   &.selected {
     border: none;
   }
+    ${media.mobile`
+      width: 154px;
+      height: 154px;
+      flex: 1 1 calc(50% - 8px);
+      `}
 `;
 
 export const ImageOption = styled.img`
@@ -99,6 +114,10 @@ export const ImageOption = styled.img`
     filter: brightness(0.5);
     opacity: 0.6;
   }
+  ${media.mobile`
+      width: 154px;
+      height: 154px;
+      `}
 `;
 
 export const ImageOptionContainer = styled.div`
