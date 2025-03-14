@@ -39,8 +39,10 @@ const S = {
     `,
 
     ButtonContainer: styled.div`
-        width: 280px;
         margin-top: 48px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     `,
 };
 
@@ -106,7 +108,7 @@ export default function CreateMessageCard() {
                 </S.MessageContainer>
                 <S.ButtonContainer>
                     <Link to="/list">
-                        <FilledButton>생성하기</FilledButton>
+                        <FilledButton w="720" >생성하기</FilledButton>
                     </Link>
                 </S.ButtonContainer>
             </S.CreateMessageCard>
