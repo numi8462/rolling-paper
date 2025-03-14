@@ -1,10 +1,11 @@
 import React from 'react';
-import useRecipients from '../../components/common/hooks/recipients/useRecipients';
-import { RollingPaperCard } from '../../components/domain/rollingpaper/RollingPaperCard/RollingPaperCard';
-import { Container, Font, media, theme } from '../../styles/theme';
 import styled from 'styled-components';
-import { FilledButton } from '../../components/common/Button/FilledButton';
 import { Link } from 'react-router-dom';
+import useRecipients from '../../components/common/hooks/recipients/useRecipients';
+import { Font, media, theme } from '../../styles/theme';
+import { FilledButton } from '../../components/common/Button/FilledButton';
+import { PaperCardList } from '../../components/domain/rollingpaper/PaperCardList/PaperCardList';
+
 
 function RollingPaperList() {
   const { 
@@ -35,24 +36,14 @@ function RollingPaperList() {
   return (
     <div>
       <Container>
-        <PaperTitle $bold>인기 롤링 페이퍼 🔥</PaperTitle>
-        <PaperCardList>
-          {sortedCount &&
-            sortedCount.map((rollingPaper) => {
-              return (
-                <RollingPaperCard key={rollingPaper.id} rollingPaper={rollingPaper} />
-              );
-            })}
-        </PaperCardList>
-        <PaperTitle $bold>최근에 만든 롤링 페이퍼 ⭐️️</PaperTitle>
-        <PaperCardList>
-          {sortedCreate &&
-            sortedCreate.map((rollingPaper) => {
-              return (
-                <RollingPaperCard key={rollingPaper.id} rollingPaper={rollingPaper} />
-              );
-            })}
-        </PaperCardList>
+        <PaperTitle $bold>
+          인기 롤링 페이퍼 🔥
+        </PaperTitle>
+        <PaperCardList rollingPapers={sortedCount} />
+        <PaperTitle $bold>
+          최근에 만든 롤링 페이퍼 ⭐️
+        </PaperTitle>
+        <PaperCardList rollingPapers={sortedCreate} />
         <LinkBox>
           <Link to="/Post">
             <FilledButton w='280'>나도 만들어보기</FilledButton>
@@ -65,29 +56,6 @@ function RollingPaperList() {
 
 export default RollingPaperList;
 
-
-const PaperCardList = styled.ul`
-  display:flex;
-  gap:20px;
-  white-space: nowrap;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  > li {
-      min-width:calc( 25% - 15px);
-      width:calc( 25% - 15px);
-    
-    ${media.tablet`
-      min-width:calc( 40% - 15px);
-      width:calc( 40% - 15px);
-    `}
-
-    ${media.mobile`
-      min-width:calc( 60% - 15px);
-      width:calc( 60% - 15px);
-    `}
-  }
-
-`
 const LinkBox = styled.div`
 text-align: center;
 ${theme.mb[113]};
@@ -99,4 +67,15 @@ const PaperTitle = styled.div`
   ${Font.f24};
   ${theme.mt[50]};
   ${theme.mb[16]};
+  ${media.tablet`
+    padding:0 24px;
+  `}
+  ${media.mobile`
+    padding:0 20px;
+  `}
 `
+const Container = styled.div`   
+  background-color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+`;

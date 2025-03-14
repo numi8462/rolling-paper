@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
+import { Font, theme } from "../../../../styles/theme";
 import { TopEmojis } from "../../../common/Emoji/TopEmojis";
 import { Profiles } from "../../../common/Profile/Profiles";
-import { Font, theme } from "../../../../styles/theme";
-import { Link } from "react-router-dom";
 
 
 export function RollingPaperCard({rollingPaper}){
@@ -11,18 +11,19 @@ export function RollingPaperCard({rollingPaper}){
     <li>
       <Link to={`post/${id}`}>
         <PaperCard $color={backgroundColor} $image={backgroundImageURL}>
-          <div>
-            <div>
-              <PaperCardName $bold>To. {name}</PaperCardName>
-              <Profiles recentMessages={recentMessages} totalLength={messageCount} />
-              <PaperCardCount><b>{messageCount}</b>명이 작성했어요!</PaperCardCount>
-            </div>
-            {topReactions.length ? 
-              <PaperCardEmoji>
-                <TopEmojis topReactions={topReactions}/>
-              </PaperCardEmoji>
-            : null}
-          </div>
+          <HiddenBox></HiddenBox>
+            <PaperBox>
+              <NameBox>
+                <PaperCardName $bold>To. {name}</PaperCardName>
+                <Profiles recentMessages={recentMessages} totalLength={messageCount} />
+                <PaperCardCount><b>{messageCount}</b>명이 작성했어요!</PaperCardCount>
+              </NameBox>
+              {topReactions.length ? 
+                <PaperCardEmoji>
+                  <TopEmojis topReactions={topReactions}/>
+                </PaperCardEmoji>
+              : null}
+          </PaperBox>
         </PaperCard>
       </Link>
     </li>
@@ -56,23 +57,37 @@ const bgSetting = css`
   `}
 `
 // 롤링페이퍼 카드 styled
+const HiddenBox = styled.div`
+ content: '';
+  width: 100%;
+  padding:0 0 100%;
+  height: 0;
+`
 const PaperCard = styled.div`
   position: relative;
-  padding:30px 24px 20px;
-  height:275px;   
+  height:100%;   
   border:1px solid rgba(0,0,0,0.1);
   border-radius: 16px;
   overflow: hidden;
   ${bgSetting}
-  > div {
-    position: relative;
+`;
+const PaperBox = styled.div`
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
     display:flex;
+    padding:30px 24px 20px;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
     z-index: 2;
-  }
-`;
+`
+const NameBox = styled.div`
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+`
 // 카드의 이모지 영역 styled
 const PaperCardEmoji = styled.div`
   border-top:1px solid rgba(0,0,0,0.12);
