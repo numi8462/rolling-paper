@@ -1,10 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import Emoji from "../../../common/Emoji/Emoji";
-import useToast from "../../../common/Toast/useToast";
-import Toast from "../../../common/Toast/Toast";
-import { theme } from "../../../../styles/theme";
-import Badge from "../../../common/Badge/Badge";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Emoji from '../../../common/Emoji/Emoji';
+import useToast from '../../../common/Toast/useToast';
+import Toast from '../../../common/Toast/Toast';
+import { theme } from '../../../../styles/theme';
+import { ShareButton } from '../../../common/Button/ShareButton';
+import Options from './Options';
 
 const StyledInformationBar = styled.div`
   position: sticky;
@@ -20,29 +21,47 @@ const StyledName = styled.div`
   font-weight: 700;
 `;
 
+const ShareContainer = styled.div`
+  position: relative;
+`;
+
 function InformationBar({ name, messageCount, emojis }) {
   const { toast, showToast, closeToast } = useToast();
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
-  const handleClick = () => {
+  const toggleOptions = () => {
+    setIsOptionsOpen(!isOptionsOpen);
+  };
+
+  const handleShareUrlClick = () => {
     const currentUrl = window.location.href;
     navigator.clipboard
       .writeText(currentUrl)
       .then(() => {
-        showToast("URL이 복사되었습니다.");
+        showToast('URL이 복사되었습니다.');
       })
-      .catch((err) => {
-        console.error("URL 복사에 실패했습니다.", err);
-        showToast("URL 복사에 실패했습니다.");
+      .catch(err => {
+        console.error('URL 복사에 실패했습니다.', err);
+        showToast('URL 복사에 실패했습니다.');
       });
   };
+
+  const handleKakaoClick = () => {};
+
+  console.log('isOpen', isOptionsOpen);
 
   return (
     <StyledInformationBar>
       <StyledName>To. {name}</StyledName>
-      <Emoji emoji={"\u{1F600}"} count={2} />
-      <button onClick={handleClick}>URL복사</button>
+      <Emoji emoji={'\u{1F600}'} count={2} />
+      <ShareContainer>
+        <ShareButton onClick={() => toggleOptions()} />
+        {isOptionsOpen && (
+          <Options handleShareUrlClick={() => handleShareUrlClick()} />
+        )}
+      </ShareContainer>
+
       {toast && <Toast message={toast.message} onClose={closeToast} />}
-      <Badge relationship="가족" />
     </StyledInformationBar>
   );
 }
