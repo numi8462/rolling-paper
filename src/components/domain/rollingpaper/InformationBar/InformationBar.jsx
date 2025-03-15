@@ -29,7 +29,7 @@ const ShareContainer = styled.div`
 function InformationBar({ name, messageCount, emojis, reactionCount }) {
   const { toast, showToast, closeToast } = useToast();
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-  const shareKakao = useKakaoShare(name, 5, 4); // 카카오 공유
+  const shareKakao = useKakaoShare(name, 5, 4); // 카카오 공유 useKakaoShare(이름, 메세지 수, 반응 수)
 
   const toggleOptions = () => {
     setIsOptionsOpen(!isOptionsOpen);
