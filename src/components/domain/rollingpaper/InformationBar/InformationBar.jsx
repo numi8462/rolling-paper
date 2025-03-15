@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import Emoji from '../../../common/Emoji/Emoji';
-import useToast from '../../../common/Toast/useToast';
-import Toast from '../../../common/Toast/Toast';
-import { theme } from '../../../../styles/theme';
-import Badge from '../../../common/Badge/Badge';
+import React from "react";
+import styled from "styled-components";
+import Emoji from "../../../common/Emoji/Emoji";
+import useToast from "../../../common/Toast/useToast";
+import Toast from "../../../common/Toast/Toast";
+import { theme } from "../../../../styles/theme";
+import Badge from "../../../common/Badge/Badge";
 
 const StyledInformationBar = styled.div`
   position: sticky;
@@ -28,18 +28,18 @@ function InformationBar({ name, messageCount, emojis }) {
     navigator.clipboard
       .writeText(currentUrl)
       .then(() => {
-        showToast('URL이 복사되었습니다.');
+        showToast("URL이 복사되었습니다.");
       })
       .catch((err) => {
-        console.error('URL 복사에 실패했습니다.', err);
-        showToast('URL 복사에 실패했습니다.');
+        console.error("URL 복사에 실패했습니다.", err);
+        showToast("URL 복사에 실패했습니다.");
       });
   };
 
   return (
     <StyledInformationBar>
       <StyledName>To. {name}</StyledName>
-      <Emoji emoji={'\u{1F600}'} count={2} />
+      <Emoji emoji={"\u{1F600}"} count={2} />
       <button onClick={handleClick}>URL복사</button>
       {toast && <Toast message={toast.message} onClose={closeToast} />}
       <Badge relationship="가족" />
