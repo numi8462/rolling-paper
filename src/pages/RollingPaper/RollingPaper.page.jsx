@@ -42,8 +42,12 @@ function RollingPaper() {
 
   return (
     <StyledRollingPaper $bgColor={backgroundColor} $bgUrl={backgroundImageURL}>
-      <InformationBar />
-      <MessageCardList postId={id} />
+      {!loading && (
+        <div>
+          <InformationBar />
+          <MessageCardList postId={id} />
+        </div>
+      )}
     </StyledRollingPaper>
   );
 }
