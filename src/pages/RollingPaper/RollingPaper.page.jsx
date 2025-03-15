@@ -5,6 +5,7 @@ import MessageCardList from '../../components/domain/rollingpaper/MessageCardLis
 import styled from 'styled-components';
 import useRecipient from '../../components/common/hooks/recipients/useRecipeint';
 import { theme } from '../../styles/theme';
+import NotFound from '../NotFound/NotFound.page';
 
 const StyledRollingPaper = styled.div`
   height: calc(100dvh - 65px);
@@ -34,6 +35,10 @@ function RollingPaper() {
     messageCount,
     recentMessages,
   } = rollingPaper;
+
+  if (error) {
+    return <NotFound />;
+  }
 
   return (
     <StyledRollingPaper $bgColor={backgroundColor} $bgUrl={backgroundImageURL}>
