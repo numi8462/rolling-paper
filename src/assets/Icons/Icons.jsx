@@ -33,7 +33,6 @@ const icons = {
   toastcloseIcon,
   toastcompleted,
   logoIcon,
-  addIcon,
 };
 
 const StyledIcon = styled.img`

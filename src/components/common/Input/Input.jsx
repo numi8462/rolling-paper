@@ -63,17 +63,7 @@ const Input = ({
 
   return (
     <InputContainer>
-      <StyledInput
-        type="text"
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onBlur={handleBlur}
-        error={error}
-        size={size}
-        width={width}
-        maxWidth={maxWidth}
-      />
+      <StyledInput/>
       <ErrorMessage show={error}>{errorMessage}</ErrorMessage>
     </InputContainer>
   );
