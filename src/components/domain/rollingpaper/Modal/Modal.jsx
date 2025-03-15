@@ -8,14 +8,13 @@ import { Button } from '../../../common/Button/Button';
 const S = {
   ModalContainer: styled.div`
     min-width: 360px;
-    position: absolute;
+    position: fixed;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #00000099;
     z-index: 999;
-    overflow: auto;
   `,
 
   Modal: styled.div`
