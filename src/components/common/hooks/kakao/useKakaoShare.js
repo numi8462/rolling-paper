@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import logo from '../../../../assets/Images/logo.png';
 
-function useKakaoShare(name) {
+function useKakaoShare(name, messageCount, reactionCount) {
   useEffect(() => {
     const kakaoApiKey = import.meta.env.VITE_KAKAO_API_KEY; // 환경 변수 이름 수정
     if (window.Kakao) {
@@ -28,9 +28,8 @@ function useKakaoShare(name) {
           },
         },
         social: {
-          likeCount: 286,
-          commentCount: 45,
-          sharedCount: 845,
+          likeCount: reactionCount || 0,
+          commentCount: messageCount || 0,
         },
         buttons: [
           {
