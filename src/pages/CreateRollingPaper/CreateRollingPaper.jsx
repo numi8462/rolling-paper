@@ -59,7 +59,6 @@ const CreateRollingPaper = () => {
     if (key === 'backgroundImageURL') {
       return setRollingPaperFormData(prev => ({
         ...prev,
-        backgroundColor: null,
         [key]: value,
       }));
     }
@@ -83,7 +82,6 @@ const CreateRollingPaper = () => {
       setRollingPaperFormData(prev => ({
         ...prev,
         backgroundImageURL: imageUrls[0],
-        backgroundColor: null,
       }));
     }
   };

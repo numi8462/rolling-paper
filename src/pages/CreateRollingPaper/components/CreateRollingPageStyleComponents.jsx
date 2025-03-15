@@ -76,7 +76,7 @@ export const ColorOption = styled.div`
   width: 168px;
   height: 168px;
   border-radius: 16px;
-  border: 1px solid #00000014
+  border: 1px solid #00000014;
   cursor: pointer;
   background: ${props => props.color};
   display: flex;
@@ -87,7 +87,7 @@ export const ColorOption = styled.div`
   &.selected {
     border: none;
   }
-    ${media.mobile`
+  ${media.mobile`
       width: 154px;
       height: 154px;
       flex: 1 1 calc(50% - 8px);

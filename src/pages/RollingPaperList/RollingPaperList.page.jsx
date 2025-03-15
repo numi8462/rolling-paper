@@ -6,21 +6,19 @@ import { Font, media, theme } from '../../styles/theme';
 import { FilledButton } from '../../components/common/Button/FilledButton';
 import { PaperCardList } from '../../components/domain/rollingpaper/PaperCardList/PaperCardList';
 
-
 function RollingPaperList() {
-  const { 
-    rollingPapers: rollingPapers1, 
-    loading: loading1, 
-    error: error1, 
-    refetch: refetch1 
+  const {
+    rollingPapers: rollingPapers1,
+    loading: loading1,
+    error: error1,
+    refetch: refetch1,
   } = useRecipients();
-  const { 
-    rollingPapers: rollingPapers2, 
-    loading: loading2, 
-    error: error2, 
-    refetch: refetch2 
+  const {
+    rollingPapers: rollingPapers2,
+    loading: loading2,
+    error: error2,
+    refetch: refetch2,
   } = useRecipients();
-
 
   // if (rollingPapers1) {
   //   console.log(rollingPapers1);
@@ -29,24 +27,22 @@ function RollingPaperList() {
   //   console.log(rollingPapers2);
   // }
 
-  // 메세지 많은순 / 최신순  
-  const sortedCount = rollingPapers1.sort((a, b) => b.messageCount - a.messageCount);
+  // 메세지 많은순 / 최신순
+  const sortedCount = rollingPapers1.sort(
+    (a, b) => b.messageCount - a.messageCount
+  );
   const sortedCreate = rollingPapers2.sort((a, b) => a.createdAt - b.createdAt);
 
   return (
     <div>
       <Container>
-        <PaperTitle $bold>
-          인기 롤링 페이퍼 🔥
-        </PaperTitle>
+        <PaperTitle $bold>인기 롤링 페이퍼 🔥</PaperTitle>
         <PaperCardList rollingPapers={sortedCount} />
-        <PaperTitle $bold>
-          최근에 만든 롤링 페이퍼 ⭐️
-        </PaperTitle>
+        <PaperTitle $bold>최근에 만든 롤링 페이퍼 ⭐️</PaperTitle>
         <PaperCardList rollingPapers={sortedCreate} />
         <LinkBox>
-          <Link to="/Post">
-            <FilledButton w='280'>나도 만들어보기</FilledButton>
+          <Link to="/post">
+            <FilledButton w="280">나도 만들어보기</FilledButton>
           </Link>
         </LinkBox>
       </Container>
@@ -57,12 +53,12 @@ function RollingPaperList() {
 export default RollingPaperList;
 
 const LinkBox = styled.div`
-text-align: center;
-${theme.mb[113]};
-  button{
-    margin:64px auto 0;
+  text-align: center;
+  ${theme.mb[113]};
+  button {
+    margin: 64px auto 0;
   }
-`
+`;
 const PaperTitle = styled.div`
   ${Font.f24};
   ${theme.mt[50]};
@@ -73,8 +69,8 @@ const PaperTitle = styled.div`
   ${media.mobile`
     padding:0 20px;
   `}
-`
-const Container = styled.div`   
+`;
+const Container = styled.div`
   background-color: white;
   max-width: 1200px;
   margin: 0 auto;
