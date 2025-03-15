@@ -27,11 +27,11 @@ const S = {
   `,
 };
 
-function Options({ onClick, handleShareUrlClick }) {
+function Options({ handleKakaoClick, handleShareUrlClick }) {
   console.log('open');
   return (
     <S.List>
-      <S.ListItem>카카오톡 공유</S.ListItem>
+      <S.ListItem onClick={handleKakaoClick}>카카오톡 공유</S.ListItem>
       <S.ListItem onClick={handleShareUrlClick}>URL 공유</S.ListItem>
     </S.List>
   );

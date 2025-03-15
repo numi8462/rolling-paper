@@ -54,6 +54,7 @@ function InformationBar({ name, messageCount, emojis }) {
     <StyledInformationBar>
       <StyledName>To. {name}</StyledName>
       <Emoji emoji={'\u{1F600}'} count={2} />
+
       <ShareContainer>
         <ShareButton onClick={() => toggleOptions()} />
         {isOptionsOpen && (
