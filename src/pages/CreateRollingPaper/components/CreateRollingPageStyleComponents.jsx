@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { media, theme } from "../../../styles/theme";
+import styled from 'styled-components';
+import { media, theme } from '../../../styles/theme';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -55,7 +55,7 @@ export const BackgroundContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${(props) =>
+  background: ${props =>
     props.bgImage ? `url(${props.bgImage})` : props.bgColor};
   background-size: cover;
   background-position: center;
@@ -78,7 +78,7 @@ export const ColorOption = styled.div`
   border-radius: 16px;
   border: 1px solid #00000014
   cursor: pointer;
-  background: ${(props) => props.color};
+  background: ${props => props.color};
   display: flex;
   position: relative;
   &:hover {
