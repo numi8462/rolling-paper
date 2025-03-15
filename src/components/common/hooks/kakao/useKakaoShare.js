@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import logo from '../../../../assets/Images/logo.png';
 
 function useKakaoShare(name, messageCount, reactionCount) {
   useEffect(() => {
