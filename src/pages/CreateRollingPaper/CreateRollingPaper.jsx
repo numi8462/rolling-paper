@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
-import Input from "../../components/common/Input/Input";
-import { theme } from "../../styles/theme";
-import { ToggleButton } from "../../components/common/Button/ToggleButton";
-import { FilledButton } from "../../components/common/Button/FilledButton";
-import Icon from "../../assets/Icons/Icons";
-import { Link } from "react-router-dom";
-import useCreateRecipient from "../../components/common/hooks/recipients/useCreateRecipient";
-import useBackgroundImages from "../../components/common/hooks/images/useBackgroundImages";
+import { useState } from 'react';
+import Input from '../../components/common/Input/Input';
+import { theme } from '../../styles/theme';
+import { ToggleButton } from '../../components/common/Button/ToggleButton';
+import { FilledButton } from '../../components/common/Button/FilledButton';
+import Icon from '../../assets/Icons/Icons';
+import useBackgroundImages from '../../components/common/hooks/images/useBackgroundImages';
 import {
   Wrapper,
   IconWrapper,
@@ -19,43 +17,88 @@ import {
   ImageOption,
   ImageOptionContainer,
   SelectContainer,
-} from "./components/CreateRollingPageStyleComponents";
+} from './components/CreateRollingPageStyleComponents';
+import recipientService from '../../api/services/recipients.services';
+import { useNavigate } from 'react-router-dom';
 
-const colorOptions = [
-  theme.colors.beige[200],
-  theme.colors.purple[200],
-  theme.colors.blue[200],
-  theme.colors.green[200],
-];
+const ColorOptions = {
+  beige: 'beige',
+  purple: 'purple',
+  blue: 'blue',
+  green: 'green',
+};
+
+const colorOptions = {
+  [ColorOptions.beige]: theme.colors.beige[200],
+  [ColorOptions.purple]: theme.colors.purple[200],
+  [ColorOptions.blue]: theme.colors.blue[200],
+  [ColorOptions.green]: theme.colors.green[200],
+};
 
 const CreateRollingPaper = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
-  const [bgColor, setBgColor] = useState(colorOptions[0]);
-  const [bgImage, setBgImage] = useState(null);
-  const [toValue, setToValue] = useState("");
-  const { data, createRecipient } = useCreateRecipient();
+  const [rollingPaperFormData, setRollingPaperFormData] = useState({
+    name: '',
+    backgroundColor: 'beige',
+    backgroundImageURL: null,
+  });
+  console.log('rollingPaperFormData: ', rollingPaperFormData);
+
   const { imgUrls: imageUrls, loading, error } = useBackgroundImages();
 
-  useEffect(() => {
-    if (activeTab === 0) {
-      setBgColor(colorOptions[0]);
-      setBgImage(null);
-    } else if (activeTab === 1 && imageUrls.length > 0) {
-      setBgImage(imageUrls[0]);
-      setBgColor(null);
+  const handleChangeFormData = (key, value) => {
+    if (key === 'backgroundColor') {
+      return setRollingPaperFormData(prev => ({
+        ...prev,
+        backgroundImageURL: null,
+        [key]: value,
+      }));
     }
-  }, [activeTab, imageUrls]);
+
+    if (key === 'backgroundImageURL') {
+      return setRollingPaperFormData(prev => ({
+        ...prev,
+        backgroundColor: null,
+        [key]: value,
+      }));
+    }
+
+    setRollingPaperFormData(prev => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const handleClickTabBtn = index => {
+    setActiveTab(index);
+
+    if (index === 0) {
+      setRollingPaperFormData(prev => ({
+        ...prev,
+        backgroundImageURL: null,
+        backgroundColor: 'beige',
+      }));
+    } else if (index === 1 && imageUrls.length > 0) {
+      setRollingPaperFormData(prev => ({
+        ...prev,
+        backgroundImageURL: imageUrls[0],
+        backgroundColor: null,
+      }));
+    }
+  };
 
   const handleCreate = async () => {
-    if (!toValue.trim()) return;
+    if (!rollingPaperFormData.name.trim()) return;
 
-    const body = {
-      recipient: toValue,
-      backgroundColor: bgColor,
-      backgroundImage: bgImage,
-    };
+    const { data } = await recipientService.createRecipient(
+      rollingPaperFormData
+    );
+    console.log('data: ', data);
 
-    await createRecipient(body);
+    if (data) {
+      navigate(`/post/${data.id}`);
+    }
   };
 
   return (
@@ -67,8 +110,9 @@ const CreateRollingPaper = () => {
             width="720px"
             maxWidth="1000px"
             placeholder="받는 사람 이름을 입력해 주세요"
-            value={toValue}
-            onChange={(e) => setToValue(e.target.value)}
+            isError={!rollingPaperFormData.name.trim()}
+            value={rollingPaperFormData.name}
+            onChange={e => handleChangeFormData('name', e.target.value)}
           />
         </ToInputContainer>
 
@@ -78,24 +122,23 @@ const CreateRollingPaper = () => {
         </SelectContainer>
 
         <ToggleButton
-          tabs={["컬러", "이미지"]}
+          tabs={['컬러', '이미지']}
           activeTab={activeTab}
-          onChange={(index) => setActiveTab(index)}
+          onChange={handleClickTabBtn}
         />
 
         {activeTab === 0 ? (
           <OptionsContainer>
-            {colorOptions.map((color) => (
+            {Object.entries(colorOptions).map(([key, color]) => (
               <ColorOption
                 key={color}
                 color={color}
-                className={bgColor === color ? "selected" : ""}
-                onClick={() => {
-                  setBgColor(color);
-                  setBgImage(null);
-                }}
+                className={
+                  rollingPaperFormData.backgroundColor === key ? 'selected' : ''
+                }
+                onClick={() => handleChangeFormData('backgroundColor', key)}
               >
-                {bgColor === color && (
+                {rollingPaperFormData.backgroundColor === key && (
                   <IconWrapper>
                     <Icon name="checkIcon" size="44px" />
                   </IconWrapper>
@@ -110,17 +153,20 @@ const CreateRollingPaper = () => {
             ) : error ? (
               <p>이미지를 불러오는 데 실패했습니다.</p>
             ) : (
-              imageUrls.map((url) => (
+              imageUrls.map(url => (
                 <ImageOptionContainer key={url}>
                   <ImageOption
                     src={url}
-                    className={bgImage === url ? "selected" : ""}
-                    onClick={() => {
-                      setBgImage(url);
-                      setBgColor(null);
-                    }}
+                    className={
+                      rollingPaperFormData.backgroundImageURL === url
+                        ? 'selected'
+                        : ''
+                    }
+                    onClick={() =>
+                      handleChangeFormData('backgroundImageURL', url)
+                    }
                   />
-                  {bgImage === url && (
+                  {rollingPaperFormData.backgroundImageURL === url && (
                     <IconWrapper>
                       <Icon name="checkIcon" size="44px" />
                     </IconWrapper>
@@ -131,19 +177,14 @@ const CreateRollingPaper = () => {
           </OptionsContainer>
         )}
 
-        {data?.id ? (
-          <Link to={`/post/${data.id}`}>
-            <FilledButton w="720">생성하기</FilledButton>
-          </Link>
-        ) : (
-          <FilledButton
-            w="720"
-            onClick={handleCreate}
-            disabled={!toValue.trim()}
-          >
-            생성하기
-          </FilledButton>
-        )}
+        <FilledButton
+          type="submit"
+          w="720"
+          onClick={handleCreate}
+          disabled={!rollingPaperFormData.name.trim()}
+        >
+          생성하기
+        </FilledButton>
       </Container>
     </Wrapper>
   );
