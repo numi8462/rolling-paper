@@ -28,7 +28,6 @@ const S = {
 };
 
 function Options({ handleKakaoClick, handleShareUrlClick }) {
-  console.log('open');
   return (
     <S.List>
       <S.ListItem onClick={handleKakaoClick}>카카오톡 공유</S.ListItem>

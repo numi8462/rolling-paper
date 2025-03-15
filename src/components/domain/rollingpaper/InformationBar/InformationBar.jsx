@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Emoji from '../../../common/Emoji/Emoji';
 import useToast from '../../../common/Toast/useToast';
@@ -6,6 +6,7 @@ import Toast from '../../../common/Toast/Toast';
 import { theme } from '../../../../styles/theme';
 import { ShareButton } from '../../../common/Button/ShareButton';
 import Options from './Options';
+import useKakaoShare from '../../../common/hooks/kakao/useKakaoShare';
 
 const StyledInformationBar = styled.div`
   position: sticky;
@@ -28,6 +29,7 @@ const ShareContainer = styled.div`
 function InformationBar({ name, messageCount, emojis }) {
   const { toast, showToast, closeToast } = useToast();
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const shareKakao = useKakaoShare(name); // 카카오 공유
 
   const toggleOptions = () => {
     setIsOptionsOpen(!isOptionsOpen);
@@ -46,9 +48,10 @@ function InformationBar({ name, messageCount, emojis }) {
       });
   };
 
-  const handleKakaoClick = () => {};
-
-  console.log('isOpen', isOptionsOpen);
+  const handleKakaoClick = () => {
+    console.log('kakao');
+    shareKakao();
+  };
 
   return (
     <StyledInformationBar>
@@ -58,7 +61,10 @@ function InformationBar({ name, messageCount, emojis }) {
       <ShareContainer>
         <ShareButton onClick={() => toggleOptions()} />
         {isOptionsOpen && (
-          <Options handleShareUrlClick={() => handleShareUrlClick()} />
+          <Options
+            handleKakaoClick={() => handleKakaoClick()}
+            handleShareUrlClick={() => handleShareUrlClick()}
+          />
         )}
       </ShareContainer>
 
