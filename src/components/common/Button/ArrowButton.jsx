@@ -15,6 +15,7 @@ export default ArrowButton;
 const StyledArrow = styled.button`
   width: 40px;
   height: 40px;
+  line-height: 44px;
   border-radius: 999px;
   background-color: rgba(255,255,255, 0.9);
   backdrop-filter: blur(4px);

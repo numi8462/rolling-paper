@@ -23,7 +23,7 @@ const S = {
     margin-top: 30px;
     padding: 60px 0;
 
-    @media (max-width: ${theme.breakpoints.m}) {
+    @media (max-width: ${theme.breakpoints.t}) {
       flex-direction: column;
       padding: 40px 0;
       ${(props) =>
@@ -33,7 +33,7 @@ const S = {
         `}
     }
 
-    @media (max-width: ${theme.breakpoints.min}) {
+    @media (max-width: ${theme.breakpoints.m}) {
       flex-direction: column;
       padding: 24px 0;
       ${(props) =>
@@ -56,13 +56,13 @@ const S = {
         padding-right: 60px;
       `}
 
-    @media (max-width: ${theme.breakpoints.m}) {
+    @media (max-width: ${theme.breakpoints.t}) {
       width: 100%;
       padding: 0 40px;
       margin-bottom: 36px;
     }
 
-    @media (max-width: ${theme.breakpoints.min}) {
+    @media (max-width: ${theme.breakpoints.m}) {
       padding: 0 24px;
       margin-bottom: 50px;
     }
@@ -80,21 +80,18 @@ const S = {
   `,
 
   Title: styled.h2`
-    ${theme.fs.xxl};
+    ${Font.f24};
     font-weight: 700;
-    line-height: 36px;
-    letter-spacing: -1%;
     color: ${theme.colors.gray[900]};
   `,
 
   Break: styled.br`
-    @media (max-width: ${theme.breakpoints.m}) {
+    @media (max-width: ${theme.breakpoints.t}) {
       display: none;
     }
   `,
 
   Description: styled.p`
-    font-weight: 400;
     ${Font.f18};
     color: ${theme.colors.gray[500]};
   `,
@@ -138,7 +135,7 @@ function Homepage() {
           </S.ImageContainer>
           <S.InfoBox $right={true}>
             <S.Point>Point. 02</S.Point>
-            <S.Title>
+            <S.Title $bold>
               서로에게 이모지로 감정을 <S.Break /> 표현해보세요
             </S.Title>
             <S.Description>

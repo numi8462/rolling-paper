@@ -27,6 +27,10 @@ const ToastContainer = styled.div`
   border-radius: 8px;
   z-index: 9999;
   animation: ${fadeIn} 0.3s ease-out, ${fadeOut} 0.3s ease-in 2.7s forwards;
+
+  @media (max-width: ${theme.breakpoints.m}) {
+    width: 320px;
+  }
 `;
 
 const Message = styled.div`

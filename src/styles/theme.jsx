@@ -66,18 +66,32 @@ export const theme = {
     40: { 40: 'padding: 40px 40px' },
     30: { 24: 'padding: 30px 24px' },
     28: { 24: 'padding: 28px 24px' },
-    24: { 24: 'padding: 24px 24px'},
-    19: { 30: 'padding: 19px 30px'},
-    16: { 16: 'padding: 16px 16px'},
-    14: { 60: 'padding: 14px 60px', 24: 'padding: 14px 24px', 16: 'padding: 14px 16px'},
-    12: { 16: 'padding: 12px 16px', 12: 'padding: 12px 12px'},
-    10: { 0: 'padding: 10px 0px'},
-    8: { 16: 'padding: 8px 16px', 12: 'padding: 8px 12px'},
-    7: { 16: 'padding: 7px 16px', 15: 'padding: 7px 15px'},
-    6: { 16: 'padding: 6px 16px', 8: 'padding: 6px 8px', 6: 'padding: 6px 6px'},
-    4: { 8: 'padding: 4px 8px'},
-    2: { 16: 'padding: 2px 16px'},
-    0: { 24: 'padding: 0px 24px', 20: 'padding: 0px 20px', 8: 'padding: 0px 8px' },
+    24: { 24: 'padding: 24px 24px' },
+    20: { 30: 'padding: 20px 30px' },
+    19: { 30: 'padding: 19px 30px' },
+    16: { 16: 'padding: 16px 16px' },
+    14: {
+      60: 'padding: 14px 60px',
+      24: 'padding: 14px 24px',
+      16: 'padding: 14px 16px',
+    },
+    12: { 16: 'padding: 12px 16px', 12: 'padding: 12px 12px' },
+    10: { 0: 'padding: 10px 0px' },
+    8: { 16: 'padding: 8px 16px', 12: 'padding: 8px 12px' },
+    7: { 16: 'padding: 7px 16px', 15: 'padding: 7px 15px', 12: 'padding: 7px 12px'},
+    6: {
+      16: 'padding: 6px 16px',
+      12: 'padding: 6px 12px',
+      8: 'padding: 6px 8px',
+      6: 'padding: 6px 6px',
+    },
+    4: { 8: 'padding: 4px 8px' },
+    2: { 16: 'padding: 2px 16px' },
+    0: {
+      24: 'padding: 0px 24px',
+      20: 'padding: 0px 20px',
+      8: 'padding: 0px 8px',
+    },
   },
   fs: {
     // font-size
@@ -239,9 +253,9 @@ export const media = {
   `,
 };
 
-export const Container = styled.div`
+export const Container = styled.div`  
   background-color: white;
-  max-width: 1248px;
+  max-width: 1200px;
   margin: 0 auto;
 
   ${media.tablet`

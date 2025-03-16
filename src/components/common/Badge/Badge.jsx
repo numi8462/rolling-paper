@@ -9,35 +9,35 @@ const StyledBadge = styled.div`
   ${theme.fs.xs};
   font-weight: 400;
   line-height: 20px;
-  color: ${(props) => props.fontColor};
-  background-color: ${(props) => props.bgColor};
+  color: ${(props) => props.color};
+  background-color: ${(props) => props.$bg};
   border-radius: 4px;
   text-align: center;
 `;
 
 const relationshipColors = {
   지인: {
-    bgColor: `${theme.colors.beige[100]}`,
-    fontColor: `${theme.colors.beige[500]}`,
+    bg: `${theme.colors.beige[100]}`,
+    color: `${theme.colors.beige[500]}`,
   },
   동료: {
-    bgColor: `${theme.colors.purple[100]}`,
-    fontColor: `${theme.colors.purple[500]}`,
+    bg: `${theme.colors.purple[100]}`,
+    color: `${theme.colors.purple[500]}`,
   },
   가족: {
-    bgColor: `${theme.colors.green[100]}`,
-    fontColor: `${theme.colors.green[500]}`,
+    bg: `${theme.colors.green[100]}`,
+    color: `${theme.colors.green[500]}`,
   },
   친구: {
-    bgColor: `${theme.colors.blue[100]}`,
-    fontColor: `${theme.colors.blue[500]}`,
+    bg: `${theme.colors.blue[100]}`,
+    color: `${theme.colors.blue[500]}`,
   },
 };
 
 function Badge({ relationship }) {
-  const { fontColor, bgColor } = relationshipColors[relationship];
+  const { color, bg } = relationshipColors[relationship];
   return (
-    <StyledBadge fontColor={fontColor} bgColor={bgColor}>
+    <StyledBadge color={color} $bg={bg}>
       {relationship}
     </StyledBadge>
   );

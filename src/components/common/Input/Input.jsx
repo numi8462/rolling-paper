@@ -1,5 +1,38 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { media, theme } from '../../../styles/theme';
+
+const Input = ({
+  value,
+  onChange,
+  onBlur,
+  isError,
+  placeholder,
+  size,
+  width,
+  maxWidth,
+  ...rest
+}) => {
+  return (
+    <InputContainer>
+      <StyledInput
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        $error={isError}
+        size={size}
+        $width={width}
+        $maxWidth={maxWidth}
+        {...rest}
+      />
+      <ErrorMessage $show={isError}>값을 입력해 주세요.</ErrorMessage>
+    </InputContainer>
+  );
+};
+
+export default Input;
 
 //에러메시지를 인풋의 바로 아래에 표시하기 위해서 만든 인풋컨테이너입니다.
 const InputContainer = styled.div`
@@ -13,63 +46,44 @@ const InputContainer = styled.div`
 //size 프롭을 전달하면 크기를 지정할수있습니다. 기본값은 20px로 지정해놨습니다
 const StyledInput = styled.input`
   border-radius: 4px;
-  border: 1px solid ${({ error }) => (error ? "#dc3a3a" : "#cccccc")};
-  padding: 8px;
-  font-size: ${({ size }) => size || "20px"};
+  border: 1px solid ${({ $error }) =>
+    $error ? theme.colors.basic.Error : theme.colors.gray[300]};
+  padding: 12px 16px;
+  font-size: ${({ size }) => size || theme.fs.xl};
   transition: border 0.2s ease-in-out;
-  width: ${({ width }) => width || "100%"};
-  max-width: ${({ maxWidth }) => maxWidth || "300px"};
+  width: ${({ $width }) => $width || '100%'};
+  max-width: ${({ $maxWidth }) => $maxWidth || '100%'};
 
     &:focus {
-    border: 2px solid "#555555"
+    border: 2px solid ${theme.colors.gray[500]};
     outline: none;
     }
 
     &:active {
-    border: 2px solid "#3a3a3a"
+    border: 2px solid ${theme.colors.gray[700]}
     }
     &:hover {
-    border: 1px solid #555555
+    border: 1px solid ${theme.colors.gray[500]}
     }
 
     &:disabled {
-        color: #f6f6f6; 
-        background-color: #eeeeee; 
-        border: 1px solid #cccccc;
+        color: ${theme.colors.gray[100]} 
+        background-color: ${theme.colors.gray[200]} 
+        border: 1px solid ${theme.colors.gray[300]} 
         cursor: not-allowed; 
     }
+      ${media.tablet`
+      width: 720px;
+      height: 50px
+      `}
+    ${media.mobile`
+      width: 320px;
+      height: 50px
+      `}
 `;
 
 const ErrorMessage = styled.span`
-  color: #dc3a3a;
+  color: ${theme.colors.basic.Error};
   font-size: 14px;
-  visibility: ${({ show }) => (show ? "visible" : "hidden")};
+  visibility: ${({ $show }) => ($show ? 'visible' : 'hidden')};
 `;
-
-const Input = ({ placeholder, size, width, maxWidth }) => {
-  const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
-
-  const handleBlur = () => {
-    setError(!value.trim());
-  };
-
-  return (
-    <InputContainer>
-      <StyledInput
-        type="text"
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onBlur={handleBlur}
-        error={error}
-        size={size}
-        width={width}
-        maxWidth={maxWidth}
-      />
-      <ErrorMessage show={error}>값을 입력해 주세요.</ErrorMessage>
-    </InputContainer>
-  );
-};
-
-export default Input;

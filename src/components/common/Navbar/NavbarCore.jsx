@@ -14,16 +14,25 @@ const NavbarWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 11px 0px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
 
   div {
     display: flex;
     justify-content: space-between;
   }
+  align-items: center;
+  padding: 11px 0px;
 
+  background-color: white;
   border-bottom: 1px solid #ededed;
 
   @media (max-width: ${BREAK_POINT.tablet}px) {
-    padding: 11px 24px;
+    padding: 11px 0;
+    margin: 0;
   }
 `;
 
@@ -57,6 +66,20 @@ const LogoText = styled.span`
 >>>>>>> bd4ccea13354f06c01557498f7a9e5a698491515
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  @media (max-width: ${BREAK_POINT.tablet}px) {
+    gap: 12px;
+  }
+
+  @media (max-width: ${BREAK_POINT.mobile}px) {
+    gap: 8px;
+  }
+`;
+
 const RollingHeader = () => {
   const navigate = useNavigate();
 
@@ -84,19 +107,6 @@ const MakingRollingPaper = () => {
     return null;
   }
 
-  const ButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-    @media (max-width: ${BREAK_POINT.tablet}px) {
-      gap: 12px;
-    }
-
-    @media (max-width: ${BREAK_POINT.mobile}px) {
-      gap: 8px;
-    }
-  `;
   return (
     <ButtonContainer onClick={handleMakingClick}>
       <Button type="outlined" w="157" h="40">
@@ -107,6 +117,13 @@ const MakingRollingPaper = () => {
 };
 
 export default function Navbar() {
+  if (
+    window.innerWidth <= BREAK_POINT.mobile &&
+    !['/', '/list'].includes(location.pathname)
+  ) {
+    return null;
+  }
+
   return (
     <NavbarWrapper>
       <Container>
