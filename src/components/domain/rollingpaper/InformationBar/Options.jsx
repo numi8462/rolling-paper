@@ -27,9 +27,9 @@ const S = {
   `,
 };
 
-function Options({ handleKakaoClick, handleShareUrlClick }) {
+function Options({ handleKakaoClick, handleShareUrlClick, optionsRef }) {
   return (
-    <S.List>
+    <S.List ref={optionsRef}>
       <S.ListItem onClick={handleKakaoClick}>카카오톡 공유</S.ListItem>
       <S.ListItem onClick={handleShareUrlClick}>URL 공유</S.ListItem>
     </S.List>
