@@ -3,6 +3,14 @@ import Badge from '../../../common/Badge/Badge';
 import { formatDate } from '../../../../utils/date';
 import { useLocation } from 'react-router-dom';
 import { DeleteButton } from '../../../common/Button/DeleteButton';
+import styled from 'styled-components';
+
+const StyledDeleteButton = styled(DeleteButton)`
+  position: absolute;
+  top: 28px;
+  transform: translateY(-50%);
+  right: -150px;
+`;
 
 function MessageCard({ message, onClick, onDelete }) {
   const {
@@ -44,9 +52,19 @@ function MessageCard({ message, onClick, onDelete }) {
       <Card.InfoBox>
         <Card.ProfileImg src={profileImageURL} alt="profile" />
         <Card.SenderInfoBox>
-          <Card.Sender>
+          <Card.Sender
+            style={{ position: 'relative', display: 'inline-block' }}
+          >
             From.
             <Card.Name $bold>{sender}</Card.Name>
+            {isEditPage && (
+              <StyledDeleteButton
+                onClick={event => {
+                  event.stopPropagation();
+                  onDelete(id);
+                }}
+              />
+            )}
           </Card.Sender>
           <Badge relationship={relationship} />
         </Card.SenderInfoBox>
@@ -55,9 +73,7 @@ function MessageCard({ message, onClick, onDelete }) {
         <Card.Message $limit>{content}</Card.Message>
       </Card.MessageBox>
       <Card.Date>{date}</Card.Date>
-
       {/* 편집 페이지에서만 삭제 버튼 표시 */}
-      {isEditPage && <DeleteButton onClick={() => onDelete(id)} />}
     </Card.Container>
   );
 }
