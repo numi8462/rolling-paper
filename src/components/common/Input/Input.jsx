@@ -2,6 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 import { media, theme } from '../../../styles/theme';
 
+const Input = ({
+  value,
+  onChange,
+  onBlur,
+  isError,
+  placeholder,
+  size,
+  width,
+  maxWidth,
+  ...rest
+}) => {
+  return (
+    <InputContainer>
+      <StyledInput
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        $error={isError}
+        size={size}
+        $width={width}
+        $maxWidth={maxWidth}
+        {...rest}
+      />
+      <ErrorMessage $show={isError}>값을 입력해 주세요.</ErrorMessage>
+    </InputContainer>
+  );
+};
+
+export default Input;
+
 //에러메시지를 인풋의 바로 아래에 표시하기 위해서 만든 인풋컨테이너입니다.
 const InputContainer = styled.div`
   display: flex;
@@ -35,9 +67,9 @@ const StyledInput = styled.input`
     }
 
     &:disabled {
-        color: ${theme.colors.gray[100]}; 
-        background-color: ${theme.colors.gray[200]}; 
-        border: 1px solid ${theme.colors.gray[300]} ;
+        color: ${theme.colors.gray[100]} 
+        background-color: ${theme.colors.gray[200]} 
+        border: 1px solid ${theme.colors.gray[300]} 
         cursor: not-allowed; 
     }
       ${media.tablet`
@@ -53,33 +85,5 @@ const StyledInput = styled.input`
 const ErrorMessage = styled.span`
   color: ${theme.colors.basic.Error};
   font-size: 14px;
-  visibility: ${({ show }) => (show ? "visible" : "hidden")};
+  visibility: ${({ $show }) => ($show ? 'visible' : 'hidden')};
 `;
-
-const Input = ({ placeholder, size, width, maxWidth }) => {
-  const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
-
-  const handleBlur = () => {
-    setError(!value.trim());
-  };
-
-  return (
-    <InputContainer>
-      <StyledInput
-        type="text"
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        onBlur={handleBlur}
-        error={error}
-        size={size}
-        width={width}
-        maxWidth={maxWidth}
-      />
-      <ErrorMessage show={error}>값을 입력해 주세요.</ErrorMessage>
-    </InputContainer>
-  );
-};
-
-export default Input;
