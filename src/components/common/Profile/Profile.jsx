@@ -48,7 +48,7 @@ const ProfileSelectImg = styled.img`
     }
 `;
 
-export default function Profile () {
+export default function Profile ( onProfileSelect ) {
     const { imgUrls, loading, error } = useProfileImages();
     // 첫 번째 이미지와 나머지 이미지 분리
     const mainImgUrl = imgUrls.length > 0 ? imgUrls[0] : null;
@@ -60,6 +60,7 @@ export default function Profile () {
     useEffect(() => {
         if (imgUrls && imgUrls.length > 0) {
             setSelectedProfileUrl(imgUrls[0]);
+            // if (onProfileSelect) onProfileSelect(imgUrls[0]);
         }
     }, [imgUrls]);
 
@@ -79,6 +80,7 @@ export default function Profile () {
         setSelectedProfileUrl(url);
         // 메시지카드(또는 부모 컴포넌트)에서도 이 url을 쓰도록 하려면
         // 상위로 함수를 전달하거나, 글로벌 상태관리로 관리해야 합니다.
+        // if (onProfileSelect) onProfileSelect(url);
     };
 
     return (
