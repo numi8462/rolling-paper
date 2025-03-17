@@ -1,93 +1,41 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { DropdownContainer, ErrorMessage, DropdownButton, OptionsList, OptionItem } from '../Dropdown/Dropdown.core';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { DropdownContainer } from './Dropdown.core';
+import { theme } from '../../../styles/theme';
+
+/** ▼ 에러 메시지 스타일 */
+const ErrorMessage = styled.span`
+  margin-top: 4px;
+  font-size: 14px;
+  color: ${theme.colors.basic.Error};
+`;
 
 function Dropdown({
-  placeholder = 'PlaceHolder', // 기본 플레이스홀더
-  options = [],                // 옵션 리스트
-  disabled = false,            // 비활성화
-  isError = false,             // 외부에서 에러 상태
-  onChange,                    // 선택 시 부모에 넘겨줄 콜백
-  errorMessage = '하나를 선택해주세요', // 에러 메세지
+  options,                // 옵션 리스트
+  errorMessage = '', // 에러 메세지
+  setSelectItem
 }) {
-  const [isopen, setIsopen] = useState(false);   // 드롭다운 열림/닫힘 상태
-  const [value, setValue] = useState('');        // 선택된 값
-  const [localError, setLocalError] = useState(false);
 
-  const dropdownRef = useRef(null);
+  // 상위에서 보내주는 에러메세지 기본값
+  const [localError, setLocalError] = useState('');
 
-  // 버튼 클릭 시 토글
-  const handleToggle = () => {
-    if (disabled) return; // 비활성화 시 클릭 막기
-    setIsopen((prev) => !prev);
-  };
 
-  // 옵션 클릭 시
-  const handleOptionClick = (option) => {
-    setValue(option.value);
-    onChange && onChange(option.value);
-    setIsopen(false); // 목록 닫기
-    setLocalError(false); // 선택이 되면 에러 해제
-  };
-
-  // blur 시, 값이 없으면 에러
   const handleBlur = () => {
-    if (!value) {
-      setLocalError(true);
-    }
+    setLocalError('하나를 선택해 주세요.');
   };
-
-  // 클릭이 바깥으로 나가면 닫기
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setIsopen(false);
-      }
-    }
-    window.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      window.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  // 에러는 부모에서 내려준 isError가 우선, 없다면 로컬상태 localError
-  const showError = isError || localError;
-
-  /** ▼ 현재 보여줄 텍스트 (값이 있으면 해당 라벨, 없으면 placeholder) */
-  const buttonText = value
-    ? options.find((opt) => opt.value === value)?.label || ''
-    : placeholder;
 
   return (
-    <DropdownContainer ref={dropdownRef}>
-      <DropdownButton
-        type="button"
-        onClick={handleToggle}
+    <>
+      <DropdownContainer 
+        options={options} 
+        setLocalError={setLocalError} 
+        Items={setSelectItem}
         onBlur={handleBlur}
-        $error={showError}
-        disabled={disabled}
-        $isOpen={isopen}
-        $hasValue={!!value}
-      >
-        {buttonText}
-      </DropdownButton>
-
-      {/* ▼ 드롭다운 옵션 목록 */}
-      {isopen && !disabled && (
-        <OptionsList>
-          {options.map((option, idx) => (
-            <OptionItem
-              key={idx}
-              onClick={() => handleOptionClick(option)}
-            >
-              {option.label}
-            </OptionItem>
-          ))}
-        </OptionsList>
-      )}
-
+        localError={localError}
+        />  
       {/* ▼ 에러 메시지 */}
-      <ErrorMessage show={showError}>{errorMessage}</ErrorMessage>
-    </DropdownContainer>
+      {localError === '' ? null : <ErrorMessage>{errorMessage||localError}</ErrorMessage>}
+    </>
   );
 }
 
