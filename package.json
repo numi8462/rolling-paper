@@ -11,11 +11,8 @@
   },
   "dependencies": {
     "axios": "^1.8.2",
-<<<<<<< HEAD
     "quill": "^2.0.3",
-=======
     "kakaojs": "^1.2.0",
->>>>>>> 3efede0e2fd7ccde30dc4c30db2fbcc4b41cedab
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-helmet": "^6.1.0",

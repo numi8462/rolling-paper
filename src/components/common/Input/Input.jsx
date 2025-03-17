@@ -2,38 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { media, theme } from '../../../styles/theme';
 
-const Input = ({
-  value,
-  onChange,
-  onBlur,
-  isError,
-  placeholder,
-  size,
-  width,
-  maxWidth,
-  ...rest
-}) => {
-  return (
-    <InputContainer>
-      <StyledInput
-        type="text"
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        $error={isError}
-        size={size}
-        $width={width}
-        $maxWidth={maxWidth}
-        {...rest}
-      />
-      <ErrorMessage $show={isError}>값을 입력해 주세요.</ErrorMessage>
-    </InputContainer>
-  );
-};
-
-export default Input;
-
 //에러메시지를 인풋의 바로 아래에 표시하기 위해서 만든 인풋컨테이너입니다.
 const InputContainer = styled.div`
   display: flex;
@@ -67,9 +35,9 @@ const StyledInput = styled.input`
     }
 
     &:disabled {
-        color: ${theme.colors.gray[100]} 
-        background-color: ${theme.colors.gray[200]} 
-        border: 1px solid ${theme.colors.gray[300]} 
+        color: ${theme.colors.gray[100]}; 
+        background-color: ${theme.colors.gray[200]}; 
+        border: 1px solid ${theme.colors.gray[300]} ;
         cursor: not-allowed; 
     }
       ${media.tablet`
@@ -85,7 +53,6 @@ const StyledInput = styled.input`
 const ErrorMessage = styled.span`
   color: ${theme.colors.basic.Error};
   font-size: 14px;
-<<<<<<< HEAD
   visibility: ${({ show }) => (show ? "visible" : "hidden")};
 `;
 
@@ -103,7 +70,7 @@ const Input = ({ placeholder, size, width, maxWidth }) => {
         type="text"
         placeholder={placeholder}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={onChange}
         onBlur={handleBlur}
         error={error}
         size={size}
@@ -116,7 +83,3 @@ const Input = ({ placeholder, size, width, maxWidth }) => {
 };
 
 export default Input;
-=======
-  visibility: ${({ $show }) => ($show ? 'visible' : 'hidden')};
-`;
->>>>>>> 3efede0e2fd7ccde30dc4c30db2fbcc4b41cedab
