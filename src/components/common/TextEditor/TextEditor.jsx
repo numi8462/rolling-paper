@@ -2,23 +2,30 @@ import React, { useState, useRef, useEffect } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import styled from 'styled-components';
-import { theme } from '../../../styles/theme';
+import { media, theme } from '../../../styles/theme';
 
 const EditorContainer = styled.div`
   display: inline-block;
   width: 720px;
-  border-radius: 8px;
-
-  @media (max-width: ${theme.breakpoints.t}) {
+  
+  ${media.tablet`
     width: auto;
-  }
+  `}
+  ${media.mobile`
+      width: 320px;
+  `}
+  
   .ql-toolbar.ql-snow {
-    background-color: ${theme.colors.gray[200]};
+      background-color: ${theme.colors.gray[200]};
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
   }
 `;
 
 const EditorWrapper = styled.div`
-  border: 1px ${theme.colors.gray[300]} solid;
+    height: 260px;
+    border: 1px ${theme.colors.gray[300]} solid;
+    border-radius: 0 0 8px 8px;
 `;
 
 // 툴바 옵션

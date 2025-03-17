@@ -47,7 +47,7 @@ function MessageCard({ message, onClick }) {
         </Card.SenderInfoBox>
       </Card.InfoBox>
       <Card.MessageBox $font={newFont}>
-        <Card.Message $limit>{content}</Card.Message>
+        <Card.Message $limit dangerouslySetInnerHTML={{ __html :  content  }} />
       </Card.MessageBox>
       <Card.Date>{date}</Card.Date>
     </Card.Container>

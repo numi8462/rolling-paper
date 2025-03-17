@@ -2,11 +2,12 @@ import Input from '../../components/common/Input/Input';
 import { theme, Font, Container, media } from '../../styles/theme';
 import styled from 'styled-components';
 import { FilledButton } from '../../components/common/Button/FilledButton';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Dropdown from '../../components/common/Dropdown/Dropdown';
 import { useState } from 'react';
 import Profile from '../../components/common/Profile/Profile';
 import TextEditor from '../../components/common/TextEditor/TextEditor';
+import recipientService from '../../api/services/recipients.services';
 
 const S = {
   CreateMessageCard: styled.div`
@@ -23,8 +24,9 @@ const S = {
     width: 720px;
     gap: 50px;
 
-    ${media.mobile`
+    ${media.tablet`
             width: 100%;
+            margin: 0 0 300px 0;
         `}
   `,
 
@@ -38,24 +40,23 @@ const S = {
     ${Font.f24};
   `,
 
-  ButtonContainer: styled.div`
+  CreateButton: styled(FilledButton)`
     margin-top: 48px;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
   `,
 };
 
 export default function CreateMessageCard() {
-  const { id } = useParams();
-  const [messageCardFormData, setMessageCardFormData] = useState({
-    recipientId: id,
-    sender: 'string',
-    profileImageURL: 'string',
-    relationship: '지인',
-    content: 'string',
-    font: 'Noto Sans',
-  });
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const [messageCardFormData, setMessageCardFormData] = useState({
+        recipientId: id,
+        sender: '',
+        profileImageURL: '',
+        relationship: '지인',
+        content: '',
+        font: 'Noto Sans',
+    });
 
   const relations = [
     { value: '지인', label: '지인' },
@@ -99,8 +100,19 @@ export default function CreateMessageCard() {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log(messageCardFormData);
     // setErrors
-    console.log('Form Data: ', messageCardFormData);
+    try {
+        const { data } = await recipientService.createMessage(id,messageCardFormData);
+        console.log(data);
+    } catch (error) {
+        console.log('error');
+    } finally{
+        navigate(`/post/${id}`);
+
+    }
+    // if (data) {
+    // }
   };
 
   return (
@@ -153,11 +165,14 @@ export default function CreateMessageCard() {
             </div>
           </S.ContentWrapper>
         </S.MessageContainer>
-        <S.ButtonContainer>
-          <FilledButton w="720" onClick={handleSubmit}>
+        <S.CreateButton 
+            type='submit'
+            w="720" 
+            onClick={handleSubmit} 
+            disabled={!(messageCardFormData.sender.trim() && messageCardFormData.content.trim())}
+        >
             생성하기
-          </FilledButton>
-        </S.ButtonContainer>
+        </S.CreateButton>
       </S.CreateMessageCard>
     </Container>
   );
