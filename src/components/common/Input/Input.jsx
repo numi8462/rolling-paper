@@ -50,10 +50,7 @@ const ErrorMessage = styled.span`
   visibility: ${({ show }) => (show ? "visible" : "hidden")};
 `;
 
-const Input = ({ 
-  placeholder, size, width, maxWidth, 
-  errorMessage = '값을 입력해 주세요.', 
-}) => {
+const Input = ({ placeholder, size, width, maxWidth }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -74,7 +71,7 @@ const Input = ({
         width={width}
         maxWidth={maxWidth}
       />
-      <ErrorMessage show={error}>{errorMessage}</ErrorMessage>
+      <ErrorMessage show={error}>값을 입력해 주세요.</ErrorMessage>
     </InputContainer>
   );
 };
