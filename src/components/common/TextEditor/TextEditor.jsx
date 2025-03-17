@@ -63,7 +63,7 @@ export default function TextEditor( onChange ) {
             }
             quillInstance.current = null;
         };
-    }, [onChange]);
+    }, []);
   
 
   return (

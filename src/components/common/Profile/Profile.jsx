@@ -48,7 +48,7 @@ const ProfileSelectImg = styled.img`
     }
 `;
 
-export default function Profile ( onProfileSelect ) {
+export default function Profile ({ onChange }) {
     const { imgUrls, loading, error } = useProfileImages();
     // 첫 번째 이미지와 나머지 이미지 분리
     const mainImgUrl = imgUrls.length > 0 ? imgUrls[0] : null;

@@ -97,13 +97,15 @@ export default function CreateMessageCard() {
                       placeholder='이름을 입력해 주세요.'
                       width={720}
                       maxWidth={720}
-                      value={messageCardFormData.name}
                       onChange={e => handleChangeFormData('sender', e.target.value)}
                     />
                   </S.ContentWrapper>
                   <S.ContentWrapper>
                     <S.Label $bold>프로필 이미지</S.Label>
-                    <Profile />
+                    <Profile 
+                        value={messageCardFormData.profileImageURL}
+                        onChange={e => handleChangeFormData('profileImageURL', e.target.value)}
+                    />
                   </S.ContentWrapper>
                   <S.ContentWrapper>
                     <S.Label $bold>상대와의 관계</S.Label>
@@ -112,12 +114,17 @@ export default function CreateMessageCard() {
                           options={relations}
                           errorMessage="관계를 선택해주세요."
                           setSelectItem={setSelectItem}
+                          value={messageCardFormData.relationship}
+                          onChange={e => handleChangeFormData('relationship', e.target.value)}
                         />
                     </div>
                   </S.ContentWrapper>
                   <S.ContentWrapper>
                     <S.Label $bold>내용을 입력해주세요</S.Label>
-                    <TextEditor />
+                    <TextEditor 
+                        value={messageCardFormData.content}
+                        onChange={e => handleChangeFormData('content', e.target.value)}
+                    />
                   </S.ContentWrapper>
                   <S.ContentWrapper>
                     <S.Label $bold>폰트 선택</S.Label>
@@ -126,6 +133,8 @@ export default function CreateMessageCard() {
                           options={Fonts}
                           errorMessage="폰트를 선택해 주세요."
                           setSelectItem={setSelectItem}
+                          value={messageCardFormData.font}
+                          onChange={e => handleChangeFormData('font', e.target.value)}
                         />
                     </div>
                   </S.ContentWrapper>
