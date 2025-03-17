@@ -5,7 +5,7 @@ import { theme } from "../../../styles/theme";
 const StyledProfiles = styled.ul`
   display:flex;
   gap:0;
-  
+  margin-right:24px;
   li {
     width:28px;
     height:28px;

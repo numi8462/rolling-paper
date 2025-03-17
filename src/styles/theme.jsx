@@ -255,6 +255,7 @@ export const media = {
 
 export const Container = styled.div`  
   background-color: white;
+  width:100%;
   max-width: 1200px;
   margin: 0 auto;
 

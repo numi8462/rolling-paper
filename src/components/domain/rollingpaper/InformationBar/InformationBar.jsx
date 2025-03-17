@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Emoji from '../../../common/Emoji/Emoji';
-import useToast from '../../../common/Toast/useToast';
 import Toast from '../../../common/Toast/Toast';
-import { theme } from '../../../../styles/theme';
+import { Container, theme } from '../../../../styles/theme';
 import { ShareButton } from '../../../common/Button/ShareButton';
 import Options from './Options';
 import useKakaoShare from '../../../common/hooks/kakao/useKakaoShare';
+import { TopEmojis } from '../../../common/Emoji/TopEmojis';
+import { Profiles } from '../../../common/Profile/Profiles';
+import { AddEmojiButton } from '../../../common/Button/AddEmojiButton';
+import useReactions from '../../../common/hooks/reactions/useReactions';
+import EmojiPickerBox from './EmojiPickerBox';
+import useToast from '../../../common/Toast/useToast';
+
 
 const StyledInformationBar = styled.div`
   position: sticky;
@@ -22,17 +27,40 @@ const StyledName = styled.div`
   font-weight: 700;
 `;
 
-const ShareContainer = styled.div`
+const RelativeBox = styled.div`
   position: relative;
 `;
+const FlexBox = styled.div`
+  display:flex;
+  justify-content: space-between;
+`;
+const RightBox = styled.div`
+  display:flex;
+  align-items: center;
+`;
+const PaperCardCount = styled.div`
+  display:flex;
+`;
 
-function InformationBar({ name, messageCount, emojis, reactionCount }) {
+function InformationBar({ postId , rollingPaper }) {
+  const {
+    name,
+    messageCount,
+    recentMessages,
+  } = rollingPaper;
+  
+  const { reactions, refetch } = useReactions(postId);
+  const [ isEmojiPickerOpen, setIsEmojiPickerOpen ] = useState(false);
   const { toast, showToast, closeToast } = useToast();
-  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [ isOptionsOpen, setIsOptionsOpen ] = useState(false);
   const shareKakao = useKakaoShare(name, 5, 4); // 카카오 공유 useKakaoShare(이름, 메세지 수, 반응 수)
 
   const toggleOptions = () => {
     setIsOptionsOpen(!isOptionsOpen);
+  };
+
+  const toggleEmojiPicker = () => {
+    setIsEmojiPickerOpen(!isEmojiPickerOpen);
   };
 
   const handleShareUrlClick = () => {
@@ -53,21 +81,38 @@ function InformationBar({ name, messageCount, emojis, reactionCount }) {
     shareKakao();
   };
 
+  const topReactions = reactions.slice(0, 3);
+
   return (
     <StyledInformationBar>
-      <StyledName>To. {name}</StyledName>
-      <Emoji emoji={'\u{1F600}'} count={2} />
-
-      <ShareContainer>
-        <ShareButton onClick={() => toggleOptions()} />
-        {isOptionsOpen && (
-          <Options
-            handleKakaoClick={() => handleKakaoClick()}
-            handleShareUrlClick={() => handleShareUrlClick()}
-          />
-        )}
-      </ShareContainer>
-
+      <Container>
+        <FlexBox>
+          <StyledName>To. {name}</StyledName>
+          <RightBox>
+            <Profiles
+              recentMessages={recentMessages}
+              totalLength={messageCount}
+            />
+            <PaperCardCount>
+              <b>{messageCount}</b>명이 작성했어요!
+            </PaperCardCount>
+            <TopEmojis topReactions={topReactions}/>
+            <RelativeBox>
+              <AddEmojiButton onClick={toggleEmojiPicker}/>
+              <EmojiPickerBox postId={postId} refetch={refetch} open={isEmojiPickerOpen} setOpen={setIsEmojiPickerOpen}/>
+            </RelativeBox>
+            <RelativeBox>
+              <ShareButton onClick={() => toggleOptions()} />
+              {isOptionsOpen && (
+                <Options
+                  handleKakaoClick={() => handleKakaoClick()}
+                  handleShareUrlClick={() => handleShareUrlClick()}
+                />
+              )}
+            </RelativeBox>
+          </RightBox>
+        </FlexBox>
+      </Container>
       {toast && <Toast message={toast.message} onClose={closeToast} />}
     </StyledInformationBar>
   );
