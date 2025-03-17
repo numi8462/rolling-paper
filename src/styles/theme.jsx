@@ -58,7 +58,8 @@ export const theme = {
     nm: `font-family: 'Nanum Myeongjo', serif`,
     np: `font-family: 'Nanum Pen Script', cursive`,
     ns: `font-family: 'Noto Sans KR', sans-serif`,
-    pd: `font-family: 'Pretendard-Regular', cursive`,
+    pd: `font-family: 'Pretendard', cursive`,
+    pp: `font-family: 'Poppins', cursive`,
   },
   p: {
     // padding

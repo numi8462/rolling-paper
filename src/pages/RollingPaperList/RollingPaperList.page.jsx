@@ -33,10 +33,10 @@ function RollingPaperList() {
   );
   const sortedCreate = rollingPapers2.sort((a, b) => a.createdAt - b.createdAt);
 
-  if (error1 && error2) {
+  if (error1 || error2) {
     return <NotFound />;
   }
-  
+
   return (
     <div>
       <Container>
