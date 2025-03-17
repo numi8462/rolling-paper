@@ -55,31 +55,31 @@ const StyledInput = styled.input`
   max-width: ${({ $maxWidth }) => $maxWidth || '100%'};
 
     &:focus {
-    border: 2px solid ${theme.colors.gray[500]};
-    outline: none;
+      border: 2px solid ${theme.colors.gray[500]};
+      outline: none;
     }
 
     &:active {
-    border: 2px solid ${theme.colors.gray[700]}
+      border: 2px solid ${theme.colors.gray[700]}
     }
     &:hover {
-    border: 1px solid ${theme.colors.gray[500]}
+      border: 1px solid ${theme.colors.gray[500]}
     }
 
     &:disabled {
-        color: ${theme.colors.gray[100]} 
-        background-color: ${theme.colors.gray[200]} 
-        border: 1px solid ${theme.colors.gray[300]} 
-        cursor: not-allowed; 
+      color: ${theme.colors.gray[100]};
+      background-color: ${theme.colors.gray[200]};
+      border: 1px solid ${theme.colors.gray[300]};
+      cursor: not-allowed; 
     }
-      ${media.tablet`
-      width: 720px;
-      height: 50px
-      `}
+    ${media.tablet`
+    width: 720px;
+    height: 50px;
+    `}
     ${media.mobile`
       width: 320px;
-      height: 50px
-      `}
+      height: 50px;
+    `}
 `;
 
 const ErrorMessage = styled.span`

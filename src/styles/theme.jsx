@@ -260,9 +260,11 @@ export const Container = styled.div`
   margin: 0 auto;
 
   ${media.tablet`
+    width:calc(100% - 48px);
     margin: 0 24px;
   `}
   ${media.mobile`
+    width:calc(100% - 40px);
     margin: 0 20px;
   `}
 `;
