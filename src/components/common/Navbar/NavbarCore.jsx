@@ -1,11 +1,12 @@
 import Logo from '../../../assets/icons/🎨 Icon Color.svg';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { useNavigate, useLocation } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 import { Button } from '../Button/Button';
 import { Container } from '../../../styles/theme';
+import { useEffect, useState } from 'react';
 
 const BREAK_POINT = {
-  mobile: 768,
+  mobile: 360, // 변경된 부분
   tablet: 1248,
 };
 
@@ -34,6 +35,20 @@ const NavbarWrapper = styled.header`
     padding: 11px 0;
     margin: 0;
   }
+
+  ${props =>
+    props.hideOnMobile &&
+    css`
+      display: none;
+    `}
+
+  @media (max-width: ${BREAK_POINT.mobile}px) {
+    ${props =>
+      !props.showOnMobile &&
+      css`
+        display: none;
+      `}
+  }
 `;
 
 const RollingLogo = styled.div`
@@ -47,15 +62,6 @@ const RollingLogo = styled.div`
 `;
 
 const LogoText = styled.span`
-<<<<<<< HEAD
-    font-family: 'Poppins', sans-serif;
-    font-size: 19.97px;
-    font-weight: 700;
-    line-height: 29.96px;
-    text-align: center;
-    margin-left: 8px;
-    color: #4A494F;
-=======
   font-family: Poppins, sans-serif;
   font-size: 19.97px;
   font-weight: 700;
@@ -63,7 +69,6 @@ const LogoText = styled.span`
   text-align: center;
   margin-left: 8px;
   color: #4a494f;
->>>>>>> bd4ccea13354f06c01557498f7a9e5a698491515
 `;
 
 const ButtonContainer = styled.div`
@@ -101,6 +106,7 @@ const RollingHeader = () => {
 
 const MakingRollingPaper = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const handleMakingClick = () => navigate('post');
 
   if (!['/', '/list'].includes(location.pathname)) {
@@ -117,15 +123,30 @@ const MakingRollingPaper = () => {
 };
 
 export default function Navbar() {
-  if (
+  const location = useLocation();
+  const [showOnMobile, setShowOnMobile] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowOnMobile(
+        !window.location.pathname.includes('/post/') &&
+          !window.location.pathname.includes('/edit/') &&
+          !window.location.pathname.includes('/post')
+      );
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [location.pathname]);
+
+  const hideOnMobile =
     window.innerWidth <= BREAK_POINT.mobile &&
-    !['/', '/list'].includes(location.pathname)
-  ) {
-    return null;
-  }
+    !['/', '/list'].includes(location.pathname);
 
   return (
-    <NavbarWrapper>
+    <NavbarWrapper showOnMobile={showOnMobile} hideOnMobile={hideOnMobile}>
       <Container>
         <RollingHeader />
         <MakingRollingPaper />

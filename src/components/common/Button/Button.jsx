@@ -38,7 +38,8 @@ const buttonDefault = css`
   ${({ height }) => StyledButtonHeight[height] || StyledButtonHeight[56]};
   width: ${({ width }) => `${width}` || '100%'};
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  z-index: 999;
+  /* transition: all 0.2s ease-in-out; */
 
   &:disabled {
     background-color: ${theme.colors.gray[300]};

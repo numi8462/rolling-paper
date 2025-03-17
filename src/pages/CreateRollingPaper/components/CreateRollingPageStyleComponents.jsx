@@ -1,10 +1,17 @@
 import styled from 'styled-components';
 import { media, theme } from '../../../styles/theme';
+import { FilledButton } from '../../../components/common/Button/FilledButton';
 
 export const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+
+  ${media.mobile`
+    max-width: 320px;
+  `}
 `;
 
 export const IconWrapper = styled.div`
@@ -15,22 +22,22 @@ export const IconWrapper = styled.div`
   z-index: 10;
 `;
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  width: 60%;
-  max-width: 800px;
-  ${theme.fonts.pd}
+// export const Container = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   gap: 16px;
+//   width: 60%;
+//   max-width: 800px;
+//   ${theme.fonts.pd}
 
-  ${media.tablet`
-    width: 90%;
-    `}
-  ${media.mobile`
-    width: 90%;
-    `}
-`;
+//   ${media.tablet`
+//     width: 90%;
+//     `}
+//   ${media.mobile`
+//     width: 90%;
+//     `}
+// `;
 
 export const Toh1 = styled.h1`
   ${theme.fs.xxl};
@@ -61,19 +68,24 @@ export const BackgroundContainer = styled.div`
   background-position: center;
 `;
 export const OptionsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   justify-content: center;
-  align-items: center;
-  min-height: 250px;
-  ${media.mobile`
-    gap: 12px; 
+  margin: 45px 0;
+
+  ${media.tablet`
+    margin-bottom: 150px;
   `}
+
+  ${media.mobile`
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px; 
+  `};
 `;
 
 export const ColorOption = styled.div`
-  width: 168px;
+  width: 100%;
   height: 168px;
   border-radius: 16px;
   border: 1px solid #00000014;
@@ -90,7 +102,7 @@ export const ColorOption = styled.div`
   ${media.mobile`
       width: 154px;
       height: 154px;
-      flex: 1 1 calc(50% - 8px);
+      /* flex: 1 1 calc(50% - 8px); */
       `}
 `;
 
@@ -100,7 +112,7 @@ export const ImageOption = styled.img`
   border-radius: 8px;
   cursor: pointer;
   object-fit: cover;
-  transition: all 0.3s ease-in-out;
+  /* transition: all 0.3s ease-in-out; */
 
   &:hover {
     border: 2px solid black;
@@ -132,8 +144,16 @@ export const SelectContainer = styled.div`
 
 export const ToInputContainer = styled.div`
   margin-top: 57px;
+  margin-bottom: 50px;
 `;
 
 export const ButtonContainer = styled.div`
   margin: 24px;
+`;
+
+export const CreateButton = styled(FilledButton)`
+  z-index: 999;
+  @media (min-width: ${theme.breakpoints.t}) {
+    margin-bottom: 100px;
+  }
 `;
