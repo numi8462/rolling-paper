@@ -50,7 +50,7 @@ export default function CreateMessageCard() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [messageCardFormData, setMessageCardFormData] = useState({
-        recipientId: id,
+        recipientId: Number(id),
         sender: '',
         profileImageURL: '',
         relationship: '지인',

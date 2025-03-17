@@ -82,7 +82,7 @@ function Modal({ message, onClick }) {
           <Card.Date>{date}</Card.Date>
         </Card.InfoBox>
         <Card.MessageBox $modal $font={newFont}>
-          <Card.Message>{content}</Card.Message>
+          <Card.Message dangerouslySetInnerHTML={{ __html :  content  }} />
         </Card.MessageBox>
         <S.ConfirmButton w="120" h="40" onClick={onClick}>
           확인
