@@ -4,7 +4,7 @@ import useDeleteRecipient from '../../components/common/hooks/recipients/useDele
 import RollingPaper from '../RollingPaper/RollingPaper.page';
 import styled from 'styled-components';
 import { Button } from '../../components/common/Button/Button';
-import { media } from '../../styles/theme';
+import { Font, media } from '../../styles/theme';
 
 export function NewFilledButton({ w = '100%', h = '32', children, ...rest }) {
   return (
@@ -16,12 +16,15 @@ export function NewFilledButton({ w = '100%', h = '32', children, ...rest }) {
 
 const StyledFilledButton = styled(FilledButtonTemp)`
   height: ${({ h }) => h}px;
+  border-radius: 6px;
+  ${({ size }) => Font[`f${size}`]}
+
   ${media.tablet`
     position:fixed;
     left:24px;
     bottom:24px;
     width: calc(100% - 48px);
-  `}
+  `};
 `;
 
 function FilledButtonTemp({ w, h, children, ...rest }) {
@@ -57,6 +60,7 @@ function RollingPaperEdit({ refetchPosts }) {
           w="92"
           onClick={handleDelete}
           disabled={loading}
+          size="16"
         >
           {loading ? '삭제 중...' : '삭제하기'}
         </NewFilledButton>
