@@ -5,6 +5,7 @@ import Point1Img from '../../assets/Images/point1.png';
 import Point2Img from '../../assets/Images/point2.png';
 import { FilledButton } from '../../components/common/Button/FilledButton';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const S = {
   Homepage: styled.div`
@@ -26,7 +27,7 @@ const S = {
     @media (max-width: ${theme.breakpoints.t}) {
       flex-direction: column;
       padding: 40px 0;
-      ${(props) =>
+      ${props =>
         props.$reverse &&
         css`
           flex-direction: column-reverse;
@@ -36,7 +37,7 @@ const S = {
     @media (max-width: ${theme.breakpoints.m}) {
       flex-direction: column;
       padding: 24px 0;
-      ${(props) =>
+      ${props =>
         props.$reverse &&
         css`
           flex-direction: column-reverse;
@@ -49,7 +50,7 @@ const S = {
     flex-direction: column;
     flex: 1 0 auto;
     padding-left: 60px;
-    ${(props) =>
+    ${props =>
       props.$right &&
       css`
         padding-left: 0;
@@ -114,43 +115,49 @@ const S = {
 
 function Homepage() {
   return (
-    <Container>
-      <S.Homepage>
-        <S.Section>
-          <S.InfoBox>
-            <S.Point>Point. 01</S.Point>
-            <S.Title>
-              누구나 손쉽게, 온라인 <S.Break /> 롤링 페이퍼를 만들 수 있어요
-            </S.Title>
-            <S.Description>로그인 없이 자유롭게 만들어요.</S.Description>
-          </S.InfoBox>
-          <S.ImageContainer>
-            <S.Image src={Point1Img} alt="cards image" />
-          </S.ImageContainer>
-        </S.Section>
+    <div>
+      <Helmet>
+        <title>롤링페이퍼</title>
+        <meta name="description" content="롤링페이퍼 홈" />
+      </Helmet>
+      <Container>
+        <S.Homepage>
+          <S.Section>
+            <S.InfoBox>
+              <S.Point>Point. 01</S.Point>
+              <S.Title>
+                누구나 손쉽게, 온라인 <S.Break /> 롤링 페이퍼를 만들 수 있어요
+              </S.Title>
+              <S.Description>로그인 없이 자유롭게 만들어요.</S.Description>
+            </S.InfoBox>
+            <S.ImageContainer>
+              <S.Image src={Point1Img} alt="cards image" />
+            </S.ImageContainer>
+          </S.Section>
 
-        <S.Section $reverse={true}>
-          <S.ImageContainer>
-            <S.Image src={Point2Img} alt="cards image" />
-          </S.ImageContainer>
-          <S.InfoBox $right={true}>
-            <S.Point>Point. 02</S.Point>
-            <S.Title $bold>
-              서로에게 이모지로 감정을 <S.Break /> 표현해보세요
-            </S.Title>
-            <S.Description>
-              롤링 페이퍼에 이모지를 추가할 수 있어요.
-            </S.Description>
-          </S.InfoBox>
-        </S.Section>
+          <S.Section $reverse={true}>
+            <S.ImageContainer>
+              <S.Image src={Point2Img} alt="cards image" />
+            </S.ImageContainer>
+            <S.InfoBox $right={true}>
+              <S.Point>Point. 02</S.Point>
+              <S.Title $bold>
+                서로에게 이모지로 감정을 <S.Break /> 표현해보세요
+              </S.Title>
+              <S.Description>
+                롤링 페이퍼에 이모지를 추가할 수 있어요.
+              </S.Description>
+            </S.InfoBox>
+          </S.Section>
 
-        <S.ButtonContainer>
-          <Link to="/list">
-            <FilledButton>구경해보기</FilledButton>
-          </Link>
-        </S.ButtonContainer>
-      </S.Homepage>
-    </Container>
+          <S.ButtonContainer>
+            <Link to="/list">
+              <FilledButton>구경해보기</FilledButton>
+            </Link>
+          </S.ButtonContainer>
+        </S.Homepage>
+      </Container>
+    </div>
   );
 }
 

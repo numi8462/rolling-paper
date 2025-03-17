@@ -5,6 +5,7 @@ import useRecipients from '../../components/common/hooks/recipients/useRecipient
 import { Font, media, theme } from '../../styles/theme';
 import { FilledButton } from '../../components/common/Button/FilledButton';
 import { PaperCardList } from '../../components/domain/rollingpaper/PaperCardList/PaperCardList';
+import { Helmet } from 'react-helmet';
 
 function RollingPaperList() {
   const {
@@ -35,6 +36,10 @@ function RollingPaperList() {
 
   return (
     <div>
+      <Helmet>
+        <title>목록 - 롤링페이퍼</title>
+        <meta name="description" content="롤링페이퍼 목록" />
+      </Helmet>
       <Container>
         <PaperTitle $bold>인기 롤링 페이퍼 🔥</PaperTitle>
         <PaperCardList rollingPapers={sortedCount} />
