@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Emoji from '../../../common/Emoji/Emoji';
 import useToast from '../../../common/Toast/useToast';
@@ -30,6 +30,7 @@ function InformationBar({ name, messageCount, emojis, reactionCount }) {
   const { toast, showToast, closeToast } = useToast();
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const shareKakao = useKakaoShare(name, 5, 4); // 카카오 공유 useKakaoShare(이름, 메세지 수, 반응 수)
+  const optionsRef = useRef(null);
 
   const toggleOptions = () => {
     setIsOptionsOpen(!isOptionsOpen);
@@ -53,6 +54,22 @@ function InformationBar({ name, messageCount, emojis, reactionCount }) {
     shareKakao();
   };
 
+  useEffect(() => {
+    const handleClickOutside = e => {
+      if (optionsRef.current && !optionsRef.current.contains(e.target)) {
+        setIsOptionsOpen(false);
+      }
+    };
+
+    if (isOptionsOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOptionsOpen]);
+
   return (
     <StyledInformationBar>
       <StyledName>To. {name}</StyledName>
@@ -62,6 +79,7 @@ function InformationBar({ name, messageCount, emojis, reactionCount }) {
         <ShareButton onClick={() => toggleOptions()} />
         {isOptionsOpen && (
           <Options
+            optionsRef={optionsRef}
             handleKakaoClick={() => handleKakaoClick()}
             handleShareUrlClick={() => handleShareUrlClick()}
           />
