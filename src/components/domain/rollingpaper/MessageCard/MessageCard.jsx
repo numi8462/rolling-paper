@@ -1,8 +1,10 @@
 import Card from '../../../../pages/RollingPaper/components/Card';
 import Badge from '../../../common/Badge/Badge';
 import { formatDate } from '../../../../utils/date';
+import { useLocation } from 'react-router-dom';
+import { DeleteButton } from '../../../common/Button/DeleteButton';
 
-function MessageCard({ message, onClick }) {
+function MessageCard({ message, onClick, onDelete }) {
   const {
     id,
     recipientId,
@@ -13,6 +15,9 @@ function MessageCard({ message, onClick }) {
     font,
     createdAt,
   } = message;
+
+  const location = useLocation(); // 현재 경로 가져오기
+  const isEditPage = location.pathname.includes('/edit'); // 편집 페이지인지 확인
 
   const date = formatDate(createdAt);
 
@@ -50,6 +55,9 @@ function MessageCard({ message, onClick }) {
         <Card.Message $limit>{content}</Card.Message>
       </Card.MessageBox>
       <Card.Date>{date}</Card.Date>
+
+      {/* 편집 페이지에서만 삭제 버튼 표시 */}
+      {isEditPage && <DeleteButton onClick={() => onDelete(id)} />}
     </Card.Container>
   );
 }

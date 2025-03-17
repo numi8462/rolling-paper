@@ -1,9 +1,36 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useDeleteRecipient from '../../components/common/hooks/recipients/useDeleteRecipient';
-import { FilledButton } from '../../components/common/Button/FilledButton';
 import RollingPaper from '../RollingPaper/RollingPaper.page';
 import styled from 'styled-components';
+import { Button } from '../../components/common/Button/Button';
+import { media } from '../../styles/theme';
+
+export function NewFilledButton({ w = '100%', h = '32', children, ...rest }) {
+  return (
+    <StyledFilledButton w={w} h={h} {...rest}>
+      {children}
+    </StyledFilledButton>
+  );
+}
+
+const StyledFilledButton = styled(FilledButtonTemp)`
+  height: ${({ h }) => h}px;
+  ${media.tablet`
+    position:fixed;
+    left:24px;
+    bottom:24px;
+    width: calc(100% - 48px);
+  `}
+`;
+
+function FilledButtonTemp({ w, h, children, ...rest }) {
+  return (
+    <Button type="primary" w={w} h={h} {...rest}>
+      {children}
+    </Button>
+  );
+}
 
 const EditContainer = styled.div`
   position: absolute;
@@ -25,9 +52,14 @@ function RollingPaperEdit({ refetchPosts }) {
     <>
       <RollingPaper /> {/* 기존 RollingPaper 그대로 사용 */}
       <EditContainer>
-        <FilledButton w="92" h="32" onClick={handleDelete} disabled={loading}>
+        <NewFilledButton
+          h="32"
+          w="92"
+          onClick={handleDelete}
+          disabled={loading}
+        >
           {loading ? '삭제 중...' : '삭제하기'}
-        </FilledButton>
+        </NewFilledButton>
         {error && <p style={{ color: 'red' }}>삭제 중 오류가 발생했습니다.</p>}
       </EditContainer>
     </>
