@@ -78,7 +78,7 @@ export const theme = {
     12: { 16: 'padding: 12px 16px', 12: 'padding: 12px 12px' },
     10: { 0: 'padding: 10px 0px' },
     8: { 16: 'padding: 8px 16px', 12: 'padding: 8px 12px' },
-    7: { 16: 'padding: 7px 16px', 15: 'padding: 7px 15px' },
+    7: { 16: 'padding: 7px 16px', 15: 'padding: 7px 15px', 12: 'padding: 7px 12px'},
     6: {
       16: 'padding: 6px 16px',
       12: 'padding: 6px 12px',
@@ -202,7 +202,7 @@ export const Font = {
   `,
   f20: css`
     display: inline-block;
-    line-height: 30x;
+    line-height : 30px;
     ${theme.fs.xl};
     font-weight: ${({ $bold }) => ($bold ? `700` : `400`)};
   `,
@@ -253,7 +253,7 @@ export const media = {
   `,
 };
 
-export const Container = styled.div`
+export const Container = styled.div`  
   background-color: white;
   max-width: 1200px;
   margin: 0 auto;
