@@ -11,6 +11,8 @@ const StyledEmoji = styled.div`
   color: ${theme.colors.basic.white};
   border-radius: 32px;
   text-align: center;
+  font-size: 16px;
+  white-space: nowrap;
 `;
 
 function Emoji({ emoji, count }) {

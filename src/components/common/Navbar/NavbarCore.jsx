@@ -47,6 +47,15 @@ const RollingLogo = styled.div`
 `;
 
 const LogoText = styled.span`
+<<<<<<< HEAD
+    font-family: 'Poppins', sans-serif;
+    font-size: 19.97px;
+    font-weight: 700;
+    line-height: 29.96px;
+    text-align: center;
+    margin-left: 8px;
+    color: #4A494F;
+=======
   font-family: Poppins, sans-serif;
   font-size: 19.97px;
   font-weight: 700;
@@ -54,6 +63,7 @@ const LogoText = styled.span`
   text-align: center;
   margin-left: 8px;
   color: #4a494f;
+>>>>>>> bd4ccea13354f06c01557498f7a9e5a698491515
 `;
 
 const ButtonContainer = styled.div`
