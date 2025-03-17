@@ -2,7 +2,7 @@ import Input from "../../components/common/Input/Input";
 import { theme, Font, Container, media } from "../../styles/theme";
 import styled from 'styled-components';
 import { FilledButton } from "../../components/common/Button/FilledButton";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Dropdown from "../../components/common/Dropdown/Dropdown";
 import { useState } from "react";
 import Profile from "../../components/common/Profile/Profile";
@@ -48,9 +48,18 @@ const S = {
 };
 
 export default function CreateMessageCard() {
+    const {id} = useParams();
     const [selectItem, setSelectItem] = useState('');
+    const [messageCardFormData, setMessageCardFormData] = useState({
+        recipientId: id,
+        sender: "string",
+        profileImageURL: "string",
+        relationship: "친구",
+        content: "string",
+        font: "Noto Sans"
+      });
     
-    const realations = [
+    const relations = [
         {value: '지인', label: '지인'},
         {value: '동료', label: '동료'},
         {value: '가족', label: '가족'},
@@ -65,10 +74,17 @@ export default function CreateMessageCard() {
     ];
     console.log(selectItem);
 
+    const handleChangeFormData = (key, value) => {
+        return setMessageCardFormData(prev => ({
+            ...prev,
+            [key]: value,
+        }))
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const vaildationErrors = vaildationForm();
-        setErrors
+        // setErrors
+        console.log("Form Data: ",messageCardFormData);
     }
 
     return (
@@ -81,6 +97,8 @@ export default function CreateMessageCard() {
                       placeholder='이름을 입력해 주세요.'
                       width={720}
                       maxWidth={720}
+                      value={messageCardFormData.name}
+                      onChange={e => handleChangeFormData('sender', e.target.value)}
                     />
                   </S.ContentWrapper>
                   <S.ContentWrapper>
@@ -91,7 +109,7 @@ export default function CreateMessageCard() {
                     <S.Label $bold>상대와의 관계</S.Label>
                     <div>
                         <Dropdown
-                          options={realations}
+                          options={relations}
                           errorMessage="관계를 선택해주세요."
                           setSelectItem={setSelectItem}
                         />
@@ -113,9 +131,7 @@ export default function CreateMessageCard() {
                   </S.ContentWrapper>
                 </S.MessageContainer>
                 <S.ButtonContainer>
-                    <Link to="/list">
-                      <FilledButton w="720" >생성하기</FilledButton>
-                    </Link>
+                    <FilledButton w="720" onClick={handleSubmit} >생성하기</FilledButton>
                 </S.ButtonContainer>
             </S.CreateMessageCard>
         </Container>

@@ -10,18 +10,16 @@ import CreateMessageCard from './pages/CreateMessageCard/CreateMessageCard.page.
 import NotFound from './pages/NotFound/NotFound.page.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<HomePage />} />
-          <Route path="list" element={<RollingPaperList />} />
-          <Route path="post" element={<RollingPaperMaking />} />
-          <Route path="post/:id" element={<RollingPaper />} />
-          <Route path='post/:id/message' element={<CreateMessageCard />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route index element={<HomePage />} />
+        <Route path="list" element={<RollingPaperList />} />
+        <Route path="post" element={<RollingPaperMaking />} />
+        <Route path="post/:id" element={<RollingPaper />} />
+        <Route path='post/:id/message' element={<CreateMessageCard />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
 );

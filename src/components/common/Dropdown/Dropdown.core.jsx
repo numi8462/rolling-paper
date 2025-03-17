@@ -8,7 +8,6 @@ const gray_900 = theme.colors.gray[900];
 const gray_500 = theme.colors.gray[500];
 const gray_300 = theme.colors.gray[300];
 const gray_200 = theme.colors.gray[200];
-const error_color = theme.colors.basic.Error;
 
 const DropdownWrap = styled.div`
   position: relative;
@@ -20,7 +19,7 @@ const DropdownButton = styled.button`
   display: flex;
   width: 100%;
   ${theme.p[12][16]};
-  border: 1px solid ${({ $error }) => ($error ? error_color : gray_300)};
+  border: 1px solid ${ gray_300 };
   border-radius: 8px;
 
   ${Font.f16};
@@ -105,7 +104,7 @@ const OptionItem = styled.li`
   }
 `;
 
-export function DropdownContainer({ options , setLocalError, Items, onBlur, localError }) {
+export function DropdownContainer({ options , Items}) {
   const [isopen, setIsopen] = useState(false);  
   // options 배열가지고 와서 인덱스와 키값만 가지고 컨트롤
   const [value, setValue] = useState(options[0].label);      
@@ -122,7 +121,6 @@ export function DropdownContainer({ options , setLocalError, Items, onBlur, loca
     // 셀렉트 옵션 클릭했을때 인뎃스 값을 가져와서 키값 전달
     setValue(options[idx].label);
     setIsopen(false);
-    setLocalError(''); 
     Items(options[idx].value);
   };
 
@@ -143,11 +141,8 @@ export function DropdownContainer({ options , setLocalError, Items, onBlur, loca
     <DropdownWrap ref={dropdownRef}>
       <DropdownButton 
         onClick={handleToggle} 
-        onBlur={onBlur} 
         $isopen={isopen} 
-        $error={!!localError}
       >
-        {value || '하나를 선택해 주세요.'} 
         {isopen ? 
          <img src={topArrow} alt="open"/>
          : 

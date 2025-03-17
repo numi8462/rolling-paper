@@ -13,5 +13,5 @@ export function validateMessage(data) {
 
   
     return errors;
-  }
+}
   
