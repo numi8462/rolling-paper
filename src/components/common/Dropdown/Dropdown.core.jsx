@@ -12,14 +12,14 @@ const gray_200 = theme.colors.gray[200];
 const DropdownWrap = styled.div`
   position: relative;
   /* width 값은 여기서만 조정하고 하위태그는 100%  */
-  width: 320px; 
+  width: 320px;
 `;
 
 const DropdownButton = styled.button`
   display: flex;
   width: 100%;
   ${theme.p[12][16]};
-  border: 1px solid ${ gray_300 };
+  border: 1px solid ${gray_300};
   border-radius: 8px;
 
   ${Font.f16};
@@ -28,7 +28,7 @@ const DropdownButton = styled.button`
   background-color: ${theme.colors.basic.white};
 
   /* outline은 다 필요없을꺼 같아서 꺼냈어요 */
-  outline: none; 
+  outline: none;
 
   &:focus {
     border: 1px solid ${gray_500};
@@ -37,21 +37,24 @@ const DropdownButton = styled.button`
   &:hover {
     border: 1px solid ${gray_500};
   }
-  
-  background-image: ${({ $isopen }) => `url(${$isopen ? topArrow : downArrow})`};
+
+  background-image: ${({ $isopen }) =>
+    `url(${$isopen ? topArrow : downArrow})`};
   background-repeat: no-repeat;
   background-position: right 16px center;
 
   img {
     position: absolute;
-    width:16px;
+    width: 16px;
     height: 16px;
-    top:16px;
-    right:16px;
+    top: 16px;
+    right: 16px;
   }
-  
+
   /* isopen이 true일 때 */
-  ${({ $isopen }) => $isopen && `
+  ${({ $isopen }) =>
+    $isopen &&
+    `
     border: 1px solid ${gray_500};
   `}
 
@@ -63,8 +66,8 @@ const OptionsList = styled.ul`
   flex-direction: column;
   justify-content: flex-start;
 
-  position: absolute; 
-  top: 58px;      
+  position: absolute;
+  top: 58px;
   left: 0;
   width: 100%;
   padding: 10px 0;
@@ -73,19 +76,19 @@ const OptionsList = styled.ul`
   border: 1px solid ${gray_300};
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 999;     
-  
+  z-index: 999;
+
   transform-origin: top;
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
-  
+
   /* isopen이 true일 때 */
-  ${({ $isopen }) => 
+  ${({ $isopen }) =>
     $isopen
       ? `
         transform: scaleY(1);
         opacity: 1;
         visibility: visible;
-      ` 
+      `
       : `
         transform: scaleY(0);
         opacity: 0;
@@ -104,24 +107,24 @@ const OptionItem = styled.li`
   }
 `;
 
-export function DropdownContainer({ options , Items}) {
-  const [isopen, setIsopen] = useState(false);  
+export function DropdownContainer({ options, onChange }) {
+  const [isopen, setIsopen] = useState(false);
   // options 배열가지고 와서 인덱스와 키값만 가지고 컨트롤
-  const [value, setValue] = useState(options[0].label);      
+  const [value, setValue] = useState(options[0].label);
 
   const dropdownRef = useRef(null);
 
-  const handleToggle = (e) => {
-    e.preventDefault()
-    setIsopen((prev) => !prev);
+  const handleToggle = e => {
+    e.preventDefault();
+    setIsopen(prev => !prev);
   };
 
-  const handleOptionClick = (idx) => {
-    // 옵션 내용이 다를 경우를 대비해서 
+  const handleOptionClick = idx => {
+    // 옵션 내용이 다를 경우를 대비해서
     // 셀렉트 옵션 클릭했을때 인뎃스 값을 가져와서 키값 전달
     setValue(options[idx].label);
     setIsopen(false);
-    Items(options[idx].value);
+    if (onChange) onChange(options[idx].value);
   };
 
   // 외부 클릭 감지 및 클리어 처리
@@ -139,22 +142,17 @@ export function DropdownContainer({ options , Items}) {
 
   return (
     <DropdownWrap ref={dropdownRef}>
-      <DropdownButton 
-        onClick={handleToggle} 
-        $isopen={isopen} 
-      >
-        {isopen ? 
-         <img src={topArrow} alt="open"/>
-         : 
-         <img src={downArrow} alt="close"/>
-         }
+      <DropdownButton onClick={handleToggle} $isopen={isopen}>
+        {value}
+        {isopen ? (
+          <img src={topArrow} alt="open" />
+        ) : (
+          <img src={downArrow} alt="close" />
+        )}
       </DropdownButton>
       <OptionsList $isopen={isopen}>
         {options.map((option, idx) => (
-          <OptionItem
-            key={idx}
-            onClick={() => handleOptionClick(idx)}
-          >
+          <OptionItem key={idx} onClick={() => handleOptionClick(idx)}>
             {option.label}
           </OptionItem>
         ))}
