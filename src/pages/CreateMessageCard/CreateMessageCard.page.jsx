@@ -49,13 +49,6 @@ const S = {
 
 export default function CreateMessageCard() {
     const [selectItem, setSelectItem] = useState('');
-      // 폼 상태값들
-    const [sender, setSender] = useState('');
-    const [recipientId, setRecipientId] = useState(1); // 예시 recipientId
-    const [profileImageURL, setProfileImageURL] = useState('');
-    const [relationship, setRelationship] = useState('');
-    const [content, setContent] = useState('');
-    const [font, setFont] = useState('');
     
     const realations = [
         {value: '지인', label: '지인'},
