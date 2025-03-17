@@ -93,6 +93,10 @@ export default function CreateMessageCard() {
     handleChangeFormData('font', value);
   };
 
+  const handleEditorChange = content => {
+    handleChangeFormData('content', content);
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     // setErrors
@@ -134,7 +138,7 @@ export default function CreateMessageCard() {
             <S.Label $bold>내용을 입력해주세요</S.Label>
             <TextEditor
               value={messageCardFormData.content}
-              onChange={e => handleChangeFormData('content', e.target.value)}
+              onChange={handleEditorChange}
             />
           </S.ContentWrapper>
           <S.ContentWrapper>
