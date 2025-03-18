@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 
 const StyledBadge = styled.div`
-  width: 42px;
+  width: 45px;
   height: 20px;
   ${theme.p[0][8]};
   ${theme.fs.xs};
   font-weight: 400;
   line-height: 20px;
-  color: ${(props) => props.color};
-  background-color: ${(props) => props.$bg};
+  color: ${props => props.color};
+  background-color: ${props => props.$bg};
   border-radius: 4px;
   text-align: center;
 `;
