@@ -68,8 +68,8 @@ export default function CreateMessageCard() {
   const Fonts = [
     { value: 'Noto Sans', label: 'Noto Sans' },
     { value: 'Pretendard', label: 'Pretendard' },
-    { value: 'Nanum Myeongjo', label: '나눔 명조' },
-    { value: 'Nanum Pen', label: '나눔 손글씨 손편지체' },
+    { value: '나눔명조', label: '나눔명조' },
+    { value: '나눔손글씨 손편지체', label: '나눔손글씨 손편지체' },
   ];
 
   const handleChangeFormData = (key, value) => {
@@ -106,7 +106,7 @@ export default function CreateMessageCard() {
         const { data } = await recipientService.createMessage(id,messageCardFormData);
         console.log(data);
     } catch (error) {
-        console.log('error');
+        console.log(error.response.data);
     } finally{
         navigate(`/post/${id}`);
 
