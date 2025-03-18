@@ -6,19 +6,6 @@ import styled from 'styled-components';
 import { Button } from '../../components/common/Button/Button';
 import { Font, media } from '../../styles/theme';
 
-const StyledFilledButton = styled(FilledButtonTemp)`
-  height: ${({ h }) => h}px;
-  border-radius: 6px;
-  ${({ size }) => Font[`f${size}`]}
-
-  ${media.tablet`
-    position:fixed;
-    left:24px;
-    bottom:24px;
-    width: calc(100% - 48px);
-  `};
-`;
-
 function FilledButtonTemp({ w, h, children, ...rest }) {
   return (
     <Button type="primary" w={w} h={h} {...rest}>
@@ -27,11 +14,7 @@ function FilledButtonTemp({ w, h, children, ...rest }) {
   );
 }
 
-const EditContainer = styled.div`
-  position: absolute;
-  top: 196px;
-  right: 360px;
-`;
+
 
 function RollingPaperEdit({ refetchPosts }) {
   const { id } = useParams(); // URL에서 ID 가져오기
@@ -47,7 +30,7 @@ function RollingPaperEdit({ refetchPosts }) {
     <>
       <RollingPaper /> {/* 기존 RollingPaper 그대로 사용 */}
       <EditContainer>
-        <NewFilledButton
+        <StyledFilledButton
           h="32"
           w="92"
           onClick={handleDelete}
@@ -55,11 +38,31 @@ function RollingPaperEdit({ refetchPosts }) {
           size="16"
         >
           {loading ? '삭제 중...' : '삭제하기'}
-        </NewFilledButton>
+        </StyledFilledButton>
         {error && <p style={{ color: 'red' }}>삭제 중 오류가 발생했습니다.</p>}
       </EditContainer>
     </>
   );
 }
+
+
+const EditContainer = styled.div`
+  position: absolute;
+  top: 196px;
+  right: 360px;
+`;
+
+const StyledFilledButton = styled(FilledButtonTemp)`
+  height: ${({ h }) => h}px;
+  border-radius: 6px;
+  ${({ size }) => Font[`f${size}`]}
+
+  ${media.tablet`
+    position: absolute;
+    right: 24px;
+    top: 196px;
+    width: auto;
+  `};
+`;
 
 export default RollingPaperEdit;
