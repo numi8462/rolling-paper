@@ -25,7 +25,7 @@ const StyledRollingPaper = styled.div`
   }
 `;
 
-function RollingPaper() {
+function RollingPaper({children}) {
   const { id } = useParams();
   const { rollingPaper, loading, error, refetch } = useRecipient(id);
   const {
@@ -49,6 +49,7 @@ function RollingPaper() {
             postId={id}
             rollingPaper={rollingPaper} 
           />
+           {children}
           <MessageCardList postId={id} />
         </div>
       )}

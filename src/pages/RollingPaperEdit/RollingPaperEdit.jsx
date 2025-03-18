@@ -4,41 +4,44 @@ import useDeleteRecipient from '../../components/common/hooks/recipients/useDele
 import RollingPaper from '../RollingPaper/RollingPaper.page';
 import styled from 'styled-components';
 import { Button } from '../../components/common/Button/Button';
-import { Font, media } from '../../styles/theme';
+import { Container, media } from '../../styles/theme';
 
-export function NewFilledButton({ w = '100%', h = '32', children, ...rest }) {
-  return (
-    <StyledFilledButton w={w} h={h} {...rest}>
-      {children}
-    </StyledFilledButton>
-  );
-}
+const StyledFilledButton = styled.div`
+  position: relative;
+  top:98px;  
+  max-width: 1200px;
+  width:100%;
+  margin:-39px auto 0;
+  text-align:right;
 
-const StyledFilledButton = styled(FilledButtonTemp)`
-  height: ${({ h }) => h}px;
-  border-radius: 6px;
-  ${({ size }) => Font[`f${size}`]}
-
+  button{
+    width:auto;
+    height: 39px;
+    padding:0 16px;
+    border-radius: 6px;
+    font-size:16px;
+    font-weight: 300;
+  }
+  
   ${media.tablet`
-    position:fixed;
-    left:24px;
+    position:absolute;
+    width:calc(100% - 48px);
+    top:auto;
     bottom:24px;
-    width: calc(100% - 48px);
-  `};
+    left:24px;
+    z-index:999;
+    
+    button{
+      height: 55px;
+      font-size:18px;
+      width:100%; 
+    }
+  `}; 
 `;
 
-function FilledButtonTemp({ w, h, children, ...rest }) {
-  return (
-    <Button type="primary" w={w} h={h} {...rest}>
-      {children}
-    </Button>
-  );
-}
-
 const EditContainer = styled.div`
-  position: absolute;
-  top: 196px;
-  right: 360px;
+  position: relative;
+  width:100%;
 `;
 
 function RollingPaperEdit({ refetchPosts }) {
@@ -53,19 +56,19 @@ function RollingPaperEdit({ refetchPosts }) {
 
   return (
     <>
-      <RollingPaper /> {/* 기존 RollingPaper 그대로 사용 */}
-      <EditContainer>
-        <NewFilledButton
-          h="32"
-          w="92"
-          onClick={handleDelete}
-          disabled={loading}
-          size="16"
-        >
-          {loading ? '삭제 중...' : '삭제하기'}
-        </NewFilledButton>
-        {error && <p style={{ color: 'red' }}>삭제 중 오류가 발생했습니다.</p>}
-      </EditContainer>
+        <EditContainer>
+          <RollingPaper> 
+              <StyledFilledButton>
+                <Button 
+                  onClick={handleDelete}
+                  disabled={loading}
+                >
+                  {loading ? '삭제 중...' : '삭제하기'}
+                </Button>
+              </StyledFilledButton>
+            </RollingPaper> {/* 기존 RollingPaper 그대로 사용 */}
+          {error && <p style={{ color: 'red' }}>삭제 중 오류가 발생했습니다.</p>}
+        </EditContainer>
     </>
   );
 }

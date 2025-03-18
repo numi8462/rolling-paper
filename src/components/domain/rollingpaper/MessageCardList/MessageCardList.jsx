@@ -5,9 +5,10 @@ import useMessages from '../../../common/hooks/messages/useMessages';
 import useDeleteMessage from '../../../common/hooks/messages/useDeleteMessage';
 import Card from '../../../../pages/RollingPaper/components/Card';
 import Icon from '../../../../assets/Icons/Icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
+
 const S = {
   ListContainer: styled.div`
     display: grid;
@@ -15,6 +16,7 @@ const S = {
     align-items: center;
     padding: 9% 0;
     gap: 24px;
+    z-index:1;
 
     @media (max-width: ${theme.breakpoints.t}) {
       grid-template-columns: repeat(2, 1fr);
@@ -40,9 +42,9 @@ function MessageCardList({ postId }) {
   const { messages, loading, error, refetch } = useMessages(postId);
   const [message, setMessage] = useState();
   const { deleteMessage } = useDeleteMessage(refetch);
+  const location = useLocation();
 
   const handleClick = message => {
-    // console.log('clicked', message.id);
     setMessage(message);
   };
 
@@ -58,13 +60,15 @@ function MessageCardList({ postId }) {
   return (
     <Container style={{ backgroundColor: 'transparent' }}>
       <S.ListContainer>
-        <Link to={`/post/${postId}/message`}>
-          <Card.Container>
-            <S.AddIcon>
-              <Icon name="addIcon" alt="add" size="56" />
-            </S.AddIcon>
-          </Card.Container>
-        </Link>
+        {location.pathname !== `/post/${postId}/edit` && (
+          <Link to={`/post/${postId}/message`}>
+            <Card.Container>
+              <S.AddIcon>
+                <Icon name="addIcon" alt="add" size="56" />
+              </S.AddIcon>
+            </Card.Container>
+          </Link>
+        )}
 
         {messages?.map(message => (
           <MessageCard
