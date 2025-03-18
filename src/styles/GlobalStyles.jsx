@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { theme } from "./theme";
+import { createGlobalStyle } from 'styled-components';
+import { theme } from './theme';
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -11,7 +11,6 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     min-width: ${theme.breakpoints.min};
-    ${theme.fonts.pd};
     font-size: 16px;
     line-height: 1.5;
     word-spacing: -1px;
