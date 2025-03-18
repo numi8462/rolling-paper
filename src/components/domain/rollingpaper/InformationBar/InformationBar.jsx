@@ -25,6 +25,8 @@ const StyledInformationBar = styled.div`
   @media (max-width: ${theme.breakpoints.m}) {
     height: 104px;
   }
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 `;
 
 const StyledName = styled.div`
@@ -98,6 +100,9 @@ const Bar = styled.div`
   background-color: ${theme.colors.gray[200]};
   width:1px;
   height:28px;
+  ${media.mobile`
+    display:none;
+  `}
 `;
 
 function InformationBar({ postId , rollingPaper }) {
@@ -126,8 +131,7 @@ function InformationBar({ postId , rollingPaper }) {
   const toggleOptions = () => {
     setIsOptionsOpen(!isOptionsOpen);
   };
-
-
+  
   const handleShareUrlClick = () => {
     const currentUrl = window.location.href;
     navigator.clipboard
@@ -163,8 +167,6 @@ function InformationBar({ postId , rollingPaper }) {
   }, [isOptionsOpen]);
 
   const topReactions = reactions.slice(0, 3);
-  const orderReactions = reactions.slice(3);
-
   return (
     <StyledInformationBar>
       <FlexBox>
@@ -190,7 +192,7 @@ function InformationBar({ postId , rollingPaper }) {
                 }
               </ReactionButton>
               {isEmojiListOpen && (
-                <EmojiBox postId={postId} refetch={refetch} reactions={orderReactions}/> 
+                <EmojiBox postId={postId} refetch={refetch} reactions={reactions}/> 
               )}
             </RelativeBox>
             <RelativeBox>

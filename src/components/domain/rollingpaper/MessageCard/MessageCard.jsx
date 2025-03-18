@@ -10,6 +10,7 @@ const StyledDeleteButton = styled(DeleteButton)`
   top: 50%;
   right: 0;
   transform: translateY(-50%);
+  right: 5px;
   z-index: 1;
 `;
 
@@ -51,6 +52,14 @@ function MessageCard({ message, onClick, onDelete }) {
   return (
     <Card.Container onClick={onClick} style={{ position: 'relative' }}>
       <Card.InfoBox>
+        {isEditPage && (
+          <StyledDeleteButton
+            onClick={event => {
+              event.stopPropagation();
+              onDelete(id);
+            }}
+          />
+        )}
         <Card.ProfileImg src={profileImageURL} alt="profile" />
         <Card.SenderInfoBox style={{ position: 'relative' }}>
           <Card.Sender>

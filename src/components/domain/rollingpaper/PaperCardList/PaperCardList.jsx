@@ -50,8 +50,8 @@ const PaperCardListBox = styled.ul`
   `}
 
   ${media.mobile`
-    min-width:calc( 60% - 15px);
-    width:calc( 60% - 15px);
+    min-width:calc( 77% - 15px);
+    width:calc( 77% - 15px);
   `}
 }
 `
