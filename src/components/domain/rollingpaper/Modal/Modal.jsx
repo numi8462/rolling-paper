@@ -33,7 +33,12 @@ const S = {
     }
 
     @media (max-width: ${theme.breakpoints.m}) {
-      margin: 0;
+      margin: 0 10px;
+    }
+
+    @media (max-width: ${theme.breakpoints.min}) {
+      padding: 30px;
+      margin: 0 10px;
     }
   `,
 
@@ -82,7 +87,7 @@ function Modal({ message, onClick }) {
           <Card.Date>{date}</Card.Date>
         </Card.InfoBox>
         <Card.MessageBox $modal $font={newFont}>
-          <Card.Message dangerouslySetInnerHTML={{ __html :  content  }} />
+          <Card.Message dangerouslySetInnerHTML={{ __html: content }} />
         </Card.MessageBox>
         <S.ConfirmButton w="120" h="40" onClick={onClick}>
           확인
