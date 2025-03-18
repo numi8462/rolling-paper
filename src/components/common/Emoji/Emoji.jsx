@@ -15,30 +15,32 @@ const StyledEmoji = styled.div`
   font-size: 16px;
   white-space: nowrap;
   cursor: pointer;
-  
+
   @media (max-width: ${theme.breakpoints.m}) {
-  width: 59px;
-  height: 28px;
-  font-size: 14px;
-   ${theme.p[4][8]};
+    width: 59px;
+    height: 28px;
+    font-size: 14px;
+    ${theme.p[4][8]};
   }
 `;
 
 function Emoji({ postId, emoji, count, refetch }) {
   const { createReaction } = useCreateReaction(refetch);
   const chosenEmoji = {
-    "emoji": null,
-    "type": "increase"
+    emoji: null,
+    type: 'increase',
   };
-  
-  const onEmojiClick = (e) => {
-    e.preventDefault()
+
+  const onEmojiClick = e => {
+    e.preventDefault();
     createReaction(postId, {
       emoji: emoji,
       type: chosenEmoji.type, // type은 그대로 유지
     });
   };
-  return <StyledEmoji onClick={onEmojiClick}>{`${emoji} ${count}`}</StyledEmoji>;
+  return (
+    <StyledEmoji onClick={onEmojiClick}>{`${emoji} ${count}`}</StyledEmoji>
+  );
 }
 
 export default Emoji;
