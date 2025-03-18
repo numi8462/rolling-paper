@@ -6,14 +6,6 @@ import styled from 'styled-components';
 import { Button } from '../../components/common/Button/Button';
 import { Font, media } from '../../styles/theme';
 
-export function NewFilledButton({ w = '100%', h = '32', children, ...rest }) {
-  return (
-    <StyledFilledButton w={w} h={h} {...rest}>
-      {children}
-    </StyledFilledButton>
-  );
-}
-
 const StyledFilledButton = styled(FilledButtonTemp)`
   height: ${({ h }) => h}px;
   border-radius: 6px;
