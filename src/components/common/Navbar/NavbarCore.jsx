@@ -37,14 +37,14 @@ const NavbarWrapper = styled.header`
   }
 
   ${props =>
-    props.hideOnMobile &&
+    props.$hideOnMobile &&
     css`
       display: none;
     `}
 
   @media (max-width: ${BREAK_POINT.mobile}px) {
     ${props =>
-      !props.showOnMobile &&
+      !props.$showOnMobile &&
       css`
         display: none;
       `}
@@ -146,7 +146,7 @@ export default function Navbar() {
     !['/', '/list'].includes(location.pathname);
 
   return (
-    <NavbarWrapper showOnMobile={showOnMobile} hideOnMobile={hideOnMobile}>
+    <NavbarWrapper $showOnMobile={showOnMobile} $hideOnMobile={hideOnMobile}>
       <Container>
         <RollingHeader />
         <MakingRollingPaper />

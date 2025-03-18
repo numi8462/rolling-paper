@@ -11,7 +11,7 @@ import recipientService from '../../api/services/recipients.services';
 
 const S = {
   CreateMessageCard: styled.div`
-    /* width: 100%; */
+    width: 100%;
     ${theme.center}
     flex-direction: column;
     margin: 50px 0;
@@ -21,11 +21,10 @@ const S = {
     display: flex;
     flex-direction: column;
     justify-content: left;
-    width: 720px;
+    max-width: 720px;
     gap: 50px;
     margin-bottom: 250px;
     ${media.tablet`
-        width: 100%;
         margin-bottom: 300px;
     `}
   `,
@@ -47,17 +46,17 @@ const S = {
 };
 
 export default function CreateMessageCard() {
-    const navigate = useNavigate();
-    const { id } = useParams();
-    const [messageCardFormData, setMessageCardFormData] = useState({
-        recipientId: Number(id),
-        sender: '',
-        profileImageURL: '',
-        relationship: '지인',
-        content: '',
-        font: 'Noto Sans',
-    });
-    const [inputError, setInputError] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [messageCardFormData, setMessageCardFormData] = useState({
+    recipientId: Number(id),
+    sender: '',
+    profileImageURL: '',
+    relationship: '지인',
+    content: '',
+    font: 'Noto Sans',
+  });
+  const [inputError, setInputError] = useState(false);
 
   const relations = [
     { value: '지인', label: '지인' },
@@ -103,12 +102,15 @@ export default function CreateMessageCard() {
     e.preventDefault();
     console.log(messageCardFormData);
     try {
-        const { data } = await recipientService.createMessage(id,messageCardFormData);
-        console.log(data);
+      const { data } = await recipientService.createMessage(
+        id,
+        messageCardFormData
+      );
+      console.log(data);
     } catch (error) {
-        console.log(error.response.data);
-    } finally{
-        navigate(`/post/${id}`);
+      console.log(error.response.data);
+    } finally {
+      navigate(`/post/${id}`);
     }
   };
 
@@ -124,7 +126,7 @@ export default function CreateMessageCard() {
               maxWidth={720}
               isError={inputError}
               onChange={e => handleChangeFormData('sender', e.target.value)}
-              onBlur={()=>setInputError(!messageCardFormData.sender.trim())}
+              onBlur={() => setInputError(!messageCardFormData.sender.trim())}
             />
           </S.ContentWrapper>
           <S.ContentWrapper>
@@ -164,13 +166,18 @@ export default function CreateMessageCard() {
             </div>
           </S.ContentWrapper>
         </S.MessageContainer>
-        <S.CreateButton 
-            type='submit'
-            w="720" 
-            onClick={handleSubmit} 
-            disabled={!(messageCardFormData.sender.trim() && messageCardFormData.content.trim())}
+        <S.CreateButton
+          type="submit"
+          w="720"
+          onClick={handleSubmit}
+          disabled={
+            !(
+              messageCardFormData.sender.trim() &&
+              messageCardFormData.content.trim()
+            )
+          }
         >
-            생성하기
+          생성하기
         </S.CreateButton>
       </S.CreateMessageCard>
     </Container>

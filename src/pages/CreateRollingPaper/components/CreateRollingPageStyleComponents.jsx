@@ -22,23 +22,6 @@ export const IconWrapper = styled.div`
   z-index: 10;
 `;
 
-// export const Container = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: flex-start;
-//   gap: 16px;
-//   width: 60%;
-//   max-width: 800px;
-//   ${theme.fonts.pd}
-
-//   ${media.tablet`
-//     width: 90%;
-//     `}
-//   ${media.mobile`
-//     width: 90%;
-//     `}
-// `;
-
 export const Toh1 = styled.h1`
   ${theme.fs.xxl};
   ${theme.fonts.pd}
@@ -102,7 +85,6 @@ export const ColorOption = styled.div`
   ${media.mobile`
       width: 154px;
       height: 154px;
-      /* flex: 1 1 calc(50% - 8px); */
       `}
 `;
 
@@ -112,7 +94,6 @@ export const ImageOption = styled.img`
   border-radius: 8px;
   cursor: pointer;
   object-fit: cover;
-  /* transition: all 0.3s ease-in-out; */
 
   &:hover {
     border: 2px solid black;
