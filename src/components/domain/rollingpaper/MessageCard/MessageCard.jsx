@@ -21,10 +21,10 @@ function MessageCard({ message, onClick }) {
     case 'Noto Sans':
       newFont = 'ns';
       break;
-    case 'Nanum Myeongjo':
+    case '나눔명조':
       newFont = 'nm';
       break;
-    case 'Nanum Pen':
+    case '나눔손글씨 손편지체':
       newFont = 'np';
       break;
     case 'Pretendard':
@@ -47,7 +47,7 @@ function MessageCard({ message, onClick }) {
         </Card.SenderInfoBox>
       </Card.InfoBox>
       <Card.MessageBox $font={newFont}>
-        <Card.Message $limit>{content}</Card.Message>
+        <Card.Message $limit dangerouslySetInnerHTML={{ __html :  content  }} />
       </Card.MessageBox>
       <Card.Date>{date}</Card.Date>
     </Card.Container>
