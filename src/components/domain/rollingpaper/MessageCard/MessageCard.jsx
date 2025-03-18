@@ -34,10 +34,10 @@ function MessageCard({ message, onClick, onDelete }) {
     case 'Noto Sans':
       newFont = 'ns';
       break;
-    case 'Nanum Myeongjo':
+    case '나눔명조':
       newFont = 'nm';
       break;
-    case 'Nanum Pen':
+    case '나눔손글씨 손편지체':
       newFont = 'np';
       break;
     case 'Pretendard':
@@ -70,7 +70,7 @@ function MessageCard({ message, onClick, onDelete }) {
         </Card.SenderInfoBox>
       </Card.InfoBox>
       <Card.MessageBox $font={newFont}>
-        <Card.Message $limit>{content}</Card.Message>
+        <Card.Message $limit dangerouslySetInnerHTML={{ __html :  content  }} />
       </Card.MessageBox>
       <Card.Date>{date}</Card.Date>
       {/* 편집 페이지에서만 삭제 버튼 표시 */}
