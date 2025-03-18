@@ -8,21 +8,21 @@ import { Container, media } from '../../styles/theme';
 
 const StyledFilledButton = styled.div`
   position: relative;
-  top:98px;  
+  top: 98px;
   max-width: 1200px;
-  width:100%;
-  margin:-39px auto 0;
-  text-align:right;
+  width: 100%;
+  margin: -39px auto 0;
+  text-align: right;
 
-  button{
-    width:auto;
+  button {
+    width: auto;
     height: 39px;
-    padding:0 16px;
+    padding: 0 16px;
     border-radius: 6px;
-    font-size:16px;
+    font-size: 16px;
     font-weight: 300;
   }
-  
+
   ${media.tablet`
     position:absolute;
     width:calc(100% - 48px);
@@ -36,12 +36,12 @@ const StyledFilledButton = styled.div`
       font-size:18px;
       width:100%; 
     }
-  `}; 
+  `};
 `;
 
 const EditContainer = styled.div`
   position: relative;
-  width:100%;
+  width: 100%;
 `;
 
 function RollingPaperEdit({ refetchPosts }) {
@@ -56,41 +56,19 @@ function RollingPaperEdit({ refetchPosts }) {
 
   return (
     <>
-        <EditContainer>
-          <RollingPaper> 
-              <StyledFilledButton>
-                <Button 
-                  onClick={handleDelete}
-                  disabled={loading}
-                >
-                  {loading ? '삭제 중...' : '삭제하기'}
-                </Button>
-              </StyledFilledButton>
-            </RollingPaper> {/* 기존 RollingPaper 그대로 사용 */}
-          {error && <p style={{ color: 'red' }}>삭제 중 오류가 발생했습니다.</p>}
-        </EditContainer>
+      <EditContainer>
+        <RollingPaper>
+          <StyledFilledButton>
+            <Button onClick={handleDelete} disabled={loading}>
+              {loading ? '삭제 중...' : '삭제하기'}
+            </Button>
+          </StyledFilledButton>
+        </RollingPaper>{' '}
+        {/* 기존 RollingPaper 그대로 사용 */}
+        {error && <p style={{ color: 'red' }}>삭제 중 오류가 발생했습니다.</p>}
+      </EditContainer>
     </>
   );
 }
-
-
-const EditContainer = styled.div`
-  position: absolute;
-  top: 196px;
-  right: 360px;
-`;
-
-const StyledFilledButton = styled(FilledButtonTemp)`
-  height: ${({ h }) => h}px;
-  border-radius: 6px;
-  ${({ size }) => Font[`f${size}`]}
-
-  ${media.tablet`
-    position: absolute;
-    right: 24px;
-    top: 196px;
-    width: auto;
-  `};
-`;
 
 export default RollingPaperEdit;

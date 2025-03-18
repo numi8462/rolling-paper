@@ -70,7 +70,7 @@ const S = {
   `,
 
   Point: styled.div`
-    width: 82px;
+    width: 83px;
     color: ${theme.colors.basic.white};
     background-color: ${theme.colors.purple[500]};
     ${theme.p[6][12]};
