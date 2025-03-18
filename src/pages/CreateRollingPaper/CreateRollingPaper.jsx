@@ -13,7 +13,6 @@ import {
   OptionsContainer,
   ColorOption,
   ImageOption,
-  ImageOptionContainer,
   SelectContainer,
   CreateButton,
 } from './components/CreateRollingPageStyleComponents';
@@ -160,24 +159,18 @@ const CreateRollingPaper = () => {
               <p>이미지를 불러오는 데 실패했습니다.</p>
             ) : (
               imageUrls.map(url => (
-                <ImageOptionContainer key={url}>
-                  <ImageOption
-                    src={url}
-                    className={
-                      rollingPaperFormData.backgroundImageURL === url
-                        ? 'selected'
-                        : ''
-                    }
-                    onClick={() =>
-                      handleChangeFormData('backgroundImageURL', url)
-                    }
-                  />
-                  {rollingPaperFormData.backgroundImageURL === url && (
-                    <IconWrapper>
-                      <Icon name="checkIcon" size="44px" />
-                    </IconWrapper>
-                  )}
-                </ImageOptionContainer>
+                <ImageOption
+                  key={url}
+                  src={url}
+                  className={
+                    rollingPaperFormData.backgroundImageURL === url
+                      ? 'selected'
+                      : ''
+                  }
+                  onClick={() =>
+                    handleChangeFormData('backgroundImageURL', url)
+                  }
+                />
               ))
             )}
           </OptionsContainer>

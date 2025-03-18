@@ -7,7 +7,8 @@ import styled from 'styled-components';
 
 const StyledDeleteButton = styled(DeleteButton)`
   position: absolute;
-  top: 28px;
+  top: 50%;
+  right: 0;
   transform: translateY(-50%);
   right: 5px;
   z-index: 1;
@@ -49,7 +50,7 @@ function MessageCard({ message, onClick, onDelete }) {
   }
 
   return (
-    <Card.Container onClick={onClick}>
+    <Card.Container onClick={onClick} style={{ position: 'relative' }}>
       <Card.InfoBox>
         {isEditPage && (
           <StyledDeleteButton
@@ -60,21 +61,26 @@ function MessageCard({ message, onClick, onDelete }) {
           />
         )}
         <Card.ProfileImg src={profileImageURL} alt="profile" />
-        <Card.SenderInfoBox>
-          <Card.Sender
-            style={{ position: 'relative', display: 'inline-block' }}
-          >
+        <Card.SenderInfoBox style={{ position: 'relative' }}>
+          <Card.Sender>
             From.
             <Card.Name $bold>{sender}</Card.Name>
           </Card.Sender>
           <Badge relationship={relationship} />
+          {isEditPage && (
+            <StyledDeleteButton
+              onClick={event => {
+                event.stopPropagation();
+                onDelete(id);
+              }}
+            />
+          )}
         </Card.SenderInfoBox>
       </Card.InfoBox>
       <Card.MessageBox $font={newFont}>
-        <Card.Message $limit dangerouslySetInnerHTML={{ __html :  content  }} />
+        <Card.Message $limit dangerouslySetInnerHTML={{ __html: content }} />
       </Card.MessageBox>
       <Card.Date>{date}</Card.Date>
-      {/* 편집 페이지에서만 삭제 버튼 표시 */}
     </Card.Container>
   );
 }

@@ -73,4 +73,24 @@ function RollingPaperEdit({ refetchPosts }) {
   );
 }
 
+
+const EditContainer = styled.div`
+  position: absolute;
+  top: 196px;
+  right: 360px;
+`;
+
+const StyledFilledButton = styled(FilledButtonTemp)`
+  height: ${({ h }) => h}px;
+  border-radius: 6px;
+  ${({ size }) => Font[`f${size}`]}
+
+  ${media.tablet`
+    position: absolute;
+    right: 24px;
+    top: 196px;
+    width: auto;
+  `};
+`;
+
 export default RollingPaperEdit;

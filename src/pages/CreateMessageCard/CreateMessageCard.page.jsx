@@ -23,11 +23,11 @@ const S = {
     justify-content: left;
     width: 720px;
     gap: 50px;
-
+    margin-bottom: 250px;
     ${media.tablet`
-            width: 100%;
-            margin: 0 0 300px 0;
-        `}
+        width: 100%;
+        margin-bottom: 300px;
+    `}
   `,
 
   ContentWrapper: styled.div`
@@ -57,6 +57,7 @@ export default function CreateMessageCard() {
         content: '',
         font: 'Noto Sans',
     });
+    const [inputError, setInputError] = useState(false);
 
   const relations = [
     { value: '지인', label: '지인' },
@@ -101,7 +102,6 @@ export default function CreateMessageCard() {
   const handleSubmit = async e => {
     e.preventDefault();
     console.log(messageCardFormData);
-    // setErrors
     try {
         const { data } = await recipientService.createMessage(id,messageCardFormData);
         console.log(data);
@@ -109,10 +109,7 @@ export default function CreateMessageCard() {
         console.log(error.response.data);
     } finally{
         navigate(`/post/${id}`);
-
     }
-    // if (data) {
-    // }
   };
 
   return (
@@ -125,7 +122,9 @@ export default function CreateMessageCard() {
               placeholder="이름을 입력해 주세요."
               width={720}
               maxWidth={720}
+              isError={inputError}
               onChange={e => handleChangeFormData('sender', e.target.value)}
+              onBlur={()=>setInputError(!messageCardFormData.sender.trim())}
             />
           </S.ContentWrapper>
           <S.ContentWrapper>
