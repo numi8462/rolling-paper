@@ -6,11 +6,12 @@ import styled from 'styled-components';
 import useRecipient from '../../components/common/hooks/recipients/useRecipeint';
 import { theme } from '../../styles/theme';
 import NotFound from '../NotFound/NotFound.page';
+import { Helmet } from 'react-helmet';
 
 const StyledRollingPaper = styled.div`
   height: calc(100dvh - 65px);
-  background-color: ${(props) => theme.colors[props.$bgColor]?.[200]};
-  background-image: url(${(props) => props.$bgUrl});
+  background-color: ${props => theme.colors[props.$bgColor]?.[200]};
+  background-image: url(${props => props.$bgUrl});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -38,6 +39,10 @@ function RollingPaper() {
   
   return (
     <StyledRollingPaper $bgColor={backgroundColor} $bgUrl={backgroundImageURL}>
+      <Helmet>
+        <title>메인 - 롤링페이퍼</title>
+        <meta name="description" content="롤링페이퍼 메인페이지" />
+      </Helmet>
       {!loading && (
         <div>
           <InformationBar 

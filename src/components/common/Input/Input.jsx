@@ -52,6 +52,7 @@ const StyledInput = styled.input`
   font-size: ${({ size }) => size || theme.fs.xl};
   transition: border 0.2s ease-in-out;
   width: ${({ $width }) => $width || '100%'};
+  height: ${({ $height }) => $height || '50px'}
   max-width: ${({ $maxWidth }) => $maxWidth || '100%'};
 
     &:focus {

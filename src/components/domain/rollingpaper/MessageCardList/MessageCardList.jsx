@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import MessageCard from '../MessageCard/MessageCard';
 import { Container, theme } from '../../../../styles/theme';
 import useMessages from '../../../common/hooks/messages/useMessages';
+import useDeleteMessage from '../../../common/hooks/messages/useDeleteMessage';
 import Card from '../../../../pages/RollingPaper/components/Card';
 import Icon from '../../../../assets/Icons/Icons';
 import { Link } from 'react-router-dom';
@@ -38,14 +39,20 @@ const S = {
 function MessageCardList({ postId }) {
   const { messages, loading, error, refetch } = useMessages(postId);
   const [message, setMessage] = useState();
+  const { deleteMessage } = useDeleteMessage(refetch);
 
-  const handleClick = (message) => {
+  const handleClick = message => {
     // console.log('clicked', message.id);
     setMessage(message);
   };
 
   const handleConfirm = () => {
     setMessage(null);
+  };
+
+  // 🛠 메시지 삭제 핸들러 추가
+  const handleDelete = async id => {
+    await deleteMessage(id);
   };
 
   return (
@@ -59,11 +66,12 @@ function MessageCardList({ postId }) {
           </Card.Container>
         </Link>
 
-        {messages?.map((message) => (
+        {messages?.map(message => (
           <MessageCard
             key={message.id}
             message={message}
             onClick={() => handleClick(message)}
+            onDelete={handleDelete}
           />
         ))}
       </S.ListContainer>

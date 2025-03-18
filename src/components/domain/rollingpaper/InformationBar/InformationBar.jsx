@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Toast from '../../../common/Toast/Toast';
 import { media, theme } from '../../../../styles/theme';
@@ -113,6 +113,7 @@ function InformationBar({ postId , rollingPaper }) {
   const [ isEmojiPickerOpen, setIsEmojiPickerOpen ] = useState(false);
   const [ isOptionsOpen, setIsOptionsOpen ] = useState(false);
   const shareKakao = useKakaoShare(name, 5, 4); // 카카오 공유 useKakaoShare(이름, 메세지 수, 반응 수)
+  const optionsRef = useRef(null);
 
   const toggleEmojiList = () => {
     setIsEmojiListOpen(!isEmojiListOpen);
@@ -144,6 +145,22 @@ function InformationBar({ postId , rollingPaper }) {
     console.log('kakao');
     shareKakao();
   };
+  
+    useEffect(() => {
+    const handleClickOutside = e => {
+      if (optionsRef.current && !optionsRef.current.contains(e.target)) {
+        setIsOptionsOpen(false);
+      }
+    };
+
+    if (isOptionsOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOptionsOpen]);
 
   const topReactions = reactions.slice(0, 3);
   const orderReactions = reactions.slice(3);
