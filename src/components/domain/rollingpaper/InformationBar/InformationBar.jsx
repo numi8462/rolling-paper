@@ -14,7 +14,6 @@ import useToast from '../../../common/Toast/useToast';
 import EmojiBox from './EmojiBox';
 import Icon from '../../../../assets/Icons/Icons';
 
-
 const StyledInformationBar = styled.div`
   position: sticky;
   top: 0;
@@ -34,21 +33,20 @@ const StyledName = styled.div`
   font-weight: 700;
 
   @media (max-width: ${theme.breakpoints.m}) {
-    padding:10px 20px;
-    line-height:32px;
+    padding: 10px 20px;
+    line-height: 32px;
     font-size: 18px;
-    border-bottom:1px solid #EDEDED;
+    border-bottom: 1px solid #ededed;
   }
-  
 `;
 
 const RelativeBox = styled.div`
   position: relative;
-  display:flex;
+  display: flex;
   align-items: center;
 `;
 const FlexBox = styled.div`
-  display:flex;
+  display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 1200px;
@@ -62,7 +60,7 @@ const FlexBox = styled.div`
   `}
 `;
 const RightBox = styled.div`
-  display:flex;
+  display: flex;
   align-items: center;
   gap: 8px;
   ${media.mobile`
@@ -70,7 +68,7 @@ const RightBox = styled.div`
   `}
 `;
 const MobileFlex = styled.div`
-  display:flex;
+  display: flex;
   gap: 8px;
   ${media.mobile`
     width: 100%;
@@ -80,14 +78,14 @@ const MobileFlex = styled.div`
 `;
 
 const PaperCardCount = styled.div`
-  display:flex;
+  display: flex;
 `;
 const ReactionButton = styled.div`
-  padding:13px;
+  padding: 13px;
   cursor: pointer;
 `;
 const CardCountBox = styled.div`
-  display:flex;
+  display: flex;
   align-items: center;
   gap: 8px;
   ${media.tablet`
@@ -96,29 +94,25 @@ const CardCountBox = styled.div`
 `;
 
 const Bar = styled.div`
-  margin:0 10px;
+  margin: 0 10px;
   background-color: ${theme.colors.gray[200]};
-  width:1px;
-  height:28px;
+  width: 1px;
+  height: 28px;
   ${media.mobile`
     display:none;
   `}
 `;
 
-function InformationBar({ postId , rollingPaper }) {
-  const {
-    name,
-    messageCount,
-    recentMessages,
-  } = rollingPaper;
-  
+function InformationBar({ postId, rollingPaper }) {
+  const { name, messageCount, recentMessages } = rollingPaper;
   const { reactions, refetch } = useReactions(postId);
   const { toast, showToast, closeToast } = useToast();
-  const [ isEmojiListOpen, setIsEmojiListOpen ] = useState(false);
-  const [ isEmojiPickerOpen, setIsEmojiPickerOpen ] = useState(false);
-  const [ isOptionsOpen, setIsOptionsOpen ] = useState(false);
+  const [isEmojiListOpen, setIsEmojiListOpen] = useState(false);
+  const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const shareKakao = useKakaoShare(name, 5, 4); // 카카오 공유 useKakaoShare(이름, 메세지 수, 반응 수)
   const optionsRef = useRef(null);
+  const emojiPickerRef = useRef(null);
 
   const toggleEmojiList = () => {
     setIsEmojiListOpen(!isEmojiListOpen);
@@ -131,7 +125,7 @@ function InformationBar({ postId , rollingPaper }) {
   const toggleOptions = () => {
     setIsOptionsOpen(!isOptionsOpen);
   };
-  
+
   const handleShareUrlClick = () => {
     const currentUrl = window.location.href;
     navigator.clipboard
@@ -149,22 +143,29 @@ function InformationBar({ postId , rollingPaper }) {
     console.log('kakao');
     shareKakao();
   };
-  
-    useEffect(() => {
+
+  useEffect(() => {
     const handleClickOutside = e => {
       if (optionsRef.current && !optionsRef.current.contains(e.target)) {
         setIsOptionsOpen(false);
       }
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(e.target)
+      ) {
+        console.log('emoji', isEmojiPickerOpen);
+        setIsEmojiPickerOpen(false);
+      }
     };
 
-    if (isOptionsOpen) {
+    if (isOptionsOpen || isEmojiPickerOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOptionsOpen]);
+  }, [isOptionsOpen, isEmojiPickerOpen]);
 
   const topReactions = reactions.slice(0, 3);
   return (
@@ -184,20 +185,35 @@ function InformationBar({ postId , rollingPaper }) {
           </CardCountBox>
           <MobileFlex>
             <RelativeBox>
-              <TopEmojis postId={postId} refetch={refetch} topReactions={topReactions}/>
+              <TopEmojis
+                postId={postId}
+                refetch={refetch}
+                topReactions={topReactions}
+              />
               <ReactionButton onClick={toggleEmojiList}>
-                {isEmojiListOpen ? 
-                  <Icon name="topArrow" alt="close reaction" size="12px"/>:
-                  <Icon name="downArrow" alt="open reaction" size="12px"/>
-                }
+                {isEmojiListOpen ? (
+                  <Icon name="topArrow" alt="close reaction" size="12px" />
+                ) : (
+                  <Icon name="downArrow" alt="open reaction" size="12px" />
+                )}
               </ReactionButton>
               {isEmojiListOpen && (
-                <EmojiBox postId={postId} refetch={refetch} reactions={reactions}/> 
+                <EmojiBox
+                  postId={postId}
+                  refetch={refetch}
+                  reactions={reactions}
+                />
               )}
             </RelativeBox>
             <RelativeBox>
-              <AddEmojiButton onClick={toggleEmojiPicker}/>
-              <EmojiPickerBox postId={postId} refetch={refetch} open={isEmojiPickerOpen} setOpen={setIsEmojiPickerOpen}/>
+              <AddEmojiButton onClick={toggleEmojiPicker} />
+              <EmojiPickerBox
+                emojiPickerRef={emojiPickerRef}
+                postId={postId}
+                refetch={refetch}
+                open={isEmojiPickerOpen}
+                setOpen={setIsEmojiPickerOpen}
+              />
             </RelativeBox>
           </MobileFlex>
           <Bar />
@@ -205,6 +221,7 @@ function InformationBar({ postId , rollingPaper }) {
             <ShareButton onClick={() => toggleOptions()} />
             {isOptionsOpen && (
               <Options
+                optionsRef={optionsRef}
                 handleKakaoClick={() => handleKakaoClick()}
                 handleShareUrlClick={() => handleShareUrlClick()}
               />

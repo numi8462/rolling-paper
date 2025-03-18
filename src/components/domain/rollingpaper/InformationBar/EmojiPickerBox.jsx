@@ -12,7 +12,7 @@ const EmojiPickerWrap = styled.div`
   `}
 `;
 
-function EmojiPickerBox({ postId, refetch, open, setOpen }) {
+function EmojiPickerBox({ postId, refetch, open, setOpen, emojiPickerRef }) {
   const { createReaction } = useCreateReaction(refetch);
   const chosenEmoji = {
     emoji: null,
@@ -28,7 +28,7 @@ function EmojiPickerBox({ postId, refetch, open, setOpen }) {
   };
 
   return (
-    <EmojiPickerWrap>
+    <EmojiPickerWrap ref={emojiPickerRef}>
       <EmojiPicker open={open} onEmojiClick={onEmojiClick} />
     </EmojiPickerWrap>
   );
