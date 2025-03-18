@@ -1,12 +1,12 @@
 import Logo from '../../../assets/icons/🎨 Icon Color.svg';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { useNavigate, useLocation } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 import { Button } from '../Button/Button';
 import { Container } from '../../../styles/theme';
 import { useEffect, useState } from 'react';
 
 const BREAK_POINT = {
-  mobile: 768,
+  mobile: 360, // 변경된 부분
   tablet: 1248,
 };
 
@@ -34,6 +34,20 @@ const NavbarWrapper = styled.header`
   @media (max-width: ${BREAK_POINT.tablet}px) {
     padding: 11px 0;
     margin: 0;
+  }
+
+  ${props =>
+    props.hideOnMobile &&
+    css`
+      display: none;
+    `}
+
+  @media (max-width: ${BREAK_POINT.mobile}px) {
+    ${props =>
+      !props.showOnMobile &&
+      css`
+        display: none;
+      `}
   }
 `;
 
@@ -92,6 +106,7 @@ const RollingHeader = () => {
 
 const MakingRollingPaper = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const handleMakingClick = () => navigate('post');
 
   if (!['/', '/list'].includes(location.pathname)) {
@@ -108,40 +123,61 @@ const MakingRollingPaper = () => {
 };
 
 export default function Navbar() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= BREAK_POINT.mobile);
-  const [currentPath, setCurrentPath] = useState(location.pathname);
+  const location = useLocation();
+  const [showOnMobile, setShowOnMobile] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= BREAK_POINT.mobile);
+      setShowOnMobile(
+        !window.location.pathname.includes('/post/') &&
+          !window.location.pathname.includes('/edit/') &&
+          !window.location.pathname.includes('/post')
+      );
     };
 
-    const handleLocationChange = () => {
-      setCurrentPath(location.pathname);
-    };
-
-    // 화면 크기 변경 시 감지
+    handleResize(); // Initial check
     window.addEventListener('resize', handleResize);
 
-    // 페이지 경로 변경 시 감지
-    window.addEventListener('popstate', handleLocationChange); // 페이지 뒤로가기, 앞으로가기
+    return () => window.removeEventListener('resize', handleResize);
+  }, [location.pathname]);
 
-    // 초기 경로 설정
-    setCurrentPath(location.pathname);
+  const hideOnMobile =
+    window.innerWidth <= BREAK_POINT.mobile &&
+    !['/', '/list'].includes(location.pathname);
+//   const [isMobile, setIsMobile] = useState(window.innerWidth <= BREAK_POINT.mobile);
+//   const [currentPath, setCurrentPath] = useState(location.pathname);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('popstate', handleLocationChange);
-    };
-  }, []);
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setIsMobile(window.innerWidth <= BREAK_POINT.mobile);
+//     };
 
-  // 모바일 크기일 때 '/post' 경로가 포함되면 Navbar 숨기기
-  if (isMobile && currentPath.includes('/post')) {
-    return null;
-  }
+//     const handleLocationChange = () => {
+//       setCurrentPath(location.pathname);
+//     };
+
+//     // 화면 크기 변경 시 감지
+//     window.addEventListener('resize', handleResize);
+
+//     // 페이지 경로 변경 시 감지
+//     window.addEventListener('popstate', handleLocationChange); // 페이지 뒤로가기, 앞으로가기
+
+//     // 초기 경로 설정
+//     setCurrentPath(location.pathname);
+
+//     return () => {
+//       window.removeEventListener('resize', handleResize);
+//       window.removeEventListener('popstate', handleLocationChange);
+//     };
+//   }, []);
+
+//   // 모바일 크기일 때 '/post' 경로가 포함되면 Navbar 숨기기
+//   if (isMobile && currentPath.includes('/post')) {
+//     return null;
+//   }
 
   return (
-    <NavbarWrapper>
+    <NavbarWrapper showOnMobile={showOnMobile} hideOnMobile={hideOnMobile}>
       <Container>
         <RollingHeader />
         <MakingRollingPaper />

@@ -1,15 +1,13 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Input from '../../components/common/Input/Input';
-import { theme } from '../../styles/theme';
+import { Container, theme } from '../../styles/theme';
 import { ToggleButton } from '../../components/common/Button/ToggleButton';
-import { FilledButton } from '../../components/common/Button/FilledButton';
 import Icon from '../../assets/Icons/Icons';
 import useBackgroundImages from '../../components/common/hooks/images/useBackgroundImages';
 import {
   Wrapper,
   IconWrapper,
   ToInputContainer,
-  Container,
   Toh1,
   CustomP,
   OptionsContainer,
@@ -17,6 +15,7 @@ import {
   ImageOption,
   ImageOptionContainer,
   SelectContainer,
+  CreateButton,
 } from './components/CreateRollingPageStyleComponents';
 import recipientService from '../../api/services/recipients.services';
 import { useNavigate } from 'react-router-dom';
@@ -43,6 +42,9 @@ const CreateRollingPaper = () => {
     backgroundColor: 'beige',
     backgroundImageURL: null,
   });
+  const [nameInputError, setNameInputError] = useState(false); // 오류 상태 추가
+  const nameInputRef = useRef(null); // useRef 추가
+
   console.log('rollingPaperFormData: ', rollingPaperFormData);
 
   const { imgUrls: imageUrls, loading, error } = useBackgroundImages();
@@ -87,7 +89,11 @@ const CreateRollingPaper = () => {
   };
 
   const handleCreate = async () => {
-    if (!rollingPaperFormData.name.trim()) return;
+    if (!rollingPaperFormData.name.trim()) {
+      setNameInputError(true); // 제출 시에도 오류 검사
+      nameInputRef.current.focus(); // 포커스 이동
+      return;
+    }
 
     const { data } = await recipientService.createRecipient(
       rollingPaperFormData
@@ -100,17 +106,19 @@ const CreateRollingPaper = () => {
   };
 
   return (
-    <Wrapper>
-      <Container>
+    <Container>
+      <Wrapper>
         <ToInputContainer>
           <Toh1>To.</Toh1>
           <Input
+            ref={nameInputRef} // ref 연결
             width="720px"
             maxWidth="1000px"
             placeholder="받는 사람 이름을 입력해 주세요"
-            isError={!rollingPaperFormData.name.trim()}
+            isError={nameInputError} // 오류 상태 사용
             value={rollingPaperFormData.name}
             onChange={e => handleChangeFormData('name', e.target.value)}
+            onBlur={() => setNameInputError(!rollingPaperFormData.name.trim())} // focusout 시 오류 검사
           />
         </ToInputContainer>
 
@@ -175,16 +183,16 @@ const CreateRollingPaper = () => {
           </OptionsContainer>
         )}
 
-        <FilledButton
+        <CreateButton
           type="submit"
           w="720"
           onClick={handleCreate}
           disabled={!rollingPaperFormData.name.trim()}
         >
           생성하기
-        </FilledButton>
-      </Container>
-    </Wrapper>
+        </CreateButton>
+      </Wrapper>
+    </Container>
   );
 };
 
