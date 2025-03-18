@@ -11,13 +11,13 @@ const StyledEmojiList = styled.ul`
   `}
 `;
 
-export function TopEmojis ( {topReactions} ) {
+export function TopEmojis ( {postId, refetch, topReactions} ) {
   return (
     <StyledEmojiList>
       {topReactions &&
         topReactions.map((Reaction) => {
           return (
-          <li key={Reaction.id}><Emoji emoji={Reaction.emoji} count={Reaction.count} /></li>
+          <li key={Reaction.id}><Emoji postId={postId} refetch={refetch} emoji={Reaction.emoji} count={Reaction.count} /></li>
           );
         })
       }

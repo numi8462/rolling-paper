@@ -14,7 +14,12 @@ export const GlobalStyles = createGlobalStyle`
     ${theme.fonts.pd};
     font-size: 16px;
     line-height: 1.5;
+    word-spacing: -1px;
     color: ${theme.colors.gray[900]};
+
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility; 
   }
 
   ol, ul {

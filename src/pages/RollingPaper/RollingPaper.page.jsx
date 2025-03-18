@@ -29,18 +29,14 @@ function RollingPaper() {
   const { id } = useParams();
   const { rollingPaper, loading, error, refetch } = useRecipient(id);
   const {
-    name,
     backgroundColor,
     backgroundImageURL,
-    createdAt,
-    messageCount,
-    recentMessages,
   } = rollingPaper;
 
   if (error) {
     return <NotFound />;
   }
-
+  
   return (
     <StyledRollingPaper $bgColor={backgroundColor} $bgUrl={backgroundImageURL}>
       <Helmet>
@@ -49,7 +45,10 @@ function RollingPaper() {
       </Helmet>
       {!loading && (
         <div>
-          <InformationBar />
+          <InformationBar 
+            postId={id}
+            rollingPaper={rollingPaper} 
+          />
           <MessageCardList postId={id} />
         </div>
       )}

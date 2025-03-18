@@ -4,7 +4,7 @@ import { RollingPaperCard } from "../RollingPaperCard/RollingPaperCard";
 import { Slider } from "../../../common/Slider/Slider";
 
 
-export function PaperCardList({rollingPapers}){
+export function PaperCardList({rollingPapers, refetch}){
 
   const sliderSetting = {
     total: rollingPapers.length,
@@ -18,7 +18,7 @@ export function PaperCardList({rollingPapers}){
         <PaperCardListBox>
         {rollingPapers &&
           rollingPapers.map((rollingPaper) => {
-            return <RollingPaperCard key={rollingPaper.id} rollingPaper={rollingPaper} />;
+            return <RollingPaperCard key={rollingPaper.id} rollingPaper={rollingPaper} refetch={refetch}/>;
           })}
         </PaperCardListBox>
       </Slider>

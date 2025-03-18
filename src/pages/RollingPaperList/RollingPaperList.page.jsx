@@ -34,6 +34,10 @@ function RollingPaperList() {
   );
   const sortedCreate = rollingPapers2.sort((a, b) => a.createdAt - b.createdAt);
 
+  if (error1 || error2) {
+    return <NotFound />;
+  }
+
   return (
     <div>
       <Helmet>
@@ -42,9 +46,9 @@ function RollingPaperList() {
       </Helmet>
       <Container>
         <PaperTitle $bold>인기 롤링 페이퍼 🔥</PaperTitle>
-        <PaperCardList rollingPapers={sortedCount} />
+        <PaperCardList rollingPapers={sortedCount} refetch={refetch1}/>
         <PaperTitle $bold>최근에 만든 롤링 페이퍼 ⭐️</PaperTitle>
-        <PaperCardList rollingPapers={sortedCreate} />
+        <PaperCardList rollingPapers={sortedCreate} refetch={refetch2} />
         <LinkBox>
           <Link to="/post">
             <FilledButton w="280">나도 만들어보기</FilledButton>
