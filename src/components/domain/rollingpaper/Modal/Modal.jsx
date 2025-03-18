@@ -54,10 +54,10 @@ function Modal({ message, onClick }) {
     case 'Noto Sans':
       newFont = 'ns';
       break;
-    case 'Nanum Myeongjo':
+    case '나눔명조':
       newFont = 'nm';
       break;
-    case 'Nanum Pen':
+    case '나눔손글씨 손편지체':
       newFont = 'np';
       break;
     case 'Pretendard':
@@ -82,7 +82,7 @@ function Modal({ message, onClick }) {
           <Card.Date>{date}</Card.Date>
         </Card.InfoBox>
         <Card.MessageBox $modal $font={newFont}>
-          <Card.Message>{content}</Card.Message>
+          <Card.Message dangerouslySetInnerHTML={{ __html :  content  }} />
         </Card.MessageBox>
         <S.ConfirmButton w="120" h="40" onClick={onClick}>
           확인

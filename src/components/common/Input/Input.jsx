@@ -80,8 +80,8 @@ const StyledInput = styled.input`
       `}
   ${media.mobile`
       width: 320px;
-      height: 50px
-      `}
+      height: 50px;
+    `}
 `;
 
 const ErrorMessage = styled.span`

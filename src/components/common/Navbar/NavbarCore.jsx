@@ -62,13 +62,13 @@ const RollingLogo = styled.div`
 `;
 
 const LogoText = styled.span`
-  font-family: Poppins, sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 19.97px;
   font-weight: 700;
   line-height: 29.96px;
   text-align: center;
   margin-left: 8px;
-  color: #4a494f;
+  color: #4A494F;
 `;
 
 const ButtonContainer = styled.div`
@@ -144,6 +144,37 @@ export default function Navbar() {
   const hideOnMobile =
     window.innerWidth <= BREAK_POINT.mobile &&
     !['/', '/list'].includes(location.pathname);
+//   const [isMobile, setIsMobile] = useState(window.innerWidth <= BREAK_POINT.mobile);
+//   const [currentPath, setCurrentPath] = useState(location.pathname);
+
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setIsMobile(window.innerWidth <= BREAK_POINT.mobile);
+//     };
+
+//     const handleLocationChange = () => {
+//       setCurrentPath(location.pathname);
+//     };
+
+//     // 화면 크기 변경 시 감지
+//     window.addEventListener('resize', handleResize);
+
+//     // 페이지 경로 변경 시 감지
+//     window.addEventListener('popstate', handleLocationChange); // 페이지 뒤로가기, 앞으로가기
+
+//     // 초기 경로 설정
+//     setCurrentPath(location.pathname);
+
+//     return () => {
+//       window.removeEventListener('resize', handleResize);
+//       window.removeEventListener('popstate', handleLocationChange);
+//     };
+//   }, []);
+
+//   // 모바일 크기일 때 '/post' 경로가 포함되면 Navbar 숨기기
+//   if (isMobile && currentPath.includes('/post')) {
+//     return null;
+//   }
 
   return (
     <NavbarWrapper showOnMobile={showOnMobile} hideOnMobile={hideOnMobile}>

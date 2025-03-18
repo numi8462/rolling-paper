@@ -1,5 +1,6 @@
 import checkIcon from './checkIcon.svg';
 import deleteIcon from './deleteIcon.svg';
+import topArrow from './topArrow.svg';
 import downArrow from './downArrow.svg';
 import rightArrow from './rightArrow.svg';
 import leftArrow from './leftArrow.svg';
@@ -21,6 +22,7 @@ import styled from 'styled-components';
 const icons = {
   checkIcon,
   deleteIcon,
+  topArrow,
   downArrow,
   rightArrow,
   leftArrow,

@@ -5,7 +5,7 @@ import { theme } from "../../../styles/theme";
 const StyledProfiles = styled.ul`
   display:flex;
   gap:0;
-  
+  margin-right: 23px;
   li {
     width:28px;
     height:28px;
@@ -28,6 +28,12 @@ const StyledProfiles = styled.ul`
 `;
 
 export function Profiles ( {recentMessages, totalLength} ) {
+  let num = '';
+  if (recentMessages && Array.isArray(recentMessages)) {
+    const recentLegnth = recentMessages.length;
+    num = totalLength - recentLegnth
+  }
+  
   return (
     totalLength ? <StyledProfiles>
       {recentMessages &&
@@ -37,7 +43,7 @@ export function Profiles ( {recentMessages, totalLength} ) {
           );
         })
       }
-      <li>+{totalLength}</li>
+      <li>+{num}</li>
     </StyledProfiles> : null 
   )
 }

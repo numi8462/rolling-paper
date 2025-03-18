@@ -58,7 +58,8 @@ export const theme = {
     nm: `font-family: 'Nanum Myeongjo', serif`,
     np: `font-family: 'Nanum Pen Script', cursive`,
     ns: `font-family: 'Noto Sans KR', sans-serif`,
-    pd: `font-family: 'Pretendard-Regular', cursive`,
+    pd: `font-family: 'Pretendard', cursive`,
+    pp: `font-family: 'Poppins', cursive`,
   },
   p: {
     // padding
@@ -255,13 +256,16 @@ export const media = {
 
 export const Container = styled.div`  
   background-color: white;
+  width:100%;
   max-width: 1200px;
   margin: 0 auto;
 
   ${media.tablet`
+    width:calc(100% - 48px);
     margin: 0 24px;
   `}
   ${media.mobile`
+    width:calc(100% - 40px);
     margin: 0 20px;
   `}
 `;

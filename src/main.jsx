@@ -6,22 +6,22 @@ import HomePage from './pages/Home/HomePage.jsx';
 import RollingPaperList from './pages/RollingPaperList/RollingPaperList.page.jsx';
 import RollingPaper from './pages/RollingPaper/RollingPaper.page.jsx';
 import RollingPaperMaking from './pages/CreateRollingPaper/CreateRollingPaper.jsx';
-// import CreateMessageCard from './pages/CreateMessageCard/CreateMessageCard.page.jsx';
+import CreateMessageCard from './pages/CreateMessageCard/CreateMessageCard.page.jsx';
 import NotFound from './pages/NotFound/NotFound.page.jsx';
+import RollingPaperEdit from './pages/RollingPaperEdit/RollingPaperEdit.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<HomePage />} />
-          <Route path="list" element={<RollingPaperList />} />
-          <Route path="post" element={<RollingPaperMaking />} />
-          <Route path="post/:id" element={<RollingPaper />} />
-          {/* <Route path='post/:id/message' element={<CreateMessageCard />} /> */}
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route index element={<HomePage />} />
+        <Route path="list" element={<RollingPaperList />} />
+        <Route path="post" element={<RollingPaperMaking />} />
+        <Route path="post/:id" element={<RollingPaper />} />
+        <Route path='post/:id/message' element={<CreateMessageCard />} />
+        <Route path="post/:id/edit" element={<RollingPaperEdit />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
 );

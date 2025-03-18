@@ -1,12 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Emoji from '../../../common/Emoji/Emoji';
-import useToast from '../../../common/Toast/useToast';
 import Toast from '../../../common/Toast/Toast';
-import { theme } from '../../../../styles/theme';
+import { media, theme } from '../../../../styles/theme';
 import { ShareButton } from '../../../common/Button/ShareButton';
 import Options from './Options';
 import useKakaoShare from '../../../common/hooks/kakao/useKakaoShare';
+import { TopEmojis } from '../../../common/Emoji/TopEmojis';
+import { Profiles } from '../../../common/Profile/Profiles';
+import { AddEmojiButton } from '../../../common/Button/AddEmojiButton';
+import useReactions from '../../../common/hooks/reactions/useReactions';
+import EmojiPickerBox from './EmojiPickerBox';
+import useToast from '../../../common/Toast/useToast';
+import EmojiBox from './EmojiBox';
+import Icon from '../../../../assets/Icons/Icons';
+
 
 const StyledInformationBar = styled.div`
   position: sticky;
@@ -15,26 +22,111 @@ const StyledInformationBar = styled.div`
   ${theme.center}
   height: 68px;
   background-color: ${theme.colors.basic.white};
+  @media (max-width: ${theme.breakpoints.m}) {
+    height: 104px;
+  }
 `;
 
 const StyledName = styled.div`
   font-size: 28px;
   font-weight: 700;
+
+  @media (max-width: ${theme.breakpoints.m}) {
+    padding:10px 20px;
+    line-height:32px;
+    font-size: 18px;
+    border-bottom:1px solid #EDEDED;
+  }
+  
 `;
 
-const ShareContainer = styled.div`
+const RelativeBox = styled.div`
   position: relative;
+  display:flex;
+  align-items: center;
+`;
+const FlexBox = styled.div`
+  display:flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+
+  ${media.tablet`
+    padding:0 24px;
+  `}
+  ${media.mobile`
+    padding:0 0px;
+    flex-direction: column;
+  `}
+`;
+const RightBox = styled.div`
+  display:flex;
+  align-items: center;
+  gap: 8px;
+  ${media.mobile`
+    padding:0 20px;
+  `}
+`;
+const MobileFlex = styled.div`
+  display:flex;
+  gap: 8px;
+  ${media.mobile`
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+  `}
 `;
 
-function InformationBar({ name, messageCount, emojis, reactionCount }) {
+const PaperCardCount = styled.div`
+  display:flex;
+`;
+const ReactionButton = styled.div`
+  padding:13px;
+  cursor: pointer;
+`;
+const CardCountBox = styled.div`
+  display:flex;
+  align-items: center;
+  gap: 8px;
+  ${media.tablet`
+    display:none;
+  `}
+`;
+
+const Bar = styled.div`
+  margin:0 10px;
+  background-color: ${theme.colors.gray[200]};
+  width:1px;
+  height:28px;
+`;
+
+function InformationBar({ postId , rollingPaper }) {
+  const {
+    name,
+    messageCount,
+    recentMessages,
+  } = rollingPaper;
+  
+  const { reactions, refetch } = useReactions(postId);
   const { toast, showToast, closeToast } = useToast();
-  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [ isEmojiListOpen, setIsEmojiListOpen ] = useState(false);
+  const [ isEmojiPickerOpen, setIsEmojiPickerOpen ] = useState(false);
+  const [ isOptionsOpen, setIsOptionsOpen ] = useState(false);
   const shareKakao = useKakaoShare(name, 5, 4); // 카카오 공유 useKakaoShare(이름, 메세지 수, 반응 수)
   const optionsRef = useRef(null);
+
+  const toggleEmojiList = () => {
+    setIsEmojiListOpen(!isEmojiListOpen);
+  };
+
+  const toggleEmojiPicker = () => {
+    setIsEmojiPickerOpen(!isEmojiPickerOpen);
+  };
 
   const toggleOptions = () => {
     setIsOptionsOpen(!isOptionsOpen);
   };
+
 
   const handleShareUrlClick = () => {
     const currentUrl = window.location.href;
@@ -53,8 +145,8 @@ function InformationBar({ name, messageCount, emojis, reactionCount }) {
     console.log('kakao');
     shareKakao();
   };
-
-  useEffect(() => {
+  
+    useEffect(() => {
     const handleClickOutside = e => {
       if (optionsRef.current && !optionsRef.current.contains(e.target)) {
         setIsOptionsOpen(false);
@@ -70,22 +162,54 @@ function InformationBar({ name, messageCount, emojis, reactionCount }) {
     };
   }, [isOptionsOpen]);
 
+  const topReactions = reactions.slice(0, 3);
+  const orderReactions = reactions.slice(3);
+
   return (
     <StyledInformationBar>
-      <StyledName>To. {name}</StyledName>
-      <Emoji emoji={'\u{1F600}'} count={2} />
-
-      <ShareContainer>
-        <ShareButton onClick={() => toggleOptions()} />
-        {isOptionsOpen && (
-          <Options
-            optionsRef={optionsRef}
-            handleKakaoClick={() => handleKakaoClick()}
-            handleShareUrlClick={() => handleShareUrlClick()}
-          />
-        )}
-      </ShareContainer>
-
+      <FlexBox>
+        <StyledName>To. {name}</StyledName>
+        <RightBox>
+          <CardCountBox>
+            <Profiles
+              recentMessages={recentMessages}
+              totalLength={messageCount}
+            />
+            <PaperCardCount>
+              <b>{messageCount}</b>명이 작성했어요!
+            </PaperCardCount>
+            <Bar />
+          </CardCountBox>
+          <MobileFlex>
+            <RelativeBox>
+              <TopEmojis postId={postId} refetch={refetch} topReactions={topReactions}/>
+              <ReactionButton onClick={toggleEmojiList}>
+                {isEmojiListOpen ? 
+                  <Icon name="topArrow" alt="close reaction" size="12px"/>:
+                  <Icon name="downArrow" alt="open reaction" size="12px"/>
+                }
+              </ReactionButton>
+              {isEmojiListOpen && (
+                <EmojiBox postId={postId} refetch={refetch} reactions={orderReactions}/> 
+              )}
+            </RelativeBox>
+            <RelativeBox>
+              <AddEmojiButton onClick={toggleEmojiPicker}/>
+              <EmojiPickerBox postId={postId} refetch={refetch} open={isEmojiPickerOpen} setOpen={setIsEmojiPickerOpen}/>
+            </RelativeBox>
+          </MobileFlex>
+          <Bar />
+          <RelativeBox>
+            <ShareButton onClick={() => toggleOptions()} />
+            {isOptionsOpen && (
+              <Options
+                handleKakaoClick={() => handleKakaoClick()}
+                handleShareUrlClick={() => handleShareUrlClick()}
+              />
+            )}
+          </RelativeBox>
+        </RightBox>
+      </FlexBox>
       {toast && <Toast message={toast.message} onClose={closeToast} />}
     </StyledInformationBar>
   );

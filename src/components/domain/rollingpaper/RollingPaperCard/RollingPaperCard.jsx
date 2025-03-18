@@ -4,7 +4,7 @@ import { Font, theme } from '../../../../styles/theme';
 import { TopEmojis } from '../../../common/Emoji/TopEmojis';
 import { Profiles } from '../../../common/Profile/Profiles';
 
-export function RollingPaperCard({ rollingPaper }) {
+export function RollingPaperCard({ rollingPaper, refetch }) {
   const {
     id,
     name,
@@ -32,7 +32,7 @@ export function RollingPaperCard({ rollingPaper }) {
             </NameBox>
             {topReactions.length ? (
               <PaperCardEmoji>
-                <TopEmojis topReactions={topReactions} />
+                <TopEmojis  postId={id} refetch={refetch} topReactions={topReactions} />
               </PaperCardEmoji>
             ) : null}
           </PaperBox>

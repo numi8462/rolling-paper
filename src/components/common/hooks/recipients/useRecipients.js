@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import recipientService from '../../../../api/services/recipients.services';
 
-function useRecipients() {
+function useRecipients( limit = 10000, offset = 0) {
   const [rollingPapers, setRollingPapers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -9,7 +9,7 @@ function useRecipients() {
   const handleLoad = async () => {
     setLoading(true);
     try {
-      const res = await recipientService.getRecipients();
+      const res = await recipientService.getRecipients(limit, offset);
       const { results } = res.data;
       setRollingPapers(results);
     } catch (error) {
