@@ -4,7 +4,7 @@ import useDeleteRecipient from '../../components/common/hooks/recipients/useDele
 import RollingPaper from '../RollingPaper/RollingPaper.page';
 import styled from 'styled-components';
 import { Button } from '../../components/common/Button/Button';
-import { Container, media } from '../../styles/theme';
+import { media } from '../../styles/theme';
 
 const StyledFilledButton = styled.div`
   position: relative;
@@ -49,9 +49,14 @@ function RollingPaperEdit({ refetchPosts }) {
   const navigate = useNavigate(); // 페이지 이동을 위한 네비게이트
   const { deleteRecipient, loading, error } = useDeleteRecipient(refetchPosts);
 
-  const handleDelete = async () => {
-    await deleteRecipient(id);
-    navigate('/posts'); // 삭제 후 목록 페이지로 이동
+  // 삭제 확인 핸들러
+  const handleDelete = async event => {
+    event.stopPropagation();
+    const confirmDelete = window.confirm('정말 롤링페이퍼를 삭제하시겠습니까?');
+    if (confirmDelete) {
+      await deleteRecipient(id);
+      navigate('/list');
+    }
   };
 
   return (

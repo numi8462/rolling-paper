@@ -51,6 +51,10 @@ const FlexBox = styled.div`
   width: 100%;
   max-width: 1200px;
 
+  @media (min-width: ${theme.breakpoints.m}) {
+    align-items: center;
+  }
+
   ${media.tablet`
     padding:0 24px;
   `}
