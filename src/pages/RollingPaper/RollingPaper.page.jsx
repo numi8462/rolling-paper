@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InformationBar from '../../components/domain/rollingpaper/InformationBar/InformationBar';
 import { useParams } from 'react-router-dom';
 import MessageCardList from '../../components/domain/rollingpaper/MessageCardList/MessageCardList';
@@ -20,23 +20,20 @@ const StyledRollingPaper = styled.div`
     display: none;
   }
 
-  @media (max-width: ${theme.breakpoints.t}) {
+  @media (max-width: ${theme.breakpoints.m}) {
     height: 100dvh;
   }
 `;
 
-function RollingPaper({children}) {
+function RollingPaper({ children }) {
   const { id } = useParams();
   const { rollingPaper, loading, error, refetch } = useRecipient(id);
-  const {
-    backgroundColor,
-    backgroundImageURL,
-  } = rollingPaper;
+  const { backgroundColor, backgroundImageURL } = rollingPaper;
 
   if (error) {
     return <NotFound />;
   }
-  
+
   return (
     <StyledRollingPaper $bgColor={backgroundColor} $bgUrl={backgroundImageURL}>
       <Helmet>
@@ -45,11 +42,8 @@ function RollingPaper({children}) {
       </Helmet>
       {!loading && (
         <div>
-          <InformationBar 
-            postId={id}
-            rollingPaper={rollingPaper} 
-          />
-           {children}
+          <InformationBar postId={id} rollingPaper={rollingPaper} />
+          {children}
           <MessageCardList postId={id} />
         </div>
       )}

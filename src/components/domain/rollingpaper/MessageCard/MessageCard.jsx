@@ -49,17 +49,18 @@ function MessageCard({ message, onClick, onDelete }) {
       newFont = 'pd';
   }
 
+  // 삭제 확인 핸들러
+  const handleDelete = event => {
+    event.stopPropagation();
+    const confirmDelete = window.confirm('정말 메시지를 삭제하시겠습니까?');
+    if (confirmDelete) {
+      onDelete(id);
+    }
+  };
+
   return (
     <Card.Container onClick={onClick} style={{ position: 'relative' }}>
       <Card.InfoBox>
-        {isEditPage && (
-          <StyledDeleteButton
-            onClick={event => {
-              event.stopPropagation();
-              onDelete(id);
-            }}
-          />
-        )}
         <Card.ProfileImg src={profileImageURL} alt="profile" />
         <Card.SenderInfoBox style={{ position: 'relative' }}>
           <Card.Sender>
@@ -67,14 +68,7 @@ function MessageCard({ message, onClick, onDelete }) {
             <Card.Name $bold>{sender}</Card.Name>
           </Card.Sender>
           <Badge relationship={relationship} />
-          {isEditPage && (
-            <StyledDeleteButton
-              onClick={event => {
-                event.stopPropagation();
-                onDelete(id);
-              }}
-            />
-          )}
+          {isEditPage && <StyledDeleteButton onClick={handleDelete} />}
         </Card.SenderInfoBox>
       </Card.InfoBox>
       <Card.MessageBox $font={newFont}>

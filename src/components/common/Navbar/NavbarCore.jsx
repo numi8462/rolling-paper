@@ -128,14 +128,15 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleResize = () => {
-      setShowOnMobile(
-        !window.location.pathname.includes('/post/') &&
-          !window.location.pathname.includes('/edit/') &&
-          !window.location.pathname.includes('/post')
-      );
+      const isMobile = window.innerWidth <= BREAK_POINT.mobile;
+      const isPostPage =
+        location.pathname.includes('/post/') ||
+        location.pathname.includes('/edit/') ||
+        location.pathname === '/post';
+      setShowOnMobile(!isMobile || !isPostPage);
     };
 
-    handleResize(); // Initial check
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
