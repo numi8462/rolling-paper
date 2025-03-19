@@ -11,6 +11,10 @@ const EmojiWrap = styled.div`
   border-radius: 8px;
   background-color: ${theme.colors.basic.white};
   padding:24px;
+  ${media.mobile`
+    right: auto;
+    left:-10px;
+  `}
 `;
 
 const StyledEmojiList = styled.div`
@@ -28,7 +32,7 @@ function EmojiBox({postId, refetch, reactions}) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 1200) {
         setGroupSize(3); 
       } else {
         setGroupSize(4); 

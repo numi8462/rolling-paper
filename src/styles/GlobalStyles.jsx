@@ -16,7 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     word-spacing: -1px;
     color: ${theme.colors.gray[900]};
     font-family: 'Pretendard-Regular';
-
+    
     -webkit-font-smoothing: antialiased; 
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility; 

@@ -188,6 +188,7 @@ function InformationBar({ postId, rollingPaper }) {
             <Bar />
           </CardCountBox>
           <MobileFlex>
+          {reactions.length !== 0 ? (
             <RelativeBox>
               <TopEmojis
                 postId={postId}
@@ -209,6 +210,7 @@ function InformationBar({ postId, rollingPaper }) {
                 />
               )}
             </RelativeBox>
+            ): <RelativeBox style={{height:50}}></RelativeBox> }
             <RelativeBox>
               <AddEmojiButton onClick={toggleEmojiPicker} />
               <EmojiPickerBox
