@@ -31,6 +31,8 @@ const StyledInformationBar = styled.div`
 const StyledName = styled.div`
   font-size: 28px;
   font-weight: 700;
+  line-height: 42px;
+  color: ${theme.colors.gray[800]};
 
   @media (max-width: ${theme.breakpoints.m}) {
     padding: 10px 20px;
@@ -47,6 +49,7 @@ const RelativeBox = styled.div`
 `;
 const FlexBox = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   max-width: 1200px;
@@ -190,13 +193,15 @@ function InformationBar({ postId, rollingPaper }) {
                 refetch={refetch}
                 topReactions={topReactions}
               />
-              <ReactionButton onClick={toggleEmojiList}>
-                {isEmojiListOpen ? (
-                  <Icon name="topArrow" alt="close reaction" size="12px" />
-                ) : (
-                  <Icon name="downArrow" alt="open reaction" size="12px" />
-                )}
-              </ReactionButton>
+              {reactions.length !== 0 && (
+                <ReactionButton onClick={toggleEmojiList}>
+                  {isEmojiListOpen ? (
+                    <Icon name="topArrow" alt="close reaction" size="12px" />
+                  ) : (
+                    <Icon name="downArrow" alt="open reaction" size="12px" />
+                  )}
+                </ReactionButton>
+              )}
               {isEmojiListOpen && (
                 <EmojiBox
                   postId={postId}

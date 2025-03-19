@@ -2,7 +2,7 @@ import Logo from '../../../assets/icons/🎨 Icon Color.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { Button } from '../Button/Button';
-import { Container } from '../../../styles/theme';
+import { Container, theme } from '../../../styles/theme';
 import { useEffect, useState } from 'react';
 
 const BREAK_POINT = {
