@@ -20,7 +20,7 @@ const StyledRollingPaper = styled.div`
     display: none;
   }
 
-  @media (max-width: ${theme.breakpoints.t}) {
+  @media (max-width: ${theme.breakpoints.m}) {
     height: 100dvh;
   }
 `;

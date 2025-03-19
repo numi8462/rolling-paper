@@ -21,11 +21,13 @@ const S = {
     @media (max-width: ${theme.breakpoints.t}) {
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
+      margin-bottom: 20px;
     }
 
     @media (max-width: ${theme.breakpoints.m}) {
       grid-template-columns: repeat(1, 1fr);
       gap: 16px;
+      margin-bottom: 100px;
     }
   `,
 

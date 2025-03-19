@@ -49,11 +49,6 @@ function RollingPaperEdit({ refetchPosts }) {
   const navigate = useNavigate(); // 페이지 이동을 위한 네비게이트
   const { deleteRecipient, loading, error } = useDeleteRecipient(refetchPosts);
 
-  // const handleDelete = async () => {
-  //   await deleteRecipient(id);
-  //   navigate('/posts'); // 삭제 후 목록 페이지로 이동
-  // };
-
   // 삭제 확인 핸들러
   const handleDelete = async event => {
     event.stopPropagation();
