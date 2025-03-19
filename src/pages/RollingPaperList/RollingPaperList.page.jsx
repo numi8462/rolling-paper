@@ -44,17 +44,19 @@ function RollingPaperList() {
         <title>목록 - 롤링페이퍼</title>
         <meta name="description" content="롤링페이퍼 목록" />
       </Helmet>
-      <Container>
-        <PaperTitle $bold>인기 롤링 페이퍼 🔥</PaperTitle>
-        <PaperCardList rollingPapers={sortedCount} refetch={refetch1}/>
-        <PaperTitle $bold>최근에 만든 롤링 페이퍼 ⭐️</PaperTitle>
-        <PaperCardList rollingPapers={sortedCreate} refetch={refetch2} />
-        <LinkBox>
-          <Link to="/post">
-            <FilledButton w="280">나도 만들어보기</FilledButton>
-          </Link>
-        </LinkBox>
-      </Container>
+      {!loading1 && !loading2 && (
+        <Container>
+          <PaperTitle $bold>인기 롤링 페이퍼 🔥</PaperTitle>
+          <PaperCardList rollingPapers={sortedCount} refetch={refetch1} />
+          <PaperTitle $bold>최근에 만든 롤링 페이퍼 ⭐️</PaperTitle>
+          <PaperCardList rollingPapers={sortedCreate} refetch={refetch2} />
+          <LinkBox>
+            <Link to="/post">
+              <FilledButton w="280">나도 만들어보기</FilledButton>
+            </Link>
+          </LinkBox>
+        </Container>
+      )}
     </div>
   );
 }
