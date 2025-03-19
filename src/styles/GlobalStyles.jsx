@@ -15,7 +15,7 @@ export const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
     word-spacing: -1px;
     color: ${theme.colors.gray[900]};
-
+    ${theme.fonts.pd};
     -webkit-font-smoothing: antialiased; 
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility; 

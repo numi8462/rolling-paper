@@ -4,6 +4,11 @@ import { Font, theme } from '../../../../styles/theme';
 import { TopEmojis } from '../../../common/Emoji/TopEmojis';
 import { Profiles } from '../../../common/Profile/Profiles';
 
+import purplePattern from "../../../../assets/img/pattern_01.svg";
+import beigePattern from "../../../../assets/img/pattern_02.svg";
+import bluePattern from "../../../../assets/img/pattern_03.svg";
+import greenPattern from "../../../../assets/img/pattern_04.svg";
+
 export function RollingPaperCard({ rollingPaper, refetch }) {
   const {
     id,
@@ -14,11 +19,26 @@ export function RollingPaperCard({ rollingPaper, refetch }) {
     messageCount,
     recentMessages,
   } = rollingPaper;
+
+  const patterns = {
+    purple: purplePattern,
+    beige: beigePattern,
+    blue: bluePattern,
+    green: greenPattern,
+  };
+
   return (
     <li>
       <Link to={`/post/${id}`}>
         <PaperCard $color={backgroundColor} $image={backgroundImageURL}>
           <HiddenBox></HiddenBox>
+          <PatternBox>
+          {backgroundImageURL ? 
+            null
+          : 
+            <img src={patterns[backgroundColor]} alt="background pattern"/>  
+          }
+          </PatternBox>
           <PaperBox>
             <NameBox>
               <PaperCardName $bold>To. {name}</PaperCardName>
@@ -67,6 +87,11 @@ const bgSetting = css`
           color: ${theme.colors.gray[700]};
           background-color: ${theme.colors[$color]?.[200]};
         `}
+`;
+const PatternBox = styled.div`
+  position: absolute;
+  bottom:-7px;
+  right:0;
 `;
 // 롤링페이퍼 카드 styled
 const HiddenBox = styled.div`
