@@ -109,12 +109,12 @@ const Bar = styled.div`
 
 function InformationBar({ postId, rollingPaper }) {
   const { name, messageCount, recentMessages } = rollingPaper;
-  const { reactions, refetch } = useReactions(postId);
+  const { reactions, totalCount, refetch } = useReactions(postId);
   const { toast, showToast, closeToast } = useToast();
   const [isEmojiListOpen, setIsEmojiListOpen] = useState(false);
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-  const shareKakao = useKakaoShare(name, 5, 4); // 카카오 공유 useKakaoShare(이름, 메세지 수, 반응 수)
+  const shareKakao = useKakaoShare(name, messageCount, totalCount); // 카카오 공유 useKakaoShare(이름, 메세지 수, 반응 수)
   const optionsRef = useRef(null);
   const emojiPickerRef = useRef(null);
 
@@ -144,7 +144,7 @@ function InformationBar({ postId, rollingPaper }) {
   };
 
   const handleKakaoClick = () => {
-    console.log('kakao');
+    // console.log('kakao');
     shareKakao();
   };
 
@@ -157,7 +157,7 @@ function InformationBar({ postId, rollingPaper }) {
         emojiPickerRef.current &&
         !emojiPickerRef.current.contains(e.target)
       ) {
-        console.log('emoji', isEmojiPickerOpen);
+        // console.log('emoji', isEmojiPickerOpen);
         setIsEmojiPickerOpen(false);
       }
     };
@@ -188,29 +188,31 @@ function InformationBar({ postId, rollingPaper }) {
             <Bar />
           </CardCountBox>
           <MobileFlex>
-          {reactions.length !== 0 ? (
-            <RelativeBox>
-              <TopEmojis
-                postId={postId}
-                refetch={refetch}
-                topReactions={topReactions}
-              />
-              <ReactionButton onClick={toggleEmojiList}>
-                {isEmojiListOpen ? (
-                  <Icon name="topArrow" alt="close reaction" size="12px" />
-                ) : (
-                  <Icon name="downArrow" alt="open reaction" size="12px" />
-                )}
-              </ReactionButton>
-              {isEmojiListOpen && (
-                <EmojiBox
+            {reactions.length !== 0 ? (
+              <RelativeBox>
+                <TopEmojis
                   postId={postId}
                   refetch={refetch}
-                  reactions={reactions}
+                  topReactions={topReactions}
                 />
-              )}
-            </RelativeBox>
-            ): <RelativeBox style={{height:50}}></RelativeBox> }
+                <ReactionButton onClick={toggleEmojiList}>
+                  {isEmojiListOpen ? (
+                    <Icon name="topArrow" alt="close reaction" size="12px" />
+                  ) : (
+                    <Icon name="downArrow" alt="open reaction" size="12px" />
+                  )}
+                </ReactionButton>
+                {isEmojiListOpen && (
+                  <EmojiBox
+                    postId={postId}
+                    refetch={refetch}
+                    reactions={reactions}
+                  />
+                )}
+              </RelativeBox>
+            ) : (
+              <RelativeBox style={{ height: 50 }}></RelativeBox>
+            )}
             <RelativeBox>
               <AddEmojiButton onClick={toggleEmojiPicker} />
               <EmojiPickerBox
