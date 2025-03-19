@@ -1,11 +1,9 @@
-import styled from "styled-components";
-import { media } from "../../../../styles/theme";
-import { RollingPaperCard } from "../RollingPaperCard/RollingPaperCard";
-import { Slider } from "../../../common/Slider/Slider";
+import styled from 'styled-components';
+import { media } from '../../../../styles/theme';
+import { RollingPaperCard } from '../RollingPaperCard/RollingPaperCard';
+import { Slider } from '../../../common/Slider/Slider';
 
-
-export function PaperCardList({rollingPapers, refetch}){
-
+export function PaperCardList({ rollingPapers, refetch }) {
   const sliderSetting = {
     total: rollingPapers.length,
     columnCount: 4, // 한 줄에 표시할 카드 수
@@ -14,17 +12,22 @@ export function PaperCardList({rollingPapers, refetch}){
   };
 
   return (
-      <Slider sliderSetting={sliderSetting}>
-        <PaperCardListBox>
+    <Slider sliderSetting={sliderSetting}>
+      <PaperCardListBox>
         {rollingPapers &&
-          rollingPapers.map((rollingPaper) => {
-            return <RollingPaperCard key={rollingPaper.id} rollingPaper={rollingPaper} refetch={refetch}/>;
+          rollingPapers.map(rollingPaper => {
+            return (
+              <RollingPaperCard
+                key={rollingPaper.id}
+                rollingPaper={rollingPaper}
+                refetch={refetch}
+              />
+            );
           })}
-        </PaperCardListBox>
-      </Slider>
-  )
+      </PaperCardListBox>
+    </Slider>
+  );
 }
-
 
 const PaperCardListBox = styled.ul`
   width: 100%;
@@ -41,17 +44,17 @@ const PaperCardListBox = styled.ul`
     padding: 0 20px;
   `}
 > li {
-  min-width:calc( 25% - 15px);
-  width:calc( 25% - 15px);
-  
-  ${media.tablet`
+    min-width: calc(25% - 15px);
+    width: calc(25% - 15px);
+
+    ${media.tablet`
     min-width:calc( 37% - 15px);
     width:calc( 37% - 15px);
   `}
 
-  ${media.mobile`
+    ${media.mobile`
     min-width:calc( 77% - 15px);
     width:calc( 77% - 15px);
   `}
-}
-`
+  }
+`;

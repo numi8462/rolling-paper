@@ -4,10 +4,10 @@ import { Font, theme } from '../../../../styles/theme';
 import { TopEmojis } from '../../../common/Emoji/TopEmojis';
 import { Profiles } from '../../../common/Profile/Profiles';
 
-import purplePattern from "../../../../assets/img/pattern_01.svg";
-import beigePattern from "../../../../assets/img/pattern_02.svg";
-import bluePattern from "../../../../assets/img/pattern_03.svg";
-import greenPattern from "../../../../assets/img/pattern_04.svg";
+import purplePattern from '../../../../assets/img/pattern_01.svg';
+import beigePattern from '../../../../assets/img/pattern_02.svg';
+import bluePattern from '../../../../assets/img/pattern_03.svg';
+import greenPattern from '../../../../assets/img/pattern_04.svg';
 
 export function RollingPaperCard({ rollingPaper, refetch }) {
   const {
@@ -33,11 +33,9 @@ export function RollingPaperCard({ rollingPaper, refetch }) {
         <PaperCard $color={backgroundColor} $image={backgroundImageURL}>
           <HiddenBox></HiddenBox>
           <PatternBox>
-          {backgroundImageURL ? 
-            null
-          : 
-            <img src={patterns[backgroundColor]} alt="background pattern"/>  
-          }
+            {backgroundImageURL ? null : (
+              <img src={patterns[backgroundColor]} alt="background pattern" />
+            )}
           </PatternBox>
           <PaperBox>
             <NameBox>
@@ -52,7 +50,11 @@ export function RollingPaperCard({ rollingPaper, refetch }) {
             </NameBox>
             {topReactions.length ? (
               <PaperCardEmoji>
-                <TopEmojis  postId={id} refetch={refetch} topReactions={topReactions} />
+                <TopEmojis
+                  postId={id}
+                  refetch={refetch}
+                  topReactions={topReactions}
+                />
               </PaperCardEmoji>
             ) : null}
           </PaperBox>
@@ -90,8 +92,8 @@ const bgSetting = css`
 `;
 const PatternBox = styled.div`
   position: absolute;
-  bottom:-7px;
-  right:0;
+  bottom: -7px;
+  right: 0;
 `;
 // 롤링페이퍼 카드 styled
 const HiddenBox = styled.div`
