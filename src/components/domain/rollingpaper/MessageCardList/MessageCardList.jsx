@@ -16,7 +16,7 @@ const S = {
     align-items: center;
     padding: 9% 0;
     gap: 24px;
-    z-index:1;
+    z-index: 1;
 
     @media (max-width: ${theme.breakpoints.t}) {
       grid-template-columns: repeat(2, 1fr);
