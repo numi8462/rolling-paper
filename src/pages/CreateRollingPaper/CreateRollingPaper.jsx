@@ -18,6 +18,7 @@ import {
 } from './components/CreateRollingPageStyleComponents';
 import recipientService from '../../api/services/recipients.services';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const ColorOptions = {
   beige: 'beige',
@@ -41,10 +42,8 @@ const CreateRollingPaper = () => {
     backgroundColor: 'beige',
     backgroundImageURL: null,
   });
-  const [nameInputError, setNameInputError] = useState(false); // 오류 상태 추가
-  const nameInputRef = useRef(null); // useRef 추가
-
-  console.log('rollingPaperFormData: ', rollingPaperFormData);
+  const [nameInputError, setNameInputError] = useState(false);
+  const nameInputRef = useRef(null);
 
   const { imgUrls: imageUrls, loading, error } = useBackgroundImages();
 
@@ -89,15 +88,14 @@ const CreateRollingPaper = () => {
 
   const handleCreate = async () => {
     if (!rollingPaperFormData.name.trim()) {
-      setNameInputError(true); // 제출 시에도 오류 검사
-      nameInputRef.current.focus(); // 포커스 이동
+      setNameInputError(true);
+      nameInputRef.current.focus();
       return;
     }
 
     const { data } = await recipientService.createRecipient(
       rollingPaperFormData
     );
-    console.log('data: ', data);
 
     if (data) {
       navigate(`/post/${data.id}`);
@@ -110,14 +108,14 @@ const CreateRollingPaper = () => {
         <ToInputContainer>
           <Toh1>To.</Toh1>
           <Input
-            ref={nameInputRef} // ref 연결
+            ref={nameInputRef}
             width="720px"
             maxWidth="1000px"
             placeholder="받는 사람 이름을 입력해 주세요"
-            isError={nameInputError} // 오류 상태 사용
+            isError={nameInputError}
             value={rollingPaperFormData.name}
             onChange={e => handleChangeFormData('name', e.target.value)}
-            onBlur={() => setNameInputError(!rollingPaperFormData.name.trim())} // focusout 시 오류 검사
+            onBlur={() => setNameInputError(!rollingPaperFormData.name.trim())}
           />
         </ToInputContainer>
 
@@ -159,18 +157,25 @@ const CreateRollingPaper = () => {
               <p>이미지를 불러오는 데 실패했습니다.</p>
             ) : (
               imageUrls.map(url => (
-                <ImageOption
-                  key={url}
-                  src={url}
-                  className={
-                    rollingPaperFormData.backgroundImageURL === url
-                      ? 'selected'
-                      : ''
-                  }
-                  onClick={() =>
-                    handleChangeFormData('backgroundImageURL', url)
-                  }
-                />
+                <ImageWrapper key={url}>
+                  <ImageOption
+                    src={url}
+                    alt={`Background image ${url}`}
+                    className={
+                      rollingPaperFormData.backgroundImageURL === url
+                        ? 'selected'
+                        : ''
+                    }
+                    onClick={() =>
+                      handleChangeFormData('backgroundImageURL', url)
+                    }
+                  />
+                  {rollingPaperFormData.backgroundImageURL === url && (
+                    <IconWrapper>
+                      <Icon name="checkIcon" size="44px" />
+                    </IconWrapper>
+                  )}
+                </ImageWrapper>
               ))
             )}
           </OptionsContainer>
@@ -190,3 +195,8 @@ const CreateRollingPaper = () => {
 };
 
 export default CreateRollingPaper;
+
+const ImageWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
