@@ -4,6 +4,13 @@
 
 이 프로젝트는 React와 Vite를 사용하여 만든 롤링페이퍼 애플리케이션입니다. 친구, 동료, 또는 사랑하는 사람들에게 따뜻한 메시지를 남겨보세요.
 
+## 사이트 프리뷰
+![image](https://github.com/user-attachments/assets/23b98a36-8cd2-493e-9821-d2420a584074)
+
+![image](https://github.com/user-attachments/assets/62b8d051-b1af-466a-8976-10c24b59cf60)
+
+![image](https://github.com/user-attachments/assets/4fc6a1b3-ab81-4064-b8fb-8f7054f05137)
+
 ## 기술 스택
 
 - **프론트엔드**: React, Vite
