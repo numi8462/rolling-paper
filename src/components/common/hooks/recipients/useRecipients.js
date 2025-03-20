@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import recipientService from '../../../../api/services/recipients.services';
 
-function useRecipients( limit = 10000, offset = 0) {
+function useRecipients(limit = 0, offset = 0) {
   const [rollingPapers, setRollingPapers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
